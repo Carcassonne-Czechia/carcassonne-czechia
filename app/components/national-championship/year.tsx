@@ -13,7 +13,7 @@ export default function NationalChampionship() {
   const data = csv as NationalChampionshipResultsRow[];
   const dataYears = [...new Set(data.map((elem) => elem.Year))].sort();
 
-const [year, setYear] = useState<string>(dataYears[dataYears.length - 1]);
+  const [year, setYear] = useState<string>(dataYears[dataYears.length - 1]);
 
   return (
     <main>
