@@ -6,9 +6,18 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
 import type { Route } from "./+types/root";
+
 import "./app.css";
+
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+import "primereact/resources/primereact.css";
+import "primeicons/primeicons.css";
+import { PrimeReactProvider } from "primereact/api";
+
+import NavBar from "./components/nav-bar";
+
+import { StrictMode } from "react";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,19 +34,27 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
+    <PrimeReactProvider>
+      <StrictMode>
+        <html lang="en">
+          <head>
+            <meta charSet="utf-8" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+            <Meta />
+            <Links />
+          </head>
+          <body>
+            <NavBar />
+            <div className="">{children}</div>
+            <ScrollRestoration />
+            <Scripts />
+          </body>
+        </html>
+      </StrictMode>
+    </PrimeReactProvider>
   );
 }
 
