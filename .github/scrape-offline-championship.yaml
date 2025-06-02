@@ -1,34 +1,34 @@
 name: Yearly Offline Championship Update
 
 on:
-  schedule:
-    - cron: "0 0 1 1 *"
+    schedule:
+        - cron: "0 0 1 1 *"
 
 jobs:
-  update-data:
-    runs-on: ubuntu-latest
+    update-data:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.x"
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.x"
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+            - name: Install dependencies
+              run: pip install -r requirements.txt
 
-      - name: Run Python script
-        run: python scripts/generate_csv_list.py
+            - name: Run Python script
+              run: python scripts/generate_csv_list.py
 
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "posij118"
-          git config --global user.email "action@github.com"
-          git add data/
-          git commit -m "Update data directory with new CSV files"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Commit and push changes
+              run: |
+                  git config --global user.name "posij118"
+                  git config --global user.email "action@github.com"
+                  git add data/
+                  git commit -m "Update data directory with new CSV files"
+                  git push
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

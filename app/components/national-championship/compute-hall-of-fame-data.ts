@@ -1,0 +1,235 @@
+import nationalChampionshipData from "src/raw_data/offline-championships/all_data.csv";
+import onlineChampionshipData from "src/raw_data/online-championships/all_data.csv";
+import { unsafeEntries } from "~/utils";
+import type {
+    NationalChampionshipResultsRow,
+    OnlineChampionshipResultsRow,
+} from "~/typings/typings";
+import {
+    placements,
+    rareTournamentResults,
+    tournamentNames,
+    type HallOfFameRow,
+    type TournamentName,
+} from "~/players/tournament-results";
+import { BGAStats } from "~/players/bga-stats";
+
+/** 1 if ASC else -1 */
+export type SortDirection = 1 | -1;
+
+export const computeTournamentStatsForAllPlayersBetweenYears = (
+    minYear: number,
+    maxYear: number,
+    tournamentsVisible: boolean[]
+) => {
+    const nationalChampionshipPlayerNames = new Set<string>(
+        nationalChampionshipData.map((row) => row.Name)
+    );
+
+    const tournamentPlayerNames = new Set<string>();
+    Object.values(rareTournamentResults).forEach((resultsArray) =>
+        resultsArray.forEach((result) =>
+            result.names.forEach((name) => tournamentPlayerNames.add(name))
+        )
+    );
+
+    const playerNames = [
+        ...nationalChampionshipPlayerNames.union(tournamentPlayerNames),
+    ];
+    const BGAUsernames = playerNames.map(
+        (name) => BGAStats.find((stat) => stat.name == name)?.bga_username ?? ""
+    );
+
+    const playerNameIndices = Object.fromEntries(
+        playerNames.map((name, i) => [name, i])
+    );
+
+    // Initialize tournament stats
+    const tournamentStats: HallOfFameRow[] = playerNames.map((name, i) => {
+        const row: Partial<HallOfFameRow> = {
+            Name: name,
+            "BGA Username": BGAUsernames[i],
+        };
+        tournamentNames.forEach((tournamentName) => {
+            placements.forEach((placement) => {
+                row[`${tournamentName}${placement}`] = 0;
+            });
+        });
+
+        return row as HallOfFameRow;
+    });
+
+    // Compute tournament stats for rare tournaments
+    unsafeEntries(rareTournamentResults).forEach(
+        ([tournamentName, resultsArray], i) => {
+            if (tournamentsVisible[i]) {
+                resultsArray.forEach((result) =>
+                    result.names.forEach((name, i) => {
+                        const rank = result.ranks[i];
+                        if (result.year >= minYear && result.year <= maxYear) {
+                            if (rank.toString() == "1") {
+                                tournamentStats[playerNameIndices[name]][
+                                    `${tournamentName}Gold`
+                                ]++;
+                            } else if (rank.toString() == "2") {
+                                tournamentStats[playerNameIndices[name]][
+                                    `${tournamentName}Silver`
+                                ]++;
+                            } else if (rank.toString() == "3") {
+                                tournamentStats[playerNameIndices[name]][
+                                    `${tournamentName}Bronze`
+                                ]++;
+                            }
+
+                            tournamentStats[playerNameIndices[name]][
+                                `${tournamentName}Participation`
+                            ]++;
+                        }
+                    })
+                );
+            }
+        }
+    );
+
+    // Compute tournament stats for championships
+    if (
+        tournamentsVisible[
+            tournamentNames.findIndex((name) => name == "nationalChampionship")
+        ]
+    ) {
+        updateResultsWithNationalChampionshipDataBetweenYears(
+            tournamentStats,
+            playerNameIndices,
+            minYear,
+            maxYear
+        );
+    }
+    if (
+        tournamentsVisible[
+            tournamentNames.findIndex((name) => name == "onlineChampionship")
+        ]
+    ) {
+        updateResultsWithOnlineChampionshipDataBetweenYears(
+            tournamentStats,
+            playerNameIndices,
+            minYear,
+            maxYear
+        );
+    }
+
+    return tournamentStats;
+};
+
+export const updateResultsWithNationalChampionshipDataBetweenYears = (
+    tournamentStats: HallOfFameRow[],
+    playerNameIndices: {
+        [k: string]: number;
+    },
+    minYear: number,
+    maxYear: number
+) => {
+    const filteredData = nationalChampionshipData.filter(
+        (row: NationalChampionshipResultsRow) =>
+            Number(row.Year) >= minYear && Number(row.Year) <= maxYear
+    );
+
+    filteredData.forEach(
+        (
+            row: NationalChampionshipResultsRow & { ["BGA Username"]?: string }
+        ) => {
+            tournamentStats[playerNameIndices[row.Name]]
+                .nationalChampionshipParticipation++;
+            if (row.Position == "1")
+                tournamentStats[playerNameIndices[row.Name]]
+                    .nationalChampionshipGold++;
+            if (row.Position == "2")
+                tournamentStats[playerNameIndices[row.Name]]
+                    .nationalChampionshipSilver++;
+            if (row.Position == "3")
+                tournamentStats[playerNameIndices[row.Name]]
+                    .nationalChampionshipBronze++;
+        }
+    );
+};
+
+export const updateResultsWithOnlineChampionshipDataBetweenYears = (
+    tournamentStats: HallOfFameRow[],
+    playerNameIndices: {
+        [k: string]: number;
+    },
+    minYear: number,
+    maxYear: number
+) => {
+    const filteredData = onlineChampionshipData.filter(
+        (row) => Number(row.Year) >= minYear && Number(row.Year) <= maxYear
+    );
+
+    filteredData.forEach(
+        (row: OnlineChampionshipResultsRow & { Name?: string }) => {
+            BGAStats.forEach((stat) => {
+                if (stat.bga_username == row["BGA Username"])
+                    row.Name = stat.name;
+            });
+            // If name not known, not add to table
+            if (!row.Name) return;
+
+            tournamentStats[playerNameIndices[row.Name]]
+                .nationalChampionshipParticipation++;
+            if (row.Position == "1")
+                tournamentStats[playerNameIndices[row.Name]]
+                    .nationalChampionshipGold++;
+            if (row.Position == "2")
+                tournamentStats[playerNameIndices[row.Name]]
+                    .nationalChampionshipSilver++;
+            if (row.Position == "3")
+                tournamentStats[playerNameIndices[row.Name]]
+                    .nationalChampionshipBronze++;
+        }
+    );
+};
+
+/** Filter those who have at least one medal or one participation in what is not national championship */
+export const filterTournamentStatsRows = (tournamentStats: HallOfFameRow[]) => {
+    return tournamentStats.filter((row) => {
+        const sumEntries = Object.values(row)
+            .filter((val) => typeof val == "number")
+            .reduce((a, b) => a + b);
+        const nationalChampionshipParticipations =
+            row.nationalChampionshipParticipation;
+        return sumEntries - nationalChampionshipParticipations > 0;
+    });
+};
+
+/** Radix sort on placements, intending olympic sorting */
+export const sortTournamentStats = (
+    tournamentStats: HallOfFameRow[],
+    sortByTournamentName: TournamentName,
+    sortDirection: SortDirection
+) => {
+    console.log(sortByTournamentName, sortDirection);
+    return tournamentStats
+        .sort(
+            (row1, row2) =>
+                sortDirection *
+                (row1[`${sortByTournamentName}Participation`] -
+                    row2[`${sortByTournamentName}Participation`])
+        )
+        .sort(
+            (row1, row2) =>
+                sortDirection *
+                (row1[`${sortByTournamentName}Bronze`] -
+                    row2[`${sortByTournamentName}Bronze`])
+        )
+        .sort(
+            (row1, row2) =>
+                sortDirection *
+                (row1[`${sortByTournamentName}Silver`] -
+                    row2[`${sortByTournamentName}Silver`])
+        )
+        .sort(
+            (row1, row2) =>
+                sortDirection *
+                (row1[`${sortByTournamentName}Gold`] -
+                    row2[`${sortByTournamentName}Gold`])
+        );
+};

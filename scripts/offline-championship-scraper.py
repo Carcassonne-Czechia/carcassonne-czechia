@@ -1,7 +1,7 @@
 """
 Scraping scores of online championship into a consistent format. Light on deskohrani servers.
 
-Data is saved to `src/raw_data/offline_championships`.
+Data is saved to `src/raw_data/offline-championships`.
 """
 
 import requests
@@ -22,7 +22,7 @@ POSITION = "Position"
 POINTS = "Points"
 SCORE_DIFFERENCE = "Score Difference"
 
-raw_data_base_path = os.path.join("..", "src", "raw_data", "offline_championships")
+raw_data_base_path = os.path.join("..", "src", "raw_data", "offline-championships")
 all_data = [(YEAR, POSITION, NAME, POINTS, SCORE_DIFFERENCE)]
 
 # UTILS

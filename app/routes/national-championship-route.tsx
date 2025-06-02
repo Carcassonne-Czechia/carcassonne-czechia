@@ -1,10 +1,10 @@
-import NationalChampionship from "~/components/national-championship/year";
+import NationalChampionship from "~/components/national-championship/national-year";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ name: "description", content: "Czechia national championship" }];
+    return [{ name: "description", content: "Czechia national championship" }];
 }
 
 export default function NationalChampionshipRoute() {
-  return <NationalChampionship />;
+    return <NationalChampionship />;
 }
