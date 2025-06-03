@@ -150,5 +150,5 @@ type TournamentNamePlacementNumber = {
 
 export type HallOfFameRow = TournamentNamePlacementNumber & {
     Name: string;
-    "BGA Username": string;
+    BGA_Username: string;
 };

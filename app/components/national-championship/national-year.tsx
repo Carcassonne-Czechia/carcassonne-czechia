@@ -17,7 +17,7 @@ export const computeDataWithBGAUsernames = (
 ) => {
     return data.map((row) => {
         return {
-            "BGA Username":
+            BGA_Username:
                 BGAStats.find((stat) => stat.name == row.Name)?.bga_username ??
                 "",
             ...row,
@@ -63,7 +63,7 @@ export default function NationalChampionship() {
                             field={field}
                             header={field}
                             key={field}
-                            body={field == "BGA Username" ? BGALink : undefined}
+                            body={field == "BGA_Username" ? BGALink : undefined}
                         ></Column>
                     ))}
                 </DataTable>

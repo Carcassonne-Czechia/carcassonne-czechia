@@ -77,9 +77,9 @@ export default function HallOfFame() {
             <Row>
                 <Column header="Name" rowSpan={2} field="Name" />
                 <Column
-                    header="BGA Username"
+                    header="BGA_Username"
                     rowSpan={2}
-                    field="BGA Username"
+                    field="BGA_Username"
                 />
                 {tournamentNames
                     .filter((_, i) => tournamentsVisible[i])
@@ -275,7 +275,7 @@ export default function HallOfFame() {
                 scrollHeight="400px"
             >
                 <Column field="Name" />
-                <Column field="BGA Username" body={BGALink} />
+                <Column field="BGA_Username" body={BGALink} />
                 {tournamentColumnNames
                     .filter((_, i) => tournamentsVisible[Math.floor(i / 4)])
                     .map(([tournamentName, placement]) => {

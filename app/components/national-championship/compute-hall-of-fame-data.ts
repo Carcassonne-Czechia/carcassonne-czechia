@@ -48,7 +48,7 @@ export const computeTournamentStatsForAllPlayersBetweenYears = (
     const tournamentStats: HallOfFameRow[] = playerNames.map((name, i) => {
         const row: Partial<HallOfFameRow> = {
             Name: name,
-            "BGA Username": BGAUsernames[i],
+            BGA_Username: BGAUsernames[i],
         };
         tournamentNames.forEach((tournamentName) => {
             placements.forEach((placement) => {
@@ -61,11 +61,15 @@ export const computeTournamentStatsForAllPlayersBetweenYears = (
 
     // Compute tournament stats for rare tournaments
     unsafeEntries(rareTournamentResults).forEach(
-        ([tournamentName, resultsArray], i) => {
-            if (tournamentsVisible[i]) {
+        ([tournamentName, resultsArray]) => {
+            if (
+                tournamentsVisible[
+                    tournamentNames.findIndex((name) => name == tournamentName)
+                ]
+            ) {
                 resultsArray.forEach((result) =>
-                    result.names.forEach((name, i) => {
-                        const rank = result.ranks[i];
+                    result.names.forEach((name, j) => {
+                        const rank = result.ranks[j];
                         if (result.year >= minYear && result.year <= maxYear) {
                             if (rank.toString() == "1") {
                                 tournamentStats[playerNameIndices[name]][
@@ -135,7 +139,7 @@ export const updateResultsWithNationalChampionshipDataBetweenYears = (
 
     filteredData.forEach(
         (
-            row: NationalChampionshipResultsRow & { ["BGA Username"]?: string }
+            row: NationalChampionshipResultsRow & { ["BGA_Username"]?: string }
         ) => {
             tournamentStats[playerNameIndices[row.Name]]
                 .nationalChampionshipParticipation++;
@@ -167,23 +171,23 @@ export const updateResultsWithOnlineChampionshipDataBetweenYears = (
     filteredData.forEach(
         (row: OnlineChampionshipResultsRow & { Name?: string }) => {
             BGAStats.forEach((stat) => {
-                if (stat.bga_username == row["BGA Username"])
+                if (stat.bga_username == row["BGA_Username"])
                     row.Name = stat.name;
             });
             // If name not known, not add to table
             if (!row.Name) return;
 
             tournamentStats[playerNameIndices[row.Name]]
-                .nationalChampionshipParticipation++;
+                .onlineChampionshipParticipation++;
             if (row.Position == "1")
                 tournamentStats[playerNameIndices[row.Name]]
-                    .nationalChampionshipGold++;
+                    .onlineChampionshipGold++;
             if (row.Position == "2")
                 tournamentStats[playerNameIndices[row.Name]]
-                    .nationalChampionshipSilver++;
+                    .onlineChampionshipSilver++;
             if (row.Position == "3")
                 tournamentStats[playerNameIndices[row.Name]]
-                    .nationalChampionshipBronze++;
+                    .onlineChampionshipBronze++;
         }
     );
 };
@@ -206,7 +210,6 @@ export const sortTournamentStats = (
     sortByTournamentName: TournamentName,
     sortDirection: SortDirection
 ) => {
-    console.log(sortByTournamentName, sortDirection);
     return tournamentStats
         .sort(
             (row1, row2) =>

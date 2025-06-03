@@ -8,19 +8,18 @@ export type NationalChampionshipResultsRow = {
 };
 
 export type OnlineChampionshipResultsRow = {
-    name: string;
     Year: string;
     Position: string;
-    "BGA Username": string;
+    BGA_Username: string;
 };
 
 export type NationalChampionshipResultsRowWithUsername =
-    NationalChampionshipResultsRow & { "BGA Username": string };
+    NationalChampionshipResultsRow & { BGA_Username: string };
 
 export const nationalChampionshipHeaderRow = [
     "Position",
     "Name",
-    "BGA Username",
+    "BGA_Username",
     "Points",
     "Score Difference",
 ] as const;
