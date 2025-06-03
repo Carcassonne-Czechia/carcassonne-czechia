@@ -1,20 +1,29 @@
 // Use for tournaments where only one team member participates
 
-import { unsafeKeys } from "~/utils";
+const _rareTournamentNames = ["worldChampionship", "CCL"] as const;
+const _championshipNames = [
+    "nationalChampionship",
+    "onlineChampionship",
+] as const;
+export type RareTournamentName = (typeof _rareTournamentNames)[number];
+export type ChampionshipName = (typeof _championshipNames)[number];
+export const rareTournamentNames: RareTournamentName[] = [
+    ..._rareTournamentNames,
+] as const;
+export const championshipNames: ChampionshipName[] = [
+    ..._championshipNames,
+] as const;
 
-export type RareTournamentName = "worldChampionship" | "CCL";
-export type TournamentName =
-    | RareTournamentName
-    | "nationalChampionship"
-    | "onlineChampionship";
+export type TournamentName = RareTournamentName | ChampionshipName;
 
-export const rareTournamentResults: {
-    [k in RareTournamentName]: {
+export const rareTournamentResults: Record<
+    RareTournamentName,
+    {
         year: number;
         names: string[];
         ranks: (number | string)[];
-    }[];
-} = {
+    }[]
+> = {
     worldChampionship: [
         {
             year: 2006,
@@ -122,12 +131,10 @@ export const rareTournamentResults: {
     ],
 } as const;
 
-export const rareTournamentNames = unsafeKeys(rareTournamentResults);
-const championshipNames: TournamentName[] = [
-    "nationalChampionship",
-    "onlineChampionship",
-];
-export const tournamentNames = championshipNames.concat(rareTournamentNames);
+export const tournamentNames: TournamentName[] = (
+    championshipNames as TournamentName[]
+).concat(rareTournamentNames);
+
 export const getShortTournamentName = (name: TournamentName) => {
     if (name == "CCL") return "CCL";
     if (name == "nationalChampionship") return "NC";
@@ -135,13 +142,9 @@ export const getShortTournamentName = (name: TournamentName) => {
     if (name == "worldChampionship") return "WC";
 };
 
-type Placement = "Participation" | "Gold" | "Silver" | "Bronze";
-export const placements: Placement[] = [
-    "Participation",
-    "Gold",
-    "Silver",
-    "Bronze",
-] as const;
+const _placements = ["Participation", "Gold", "Silver", "Bronze"] as const;
+type Placement = (typeof _placements)[number];
+export const placements: Placement[] = [..._placements] as const;
 
 export type TournamentNamePlacement = `${TournamentName}${Placement}`;
 type TournamentNamePlacementNumber = {

@@ -2,7 +2,7 @@ import csv from "src/raw_data/offline-championships/all_data.csv";
 import {
     nationalChampionshipHeaderRow,
     type NationalChampionshipResultsRow,
-} from "~/typings/typings";
+} from "~/components/national-championship/typings";
 import { useState } from "react";
 import NationalChampionshipAbout from "./about";
 import { DataTable } from "primereact/datatable";

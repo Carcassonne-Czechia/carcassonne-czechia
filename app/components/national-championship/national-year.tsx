@@ -3,7 +3,7 @@ import {
     nationalChampionshipHeaderRow,
     type NationalChampionshipResultsRow,
     type NationalChampionshipResultsRowWithUsername,
-} from "~/typings/typings";
+} from "~/components/national-championship/typings";
 import { useState } from "react";
 import NationalChampionshipAbout from "./national-about";
 import { DataTable } from "primereact/datatable";

@@ -4,7 +4,7 @@ import { unsafeEntries } from "~/utils";
 import type {
     NationalChampionshipResultsRow,
     OnlineChampionshipResultsRow,
-} from "~/typings/typings";
+} from "~/components/national-championship/typings";
 import {
     placements,
     rareTournamentResults,
