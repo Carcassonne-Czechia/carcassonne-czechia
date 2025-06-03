@@ -1,14 +1,163 @@
 export const currentTeamMembers = [
-    "Pavel Hudec",
-    "Martin Mojžíš",
-    "Martin Čeliňák",
-    "Jakub Hertl",
-    "Martin Boreš",
-    "Petra Vidnerová",
-    "Pavel Raus",
-];
+    "posij118",
+    "martypartyouje",
+    "Moya88",
+    "Hurtle_cz",
+    "chonps",
+    "Zabza",
+    "smoula",
+    "farincz",
+    "bormar",
+    "Simaster 1991",
+    "majkls",
+    "vomo_43",
+    "wikri",
+] as const;
 
-export const formerTeamMembers = [];
+export const formerTeamMembers = [
+    "Eshu_cz",
+    "Senvin",
+    "Elvid",
+    "bassano",
+    "DarnCZ",
+    "kaspemart",
+    "MATY51",
+] as const;
+export type CurrentTeamMemberBGAUsername = (typeof currentTeamMembers)[number];
+export type FormerTeamMemberBGAUsername = (typeof formerTeamMembers)[number];
 
-export const teamCaptain = "Pavel Hudec";
-export const formerTeamCaptain = "Martin Čeliňák";
+export const teamCaptain: CurrentTeamMemberBGAUsername = "posij118";
+export const formerTeamCaptains: (
+    | CurrentTeamMemberBGAUsername
+    | FormerTeamMemberBGAUsername
+)[] = ["martypartyouje"];
+
+export const teamContests = ["WTCOC", "ETCOC"] as const;
+export type TeamContest = (typeof teamContests)[number];
+
+export const teamCompetitionMembers: Record<
+    TeamContest,
+    {
+        year: number;
+        members: (CurrentTeamMemberBGAUsername | FormerTeamMemberBGAUsername)[];
+    }[]
+> = {
+    WTCOC: [
+        {
+            year: 2025,
+            members: [
+                "bormar",
+                "chonps",
+                "Hurtle_cz",
+                "majkls",
+                "martypartyouje",
+                "Moya88",
+                "posij118",
+                "Simaster 1991",
+                "smoula",
+                "vomo_43",
+            ],
+        },
+        {
+            year: 2024,
+            members: [
+                "bormar",
+                "chonps",
+                "Hurtle_cz",
+                "martypartyouje",
+                "Moya88",
+                "posij118",
+                "Simaster 1991",
+                "smoula",
+                "vomo_43",
+                "wikri",
+            ],
+        },
+        {
+            year: 2023,
+            members: [
+                "bormar",
+                "chonps",
+                "Hurtle_cz",
+                "martypartyouje",
+                "Moya88",
+                "Simaster 1991",
+                "smoula",
+                "wikri",
+                "Zabza",
+            ],
+        },
+        {
+            year: 2022,
+            members: [
+                "martypartyouje",
+                "smoula",
+                "bormar",
+                "wikri",
+                "Hurtle_cz",
+                "Moya88",
+                "chonps",
+                "Zabza",
+                "Simaster 1991",
+            ],
+        },
+        {
+            year: 2021,
+            members: [
+                "Hurtle_cz",
+                "Moya88",
+                "martypartyouje",
+                "chonps",
+                "bormar",
+                "Eshu_cz",
+                "Senvin",
+                "wikri",
+            ],
+        },
+    ],
+    ETCOC: [
+        {
+            year: 2023,
+            members: [
+                "bormar",
+                "chonps",
+                "farincz",
+                "Hurtle_cz",
+                "martypartyouje",
+                "Moya88",
+                "posij118",
+                "Simaster 1991",
+                "smoula",
+                "Zabza",
+            ],
+        },
+        {
+            year: 2021,
+            members: [
+                "martypartyouje",
+                "Moya88",
+                "Hurtle_cz",
+                "chonps",
+                "bormar",
+                "Zabza",
+                "wikri",
+                "smoula",
+            ],
+        },
+        {
+            year: 2020,
+            members: [
+                "Hurtle_cz",
+                "Moya88",
+                "chonps",
+                "Elvid",
+                "martypartyouje",
+                "bassano",
+                "DarnCZ",
+                "bormar",
+                "kaspemart",
+                "MATY51",
+            ],
+        },
+    ],
+};
