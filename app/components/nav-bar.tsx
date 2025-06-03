@@ -19,7 +19,7 @@ export default function NavBar() {
             className="flex align-items-center p-menuitem-link"
         >
             {item.icon && <span className={item.icon} />}
-            <span className="mx-2">{item.label}</span>
+            <span>{item.label}</span>
         </NavLink>
     );
 
@@ -53,21 +53,22 @@ export default function NavBar() {
 
     const start = (
         <div style={{ display: "flex", flexDirection: "row" }}>
-            <img
-                alt="logo"
-                src="/assets/logo.jpg"
-                height="40"
-                className="mr-2"
-            ></img>
+            <img alt="logo" src="/assets/logo.jpg" height="40"></img>
             <div style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ padding: "0 1rem" }}>Carcassonne Czechia</div>
+                <div style={{ padding: "0 1rem", fontWeight: "600" }}>
+                    Carcassonne Czechia
+                </div>
             </div>
         </div>
     );
 
     return (
         <div className="card">
-            <Menubar model={items as MenuItem[]} start={start} />
+            <Menubar
+                model={items as MenuItem[]}
+                start={start}
+                style={{ fontSize: "16px" }}
+            />
         </div>
     );
 }
