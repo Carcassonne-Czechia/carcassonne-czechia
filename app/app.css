@@ -14,7 +14,7 @@ body {
     color: var(--text-color);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding: 1rem 2rem 0 2rem;
+    padding: 1rem max(1rem, 5%) 0 max(1rem, 5%);
 }
 
 .layout-wrapper,

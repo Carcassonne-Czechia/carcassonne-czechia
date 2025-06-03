@@ -79,11 +79,7 @@ export default function HallOfFame() {
         <ColumnGroup>
             <Row>
                 <Column header="Name" rowSpan={2} field="Name" />
-                <Column
-                    header="BGA_Username"
-                    rowSpan={2}
-                    field="BGA_Username"
-                />
+                <Column header="BGA" rowSpan={2} field="BGA_Username" />
                 {tournamentNames
                     .filter((_, i) => tournamentsVisible[i])
                     .map((tournamentName) => (
@@ -147,8 +143,6 @@ export default function HallOfFame() {
                             display: "flex",
                             alignItems: "center",
                             fontWeight: 600,
-                            marginTop: "1rem",
-                            marginBottom: "1rem",
                         }}
                     >
                         <span>Min year:</span>
