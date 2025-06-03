@@ -1,4 +1,4 @@
-export const currentTeamMembers = [
+export const currentTeamMemberBGAUsernames = [
     "posij118",
     "martypartyouje",
     "Moya88",
@@ -14,7 +14,7 @@ export const currentTeamMembers = [
     "wikri",
 ] as const;
 
-export const formerTeamMembers = [
+export const formerTeamMemberBGAUsernames = [
     "Eshu_cz",
     "Senvin",
     "Elvid",
@@ -23,17 +23,20 @@ export const formerTeamMembers = [
     "kaspemart",
     "MATY51",
 ] as const;
-export type CurrentTeamMemberBGAUsername = (typeof currentTeamMembers)[number];
-export type FormerTeamMemberBGAUsername = (typeof formerTeamMembers)[number];
+export type CurrentTeamMemberBGAUsername =
+    (typeof currentTeamMemberBGAUsernames)[number];
+export type FormerTeamMemberBGAUsername =
+    (typeof formerTeamMemberBGAUsernames)[number];
 
-export const teamCaptain: CurrentTeamMemberBGAUsername = "posij118";
+export const teamCaptain: CurrentTeamMemberBGAUsername = "posij118" as const;
 export const formerTeamCaptains: (
     | CurrentTeamMemberBGAUsername
     | FormerTeamMemberBGAUsername
-)[] = ["martypartyouje"];
+)[] = ["martypartyouje"] as const;
 
 export const teamContests = ["WTCOC", "ETCOC"] as const;
 export type TeamContest = (typeof teamContests)[number];
+export type TeamContestParticipations = `${TeamContest}Participations`;
 
 export const teamCompetitionMembers: Record<
     TeamContest,
