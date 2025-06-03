@@ -5,7 +5,7 @@ import { NavLink } from "react-router";
 import { ROUTE_HEADERS } from "~/routes";
 
 interface Item {
-    to: string;
+    to?: string;
     label: string;
     template?: (item: Item) => JSX.Element;
     icon?: string;
@@ -15,7 +15,7 @@ interface Item {
 export default function NavBar() {
     const itemRenderer = (item: Item) => (
         <NavLink
-            to={item.to}
+            to={item.to ?? ""}
             className="flex align-items-center p-menuitem-link"
         >
             {item.icon && <span className={item.icon} />}
@@ -36,7 +36,6 @@ export default function NavBar() {
         },
         {
             label: "Contests",
-            to: `/${ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP}`,
             items: [
                 {
                     label: "National Championship",

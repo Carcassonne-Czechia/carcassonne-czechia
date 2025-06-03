@@ -12,7 +12,7 @@ import {
     tournamentNames,
 } from "~/players/tournament-results";
 import BGALink from "../bga-link";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import {
     computeTournamentStatsForAllPlayersBetweenYears,
@@ -128,113 +128,147 @@ export default function HallOfFame() {
             <div
                 style={{
                     display: "flex",
-                    flexDirection: "row",
+                    flexDirection: "column",
                     maxWidth: "40rem",
-                    flexWrap: "wrap",
                 }}
             >
-                <span
+                <div
                     style={{
                         display: "flex",
-                        alignItems: "center",
-                        fontWeight: 600,
-                        marginTop: "1rem",
-                        marginBottom: "1rem",
+                        flexDirection: "row",
                     }}
                 >
-                    <span>Min year:</span>
-                </span>
-                <Dropdown
-                    value={minYear}
-                    onChange={(e) => setMinYear(e.value)}
-                    options={[
-                        ...new Set(
-                            nationalChampionshipData.map((row) => row.Year)
-                        ),
-                    ]}
-                    optionLabel="name"
-                    placeholder="Select start year"
-                    className="w-full md:w-14rem"
-                    style={{ marginRight: "2rem", marginLeft: "1rem" }}
-                />
-                <span
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        fontWeight: 600,
-                    }}
-                >
-                    <span>Max year:</span>
-                </span>
-                <Dropdown
-                    value={maxYear}
-                    onChange={(e) => setMaxYear(e.value)}
-                    options={[
-                        ...new Set(
-                            nationalChampionshipData.map((row) => row.Year)
-                        ),
-                    ]}
-                    optionLabel="name"
-                    placeholder="Select start year"
-                    className="w-full md:w-14rem"
-                    style={{ marginRight: "4rem", marginLeft: "1rem" }}
-                />
-                <span
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        fontWeight: 600,
-                    }}
-                >
-                    <span style={{ marginRight: "1rem" }}>
-                        Include competitions:
+                    <span
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            fontWeight: 600,
+                            marginTop: "1rem",
+                            marginBottom: "1rem",
+                        }}
+                    >
+                        <span>Min year:</span>
                     </span>
-                </span>
-                {tournamentNames.map((name, i) => {
-                    return (
-                        <React.Fragment key={name}>
-                            <span
-                                style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    fontWeight: 600,
-                                    marginLeft: "1rem",
-                                    marginRight: "0.5rem",
-                                }}
-                            >
-                                <label htmlFor={`visible-toggler${name}`}>
-                                    {getShortTournamentName(name)}:
-                                </label>
-                            </span>
-                            <span
-                                style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    fontWeight: 600,
-                                    marginTop: "1rem",
-                                    marginBottom: "1rem",
-                                }}
-                            >
-                                <Checkbox
-                                    inputId={`visible-toggler${name}`}
-                                    checked={tournamentsVisible[i]}
-                                    onChange={(e) =>
-                                        setTournamentsVisible([
-                                            ...tournamentsVisible.slice(0, i),
-                                            e.checked ?? false,
-                                            ...tournamentsVisible.slice(i + 1),
-                                        ])
-                                    }
-                                />
-                            </span>
-                        </React.Fragment>
-                    );
-                })}
+                    <Dropdown
+                        value={minYear}
+                        onChange={(e) => setMinYear(e.value)}
+                        options={[
+                            ...new Set(
+                                nationalChampionshipData.map((row) => row.Year)
+                            ),
+                        ]}
+                        optionLabel="name"
+                        placeholder="Select start year"
+                        className="w-full md:w-14rem"
+                        style={{ marginRight: "1rem", marginLeft: "0.5rem" }}
+                    />
+                    <span
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            fontWeight: 600,
+                        }}
+                    >
+                        <span>Max year:</span>
+                    </span>
+                    <Dropdown
+                        value={maxYear}
+                        onChange={(e) => setMaxYear(e.value)}
+                        options={[
+                            ...new Set(
+                                nationalChampionshipData.map((row) => row.Year)
+                            ),
+                        ]}
+                        optionLabel="name"
+                        placeholder="Select start year"
+                        className="w-full md:w-14rem"
+                        style={{ marginRight: "1rem", marginLeft: "0.5rem" }}
+                    />
+                </div>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "left",
+                    }}
+                >
+                    <span
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            fontWeight: 600,
+                        }}
+                    >
+                        <span style={{ marginRight: "1rem" }}>
+                            Include competitions:
+                        </span>
+                    </span>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            flexWrap: "wrap",
+                        }}
+                    >
+                        {tournamentNames.map((name, i) => {
+                            return (
+                                <div
+                                    key={name}
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                    }}
+                                >
+                                    <span
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            fontWeight: 600,
+                                            marginLeft: "1rem",
+                                            marginRight: "0.5rem",
+                                        }}
+                                    >
+                                        <label
+                                            htmlFor={`visible-toggler${name}`}
+                                        >
+                                            {getShortTournamentName(name)}:
+                                        </label>
+                                    </span>
+                                    <span
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            fontWeight: 600,
+                                            marginTop: "1rem",
+                                            marginBottom: "1rem",
+                                        }}
+                                    >
+                                        <Checkbox
+                                            inputId={`visible-toggler${name}`}
+                                            checked={tournamentsVisible[i]}
+                                            onChange={(e) =>
+                                                setTournamentsVisible([
+                                                    ...tournamentsVisible.slice(
+                                                        0,
+                                                        i
+                                                    ),
+                                                    e.checked ?? false,
+                                                    ...tournamentsVisible.slice(
+                                                        i + 1
+                                                    ),
+                                                ])
+                                            }
+                                        />
+                                    </span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
             </div>
             <DataTable
                 value={sortedTournamentStats}
                 headerColumnGroup={headerGroup}
-                tableStyle={{ minWidth: "20rem" }}
                 stripedRows
                 showGridlines
                 scrollable

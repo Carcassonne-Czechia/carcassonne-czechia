@@ -29,7 +29,8 @@ export default function NationalChampionship() {
                 />
                 <DataTable
                     value={data.slice(1).filter((row) => row.Year == year)}
-                    tableStyle={{ minWidth: "30rem" }}
+                    scrollable
+                    scrollHeight="400px"
                 >
                     {nationalChampionshipHeaderRow.map((field) => (
                         <Column
