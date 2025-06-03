@@ -18,7 +18,6 @@ import {
     computeTournamentStatsForAllPlayersBetweenYears,
     filterTournamentStatsRows,
     sortTournamentStats,
-    type SortDirection,
 } from "./compute-hall-of-fame-data";
 import { Checkbox } from "primereact/checkbox";
 
@@ -40,9 +39,8 @@ export default function HallOfFame() {
     ].sort();
     const [minYear, setMinYear] = useState(dataYears[0]);
     const [maxYear, setMaxYear] = useState(dataYears[dataYears.length - 1]);
-    const [sortByTournamentName, setSortByTournamentName] =
-        useState<TournamentName>("nationalChampionship");
-    const [sortDirection, setSortDirection] = useState<SortDirection>(-1);
+    const [order, setOrder] = useState<0 | 1 | -1 | null | undefined>(-1);
+    const [field, setField] = useState<string>("nationalChampionship");
 
     const [tournamentsVisible, setTournamentsVisible] = useState(
         tournamentNames.map((name) => name == "nationalChampionship")
@@ -60,16 +58,21 @@ export default function HallOfFame() {
         tournamentsVisible
     );
     const filteredTournamentStats = filterTournamentStatsRows(tournamentStats);
-    const sortedTournamentStats = sortTournamentStats(
+    const initialSortedTournamentNames = sortTournamentStats(
         filteredTournamentStats,
-        sortByTournamentName,
-        sortDirection
+        "nationalChampionship",
+        -1
     );
+
     const tournamentColumnNames = cartesianProduct(tournamentNames, placements);
 
     const sortColumn = (e: ColumnSortEvent, tournamentName: TournamentName) => {
-        setSortByTournamentName(tournamentName);
-        setSortDirection(e.order == 1 ? 1 : -1);
+        const tournamentStatsCopy = [...filteredTournamentStats];
+        return sortTournamentStats(
+            tournamentStatsCopy,
+            tournamentName,
+            e.order == 1 ? 1 : -1
+        );
     };
 
     const headerGroup = (
@@ -86,6 +89,7 @@ export default function HallOfFame() {
                     .map((tournamentName) => (
                         <Column
                             header={tournamentName}
+                            field={tournamentName}
                             colSpan={4}
                             sortable
                             sortFunction={(e) => sortColumn(e, tournamentName)}
@@ -267,12 +271,18 @@ export default function HallOfFame() {
                 </div>
             </div>
             <DataTable
-                value={sortedTournamentStats}
+                value={initialSortedTournamentNames}
                 headerColumnGroup={headerGroup}
                 stripedRows
                 showGridlines
                 scrollable
                 scrollHeight="400px"
+                sortOrder={order}
+                sortField={field}
+                onSort={(e) => {
+                    setOrder(e.sortOrder);
+                    setField(e.sortField);
+                }}
             >
                 <Column field="Name" />
                 <Column field="BGA_Username" body={BGALink} />
