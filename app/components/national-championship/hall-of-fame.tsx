@@ -17,6 +17,7 @@ import { Dropdown } from "primereact/dropdown";
 import {
     computeTournamentStatsForAllPlayersBetweenYears,
     filterTournamentStatsRows,
+    medalColors,
     sortTournamentStats,
 } from "./compute-hall-of-fame-data";
 import { Checkbox } from "primereact/checkbox";
@@ -45,12 +46,6 @@ export default function HallOfFame() {
     const [tournamentsVisible, setTournamentsVisible] = useState(
         tournamentNames.map((name) => name == "nationalChampionship")
     );
-
-    const medalColors = {
-        Gold: "#FEE101",
-        Silver: "#D7D7D7",
-        Bronze: "#824A02",
-    } as const;
 
     const tournamentStats = computeTournamentStatsForAllPlayersBetweenYears(
         minYear,

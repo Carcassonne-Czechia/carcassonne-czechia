@@ -17,6 +17,12 @@ import { BGAStats } from "~/players/bga-stats";
 /** 1 if ASC else -1 */
 export type SortDirection = 1 | -1;
 
+export const medalColors = {
+    Gold: "#FEE101",
+    Silver: "#D7D7D7",
+    Bronze: "#824A02",
+} as const;
+
 export const computeTournamentStatsForAllPlayersBetweenYears = (
     minYear: number,
     maxYear: number,
