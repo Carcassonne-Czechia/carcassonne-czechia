@@ -25,8 +25,7 @@ export const medalColors = {
 
 export const computeTournamentStatsForAllPlayersBetweenYears = (
     minYear: number,
-    maxYear: number,
-    tournamentsVisible: boolean[]
+    maxYear: number
 ) => {
     const nationalChampionshipPlayerNames = new Set<string>(
         nationalChampionshipData.map((row) => row.Name)
@@ -68,64 +67,47 @@ export const computeTournamentStatsForAllPlayersBetweenYears = (
     // Compute tournament stats for rare tournaments
     unsafeEntries(rareTournamentResults).forEach(
         ([tournamentName, resultsArray]) => {
-            if (
-                tournamentsVisible[
-                    tournamentNames.findIndex((name) => name == tournamentName)
-                ]
-            ) {
-                resultsArray.forEach((result) =>
-                    result.names.forEach((name, j) => {
-                        const rank = result.ranks[j];
-                        if (result.year >= minYear && result.year <= maxYear) {
-                            if (rank.toString() == "1") {
-                                tournamentStats[playerNameIndices[name]][
-                                    `${tournamentName}Gold`
-                                ]++;
-                            } else if (rank.toString() == "2") {
-                                tournamentStats[playerNameIndices[name]][
-                                    `${tournamentName}Silver`
-                                ]++;
-                            } else if (rank.toString() == "3") {
-                                tournamentStats[playerNameIndices[name]][
-                                    `${tournamentName}Bronze`
-                                ]++;
-                            }
-
+            resultsArray.forEach((result) =>
+                result.names.forEach((name, j) => {
+                    const rank = result.ranks[j];
+                    if (result.year >= minYear && result.year <= maxYear) {
+                        if (rank.toString() == "1") {
                             tournamentStats[playerNameIndices[name]][
-                                `${tournamentName}Participation`
+                                `${tournamentName}Gold`
+                            ]++;
+                        } else if (rank.toString() == "2") {
+                            tournamentStats[playerNameIndices[name]][
+                                `${tournamentName}Silver`
+                            ]++;
+                        } else if (rank.toString() == "3") {
+                            tournamentStats[playerNameIndices[name]][
+                                `${tournamentName}Bronze`
                             ]++;
                         }
-                    })
-                );
-            }
+
+                        tournamentStats[playerNameIndices[name]][
+                            `${tournamentName}Participation`
+                        ]++;
+                    }
+                })
+            );
         }
     );
 
     // Compute tournament stats for championships
-    if (
-        tournamentsVisible[
-            tournamentNames.findIndex((name) => name == "nationalChampionship")
-        ]
-    ) {
-        updateResultsWithNationalChampionshipDataBetweenYears(
-            tournamentStats,
-            playerNameIndices,
-            minYear,
-            maxYear
-        );
-    }
-    if (
-        tournamentsVisible[
-            tournamentNames.findIndex((name) => name == "onlineChampionship")
-        ]
-    ) {
-        updateResultsWithOnlineChampionshipDataBetweenYears(
-            tournamentStats,
-            playerNameIndices,
-            minYear,
-            maxYear
-        );
-    }
+
+    updateResultsWithNationalChampionshipDataBetweenYears(
+        tournamentStats,
+        playerNameIndices,
+        minYear,
+        maxYear
+    );
+    updateResultsWithOnlineChampionshipDataBetweenYears(
+        tournamentStats,
+        playerNameIndices,
+        minYear,
+        maxYear
+    );
 
     return tournamentStats;
 };
@@ -199,13 +181,31 @@ export const updateResultsWithOnlineChampionshipDataBetweenYears = (
 };
 
 /** Filter those who have at least one medal or one participation in what is not national championship */
-export const filterTournamentStatsRows = (tournamentStats: HallOfFameRow[]) => {
+export const filterTournamentStatsRows = (
+    tournamentStats: HallOfFameRow[],
+    tournamentsVisible: boolean[]
+) => {
     return tournamentStats.filter((row) => {
-        const sumEntries = Object.values(row)
-            .filter((val) => typeof val == "number")
-            .reduce((a, b) => a + b);
-        const nationalChampionshipParticipations =
-            row.nationalChampionshipParticipation;
+        const sumEntries = tournamentNames
+            .filter((_, i) => tournamentsVisible[i])
+            .map(
+                (name) =>
+                    row[`${name}Participation`] +
+                    row[`${name}Gold`] +
+                    row[`${name}Silver`] +
+                    row[`${name}Bronze`]
+            )
+            .reduce((a, b) => a + b, 0);
+        const nationalChampionshipVisible =
+            tournamentsVisible[
+                tournamentNames.findIndex(
+                    (name) => name == "nationalChampionship"
+                )
+            ];
+
+        const nationalChampionshipParticipations = nationalChampionshipVisible
+            ? row.nationalChampionshipParticipation
+            : 0;
         return sumEntries - nationalChampionshipParticipations > 0;
     });
 };

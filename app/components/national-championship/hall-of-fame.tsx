@@ -49,11 +49,13 @@ export default function HallOfFame() {
 
     const tournamentStats = computeTournamentStatsForAllPlayersBetweenYears(
         minYear,
-        maxYear,
+        maxYear
+    );
+    const filteredTournamentStats = filterTournamentStatsRows(
+        tournamentStats,
         tournamentsVisible
     );
-    const filteredTournamentStats = filterTournamentStatsRows(tournamentStats);
-    const initialSortedTournamentNames = sortTournamentStats(
+    const initialSortedTournamentStats = sortTournamentStats(
         filteredTournamentStats,
         "nationalChampionship",
         -1
@@ -260,7 +262,7 @@ export default function HallOfFame() {
                 </div>
             </div>
             <DataTable
-                value={initialSortedTournamentNames}
+                value={initialSortedTournamentStats}
                 headerColumnGroup={headerGroup}
                 stripedRows
                 showGridlines
@@ -269,9 +271,10 @@ export default function HallOfFame() {
                 sortOrder={order}
                 sortField={field}
                 onSort={(e) => {
-                    setOrder(e.sortOrder);
+                    setOrder(e.sortOrder == 1 ? -1 : 1);
                     setField(e.sortField);
                 }}
+                key={JSON.stringify([initialSortedTournamentStats])}
             >
                 <Column field="Name" />
                 <Column field="BGA_Username" body={BGALink} />
