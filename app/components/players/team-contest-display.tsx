@@ -3,6 +3,7 @@ import type { TeamMemberData } from "./compute-player-data";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { medalColors } from "../national-championship/compute-hall-of-fame-data";
 import { teamContests } from "~/players/team-members";
+import React from "react";
 
 export default function TeamContests({
     teamMemberData,
@@ -45,7 +46,7 @@ export default function TeamContests({
                         {teamMemberData[`${name}Participations`].join(", ")}
                     </span>
                 ) : (
-                    <></>
+                    <React.Fragment key={name}></React.Fragment>
                 );
             })}
         </>

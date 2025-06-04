@@ -25,6 +25,7 @@ export default function Players() {
                     margin: "2rem 4rem",
                     lineHeight: "1.5rem",
                 }}
+                key={item.BGA_Username}
             >
                 <PlayerAvatar BGA_Username={item.BGA_Username} />
                 <div
