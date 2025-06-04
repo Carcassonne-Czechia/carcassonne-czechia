@@ -7,18 +7,19 @@ import { Column, type ColumnSortEvent } from "primereact/column";
 import { ColumnGroup } from "primereact/columngroup";
 import { Row } from "primereact/row";
 import {
-    getShortTournamentName,
+    getShortIndividualTournamentName,
     placements,
     rareTournamentNames,
     rareTournamentResults,
-    type TournamentName,
-    tournamentNames,
+    type IndividualTournamentName,
+    individualTournamentNames,
 } from "~/players/tournament-results";
 import BGALink from "../bga-link";
 import { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import {
-    computeTournamentStatsForAllPlayersBetweenYears,
+    computePlayerNames,
+    computeIndividualTournamentDataForPlayersBetweenYears,
     filterTournamentStatsRows,
     medalColors,
     sortTournamentStats,
@@ -60,13 +61,16 @@ export default function HallOfFame() {
     const [field, setField] = useState<string>("nationalChampionship");
 
     const [tournamentsVisible, setTournamentsVisible] = useState(
-        tournamentNames.map((name) => name == "nationalChampionship")
+        individualTournamentNames.map((name) => name === "nationalChampionship")
     );
 
-    const tournamentStats = computeTournamentStatsForAllPlayersBetweenYears(
-        minYear,
-        maxYear
-    );
+    const playerNames = computePlayerNames();
+    const tournamentStats =
+        computeIndividualTournamentDataForPlayersBetweenYears(
+            playerNames,
+            minYear,
+            maxYear
+        );
     const filteredTournamentStats = filterTournamentStatsRows(
         tournamentStats,
         tournamentsVisible
@@ -77,14 +81,20 @@ export default function HallOfFame() {
         -1
     );
 
-    const tournamentColumnNames = cartesianProduct(tournamentNames, placements);
+    const tournamentColumnNames = cartesianProduct(
+        individualTournamentNames,
+        placements
+    );
 
-    const sortColumn = (e: ColumnSortEvent, tournamentName: TournamentName) => {
+    const sortColumn = (
+        e: ColumnSortEvent,
+        tournamentName: IndividualTournamentName
+    ) => {
         const tournamentStatsCopy = [...filteredTournamentStats];
         return sortTournamentStats(
             tournamentStatsCopy,
             tournamentName,
-            e.order == 1 ? 1 : -1
+            e.order === 1 ? 1 : -1
         );
     };
 
@@ -93,7 +103,7 @@ export default function HallOfFame() {
             <Row>
                 <Column header="Name" rowSpan={2} field="Name" />
                 <Column header="BGA" rowSpan={2} field="BGA_Username" />
-                {tournamentNames
+                {individualTournamentNames
                     .filter((_, i) => tournamentsVisible[i])
                     .map((tournamentName) => (
                         <Column
@@ -115,12 +125,12 @@ export default function HallOfFame() {
                             header={
                                 <FontAwesomeIcon
                                     icon={
-                                        placement == "Participation"
+                                        placement === "Participation"
                                             ? faFlagCheckered
                                             : faMedal
                                     }
                                     style={
-                                        placement != "Participation"
+                                        placement !== "Participation"
                                             ? {
                                                   color: medalColors[placement],
                                               }
@@ -211,7 +221,7 @@ export default function HallOfFame() {
                             flexWrap: "wrap",
                         }}
                     >
-                        {tournamentNames.map((name, i) => {
+                        {individualTournamentNames.map((name, i) => {
                             return (
                                 <div
                                     key={name}
@@ -232,7 +242,10 @@ export default function HallOfFame() {
                                         <label
                                             htmlFor={`visible-toggler${name}`}
                                         >
-                                            {getShortTournamentName(name)}:
+                                            {getShortIndividualTournamentName(
+                                                name
+                                            )}
+                                            :
                                         </label>
                                     </span>
                                     <span
@@ -277,7 +290,7 @@ export default function HallOfFame() {
                 sortOrder={order}
                 sortField={field}
                 onSort={(e) => {
-                    setOrder(e.sortOrder == 1 ? -1 : 1);
+                    setOrder(e.sortOrder === 1 ? -1 : 1);
                     setField(e.sortField);
                 }}
                 key={JSON.stringify([initialSortedTournamentStats])}

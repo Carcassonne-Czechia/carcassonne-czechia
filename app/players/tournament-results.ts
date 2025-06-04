@@ -14,14 +14,15 @@ export const championshipNames: ChampionshipName[] = [
     ..._championshipNames,
 ] as const;
 
-export type TournamentName = RareTournamentName | ChampionshipName;
+export type IndividualTournamentName = RareTournamentName | ChampionshipName;
+export type Rank = "Q" | "R32" | "R16" | "QF" | "SF" | number;
 
 export const rareTournamentResults: Record<
     RareTournamentName,
     {
         year: number;
         names: string[];
-        ranks: (number | string)[];
+        ranks: Rank[];
     }[]
 > = {
     worldChampionship: [
@@ -121,37 +122,59 @@ export const rareTournamentResults: Record<
         {
             year: 2024,
             names: ["Pavel Hudec"],
-            ranks: ["Round of 16"],
+            ranks: ["R16"],
         },
         {
             year: 2025,
             names: ["Pavel Hudec", "Pavel Raus"],
-            ranks: ["Quarter finals", "Qualification"],
+            ranks: ["QF", "Q"],
         },
     ],
 } as const;
 
-export const tournamentNames: TournamentName[] = (
-    championshipNames as TournamentName[]
+export const convertRankToNumber = (rank: Rank) => {
+    if (typeof rank == "number") return rank;
+    switch (rank) {
+        case "Q":
+            return 40.5;
+        case "R32":
+            return 24.5;
+        case "R16":
+            return 12.5;
+        case "QF":
+            return 6.5;
+        case "SF":
+            return 3.5;
+    }
+};
+
+export const individualTournamentNames: IndividualTournamentName[] = (
+    championshipNames as IndividualTournamentName[]
 ).concat(rareTournamentNames);
 
-export const getShortTournamentName = (name: TournamentName) => {
-    if (name == "CCL") return "CCL";
-    if (name == "nationalChampionship") return "NC";
-    if (name == "onlineChampionship") return "NOC";
-    if (name == "worldChampionship") return "WC";
+export const getShortIndividualTournamentName = (
+    name: IndividualTournamentName
+) => {
+    if (name === "CCL") return "CCL";
+    if (name === "nationalChampionship") return "NC";
+    if (name === "onlineChampionship") return "NOC";
+    if (name === "worldChampionship") return "WC";
 };
 
 const _placements = ["Participation", "Gold", "Silver", "Bronze"] as const;
 type Placement = (typeof _placements)[number];
 export const placements: Placement[] = [..._placements] as const;
+export type IndividualTournamentResult = { year: number; rank: Rank };
 
-export type TournamentNamePlacement = `${TournamentName}${Placement}`;
-type TournamentNamePlacementNumber = {
-    [Property in TournamentNamePlacement]: number;
-};
+type IndividualTournamentNamePlacement =
+    `${IndividualTournamentName}${Placement}`;
+type IndividualTournamentNamePlacementData = Record<
+    IndividualTournamentNamePlacement,
+    number
+> &
+    Record<`${IndividualTournamentName}RawData`, IndividualTournamentResult[]>;
 
-export type HallOfFameRow = TournamentNamePlacementNumber & {
+export type HallOfFameRow = IndividualTournamentNamePlacementData & {
     Name: string;
     BGA_Username: string;
 };

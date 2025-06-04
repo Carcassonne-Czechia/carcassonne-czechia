@@ -33,6 +33,7 @@ export default defineConfig([
                     ignoreRestSiblings: true,
                 },
             ],
+            eqeqeq: ["error", "smart"],
         },
     },
 ]);

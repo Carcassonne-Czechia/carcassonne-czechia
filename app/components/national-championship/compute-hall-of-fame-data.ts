@@ -8,9 +8,9 @@ import type {
 import {
     placements,
     rareTournamentResults,
-    tournamentNames,
+    individualTournamentNames,
     type HallOfFameRow,
-    type TournamentName,
+    type IndividualTournamentName,
 } from "~/players/tournament-results";
 import { BGAStats } from "~/players/bga-stats";
 
@@ -23,10 +23,7 @@ export const medalColors = {
     Bronze: "#824A02",
 } as const;
 
-export const computeTournamentStatsForAllPlayersBetweenYears = (
-    minYear: number,
-    maxYear: number
-) => {
+export const computePlayerNames = () => {
     const nationalChampionshipPlayerNames = new Set<string>(
         nationalChampionshipData.map((row) => row.Name)
     );
@@ -41,8 +38,18 @@ export const computeTournamentStatsForAllPlayersBetweenYears = (
     const playerNames = [
         ...nationalChampionshipPlayerNames.union(tournamentPlayerNames),
     ];
+
+    return playerNames;
+};
+
+export const computeIndividualTournamentDataForPlayersBetweenYears = (
+    playerNames: string[],
+    minYear: number,
+    maxYear: number
+) => {
     const BGAUsernames = playerNames.map(
-        (name) => BGAStats.find((stat) => stat.name == name)?.bga_username ?? ""
+        (name) =>
+            BGAStats.find((stat) => stat.name === name)?.bga_username ?? ""
     );
 
     const playerNameIndices = Object.fromEntries(
@@ -55,10 +62,11 @@ export const computeTournamentStatsForAllPlayersBetweenYears = (
             Name: name,
             BGA_Username: BGAUsernames[i],
         };
-        tournamentNames.forEach((tournamentName) => {
+        individualTournamentNames.forEach((tournamentName) => {
             placements.forEach((placement) => {
                 row[`${tournamentName}${placement}`] = 0;
             });
+            row[`${tournamentName}RawData`] = [];
         });
 
         return row as HallOfFameRow;
@@ -71,23 +79,29 @@ export const computeTournamentStatsForAllPlayersBetweenYears = (
                 result.names.forEach((name, j) => {
                     const rank = result.ranks[j];
                     if (result.year >= minYear && result.year <= maxYear) {
-                        if (rank.toString() == "1") {
+                        if (playerNameIndices[name] !== undefined) {
                             tournamentStats[playerNameIndices[name]][
-                                `${tournamentName}Gold`
-                            ]++;
-                        } else if (rank.toString() == "2") {
+                                `${tournamentName}RawData`
+                            ].push({ year: result.year, rank });
+
+                            if (rank.toString() === "1") {
+                                tournamentStats[playerNameIndices[name]][
+                                    `${tournamentName}Gold`
+                                ]++;
+                            } else if (rank.toString() === "2") {
+                                tournamentStats[playerNameIndices[name]][
+                                    `${tournamentName}Silver`
+                                ]++;
+                            } else if (rank.toString() === "3") {
+                                tournamentStats[playerNameIndices[name]][
+                                    `${tournamentName}Bronze`
+                                ]++;
+                            }
+
                             tournamentStats[playerNameIndices[name]][
-                                `${tournamentName}Silver`
-                            ]++;
-                        } else if (rank.toString() == "3") {
-                            tournamentStats[playerNameIndices[name]][
-                                `${tournamentName}Bronze`
+                                `${tournamentName}Participation`
                             ]++;
                         }
-
-                        tournamentStats[playerNameIndices[name]][
-                            `${tournamentName}Participation`
-                        ]++;
                     }
                 })
             );
@@ -129,17 +143,26 @@ export const updateResultsWithNationalChampionshipDataBetweenYears = (
         (
             row: NationalChampionshipResultsRow & { ["BGA_Username"]?: string }
         ) => {
-            tournamentStats[playerNameIndices[row.Name]]
-                .nationalChampionshipParticipation++;
-            if (row.Position == "1")
+            if (playerNameIndices[row.Name] !== undefined) {
+                tournamentStats[
+                    playerNameIndices[row.Name]
+                ].nationalChampionshipRawData.push({
+                    year: Number(row.Year),
+                    rank: Number(row.Position),
+                });
                 tournamentStats[playerNameIndices[row.Name]]
-                    .nationalChampionshipGold++;
-            if (row.Position == "2")
-                tournamentStats[playerNameIndices[row.Name]]
-                    .nationalChampionshipSilver++;
-            if (row.Position == "3")
-                tournamentStats[playerNameIndices[row.Name]]
-                    .nationalChampionshipBronze++;
+                    .nationalChampionshipParticipation++;
+
+                if (row.Position === "1")
+                    tournamentStats[playerNameIndices[row.Name]]
+                        .nationalChampionshipGold++;
+                if (row.Position === "2")
+                    tournamentStats[playerNameIndices[row.Name]]
+                        .nationalChampionshipSilver++;
+                if (row.Position === "3")
+                    tournamentStats[playerNameIndices[row.Name]]
+                        .nationalChampionshipBronze++;
+            }
         }
     );
 };
@@ -159,23 +182,30 @@ export const updateResultsWithOnlineChampionshipDataBetweenYears = (
     filteredData.forEach(
         (row: OnlineChampionshipResultsRow & { Name?: string }) => {
             BGAStats.forEach((stat) => {
-                if (stat.bga_username == row["BGA_Username"])
+                if (stat.bga_username === row["BGA_Username"])
                     row.Name = stat.name;
             });
             // If name not known, not add to table
             if (!row.Name) return;
-
-            tournamentStats[playerNameIndices[row.Name]]
-                .onlineChampionshipParticipation++;
-            if (row.Position == "1")
+            if (playerNameIndices[row.Name] !== undefined) {
+                tournamentStats[
+                    playerNameIndices[row.Name]
+                ].onlineChampionshipRawData.push({
+                    year: Number(row.Year),
+                    rank: Number(row.Position),
+                });
                 tournamentStats[playerNameIndices[row.Name]]
-                    .onlineChampionshipGold++;
-            if (row.Position == "2")
-                tournamentStats[playerNameIndices[row.Name]]
-                    .onlineChampionshipSilver++;
-            if (row.Position == "3")
-                tournamentStats[playerNameIndices[row.Name]]
-                    .onlineChampionshipBronze++;
+                    .onlineChampionshipParticipation++;
+                if (row.Position === "1")
+                    tournamentStats[playerNameIndices[row.Name]]
+                        .onlineChampionshipGold++;
+                if (row.Position === "2")
+                    tournamentStats[playerNameIndices[row.Name]]
+                        .onlineChampionshipSilver++;
+                if (row.Position === "3")
+                    tournamentStats[playerNameIndices[row.Name]]
+                        .onlineChampionshipBronze++;
+            }
         }
     );
 };
@@ -186,7 +216,7 @@ export const filterTournamentStatsRows = (
     tournamentsVisible: boolean[]
 ) => {
     return tournamentStats.filter((row) => {
-        const sumEntries = tournamentNames
+        const sumEntries = individualTournamentNames
             .filter((_, i) => tournamentsVisible[i])
             .map(
                 (name) =>
@@ -198,8 +228,8 @@ export const filterTournamentStatsRows = (
             .reduce((a, b) => a + b, 0);
         const nationalChampionshipVisible =
             tournamentsVisible[
-                tournamentNames.findIndex(
-                    (name) => name == "nationalChampionship"
+                individualTournamentNames.findIndex(
+                    (name) => name === "nationalChampionship"
                 )
             ];
 
@@ -213,7 +243,7 @@ export const filterTournamentStatsRows = (
 /** Radix sort on placements, intending olympic sorting */
 export const sortTournamentStats = (
     tournamentStats: HallOfFameRow[],
-    sortByTournamentName: TournamentName,
+    sortByTournamentName: IndividualTournamentName,
     sortDirection: SortDirection
 ) => {
     return tournamentStats

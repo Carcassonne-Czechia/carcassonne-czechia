@@ -14,7 +14,7 @@ export default function PlayerAvatar({
             type="image/jpeg"
             width={"184px"}
         >
-            <img src="assets/logo.jpg" />
+            <img src="/assets/logo.jpg" />
         </object>
     );
 }

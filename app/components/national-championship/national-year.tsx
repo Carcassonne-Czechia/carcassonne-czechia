@@ -18,7 +18,7 @@ export const computeDataWithBGAUsernames = (
     return data.map((row) => {
         return {
             BGA_Username:
-                BGAStats.find((stat) => stat.name == row.Name)?.bga_username ??
+                BGAStats.find((stat) => stat.name === row.Name)?.bga_username ??
                 "",
             ...row,
         };
@@ -53,7 +53,7 @@ export default function NationalChampionship() {
                 <DataTable
                     value={dataWithBGAUsernames
                         .slice(1)
-                        .filter((row) => row.Year == year)}
+                        .filter((row) => row.Year === year)}
                     tableStyle={{ minWidth: "30rem", marginTop: "1rem" }}
                     stripedRows
                     showGridlines
@@ -63,7 +63,9 @@ export default function NationalChampionship() {
                             field={field}
                             header={field}
                             key={field}
-                            body={field == "BGA_Username" ? BGALink : undefined}
+                            body={
+                                field === "BGA_Username" ? BGALink : undefined
+                            }
                         ></Column>
                     ))}
                 </DataTable>

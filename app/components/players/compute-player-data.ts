@@ -24,9 +24,9 @@ export const computeTeamMemberDataFromBGAUsername = (
 ) => {
     const memberData: BasicTeamMemberData &
         Partial<Record<TeamContestParticipations, number[]>> = {
-        name: BGAStats.find((stat) => stat.bga_username == BGA_Username)?.name,
+        name: BGAStats.find((stat) => stat.bga_username === BGA_Username)?.name,
         BGA_Username,
-        team_captain: teamCaptain == BGA_Username,
+        team_captain: teamCaptain === BGA_Username,
         former_captain: formerTeamCaptains.includes(BGA_Username),
     };
 
@@ -35,7 +35,7 @@ export const computeTeamMemberDataFromBGAUsername = (
 
         teamCompetitionMembers[teamContest].forEach((contest) => {
             contest.members.forEach((member) => {
-                if (member == BGA_Username)
+                if (member === BGA_Username)
                     memberData[`${teamContest}Participations`]?.push(
                         contest.year
                     );

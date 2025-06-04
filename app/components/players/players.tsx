@@ -1,17 +1,12 @@
-import {
-    currentTeamMemberBGAUsernames,
-    teamContests,
-} from "~/players/team-members";
+import { currentTeamMemberBGAUsernames } from "~/players/team-members";
 import {
     computeTeamMemberDataFromBGAUsername,
     type TeamMemberData,
 } from "./compute-player-data";
 import { DataView } from "primereact/dataview";
 import { Link } from "react-router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { medalColors } from "../national-championship/compute-hall-of-fame-data";
 import PlayerAvatar from "./player_avatar";
+import TeamContests from "./team-contest-display";
 
 export default function Players() {
     const currentTeamMemberData = currentTeamMemberBGAUsernames.map(
@@ -35,62 +30,22 @@ export default function Players() {
                 <div
                     style={{
                         display: "flex",
-                        justifyContent: "center",
-                        fontSize: "20px",
+                        flexDirection: "column",
                     }}
                 >
                     <Link
-                        style={{ fontWeight: 600, marginBottom: "20px" }}
+                        style={{
+                            fontWeight: 600,
+                            marginBottom: "20px",
+                            fontSize: "20px",
+                            textAlign: "center",
+                        }}
                         to={`/players/${item.BGA_Username}`}
                     >
                         {item.BGA_Username}
                     </Link>
+                    <TeamContests teamMemberData={item} />
                 </div>
-                {item.team_captain && (
-                    <span
-                        style={{
-                            fontWeight: 700,
-                            fontSize: "20px",
-                            marginBottom: "12px",
-                        }}
-                    >
-                        <FontAwesomeIcon
-                            icon={faStar}
-                            color={medalColors.Gold}
-                        />
-                        <span style={{ marginLeft: "0.5rem" }}>
-                            Team captain
-                        </span>
-                    </span>
-                )}
-                {item.former_captain && (
-                    <span
-                        style={{
-                            fontWeight: 700,
-                            fontSize: "20px",
-                            marginBottom: "10px",
-                            lineHeight: "25px",
-                        }}
-                    >
-                        <FontAwesomeIcon
-                            icon={faStar}
-                            color={medalColors.Silver}
-                        />
-                        <span style={{ marginLeft: "0.5rem" }}>
-                            Former team captain
-                        </span>
-                    </span>
-                )}
-                {teamContests.map((name) => {
-                    return item[`${name}Participations`].length ? (
-                        <span key={name}>
-                            <span style={{ fontWeight: 600 }}>{name}</span>:{" "}
-                            {item[`${name}Participations`].join(", ")}
-                        </span>
-                    ) : (
-                        <></>
-                    );
-                })}
             </div>
         );
     };
