@@ -1,4 +1,5 @@
 import nationalChampionshipData from "src/raw_data/offline-championships/all_data.csv";
+import onlineChampionshipData from "src/raw_data/online-championships/all_data.csv";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlagCheckered, faMedal } from "@fortawesome/free-solid-svg-icons";
 import { DataTable } from "primereact/datatable";
@@ -8,6 +9,8 @@ import { Row } from "primereact/row";
 import {
     getShortTournamentName,
     placements,
+    rareTournamentNames,
+    rareTournamentResults,
     type TournamentName,
     tournamentNames,
 } from "~/players/tournament-results";
@@ -36,8 +39,21 @@ const cartesianProduct = <T, S>(arr1: T[], arr2: S[]): [T, S][] => {
 
 export default function HallOfFame() {
     const dataYears = [
-        ...new Set(nationalChampionshipData.map((elem) => elem.Year)),
+        ...new Set(nationalChampionshipData.map((elem) => elem.Year))
+            .union(new Set(onlineChampionshipData.map((elem) => elem.Year)))
+            .union(
+                new Set(
+                    rareTournamentNames
+                        .map((name) =>
+                            rareTournamentResults[name].map((result) =>
+                                result.year.toString()
+                            )
+                        )
+                        .reduce((a, b) => a.concat(b))
+                )
+            ),
     ].sort();
+
     const [minYear, setMinYear] = useState(dataYears[0]);
     const [maxYear, setMaxYear] = useState(dataYears[dataYears.length - 1]);
     const [order, setOrder] = useState<0 | 1 | -1 | null | undefined>(-1);
@@ -147,14 +163,9 @@ export default function HallOfFame() {
                     <Dropdown
                         value={minYear}
                         onChange={(e) => setMinYear(e.value)}
-                        options={[
-                            ...new Set(
-                                nationalChampionshipData.map((row) => row.Year)
-                            ),
-                        ]}
-                        optionLabel="name"
+                        options={dataYears}
+                        optionLabel="year"
                         placeholder="Select start year"
-                        className="w-full md:w-14rem"
                         style={{ marginRight: "1rem", marginLeft: "0.5rem" }}
                     />
                     <span
@@ -169,14 +180,9 @@ export default function HallOfFame() {
                     <Dropdown
                         value={maxYear}
                         onChange={(e) => setMaxYear(e.value)}
-                        options={[
-                            ...new Set(
-                                nationalChampionshipData.map((row) => row.Year)
-                            ),
-                        ]}
-                        optionLabel="name"
-                        placeholder="Select start year"
-                        className="w-full md:w-14rem"
+                        options={dataYears}
+                        optionLabel="year"
+                        placeholder="Select end year"
                         style={{ marginRight: "1rem", marginLeft: "0.5rem" }}
                     />
                 </div>
