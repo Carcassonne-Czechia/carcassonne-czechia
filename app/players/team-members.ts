@@ -32,7 +32,7 @@ export const teamCaptain: CurrentTeamMemberBGAUsername = "posij118" as const;
 export const formerTeamCaptains: (
     | CurrentTeamMemberBGAUsername
     | FormerTeamMemberBGAUsername
-)[] = ["martypartyouje"] as const;
+)[] = ["martypartyouje", "Hurtle_cz"] as const;
 
 export const teamContests = ["WTCOC", "ETCOC"] as const;
 export type TeamContest = (typeof teamContests)[number];
