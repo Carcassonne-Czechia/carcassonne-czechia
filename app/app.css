@@ -61,6 +61,8 @@ h6:first-child {
 h1 {
     font-size: 4rem;
     text-align: center;
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
 }
 
 h2 {
