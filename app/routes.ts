@@ -14,6 +14,8 @@ export const ROUTE_HEADERS = {
 
 export default [
     index("routes/home.tsx"),
+    route("players", "components/players/players.tsx"),
+    route("players/:player", "components/players/player.tsx"),
     ...prefix(ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP, [
         route("", "components/national-championship/national-year.tsx"),
         route(
