@@ -22,7 +22,11 @@ POSITION = "position"
 POINTS = "points"
 SCORE_DIFFERENCE = "scoreDifference"
 
-raw-data_base_path = os.path.join("..", "src", "raw-data", "offline-championships")
+raw_data_base_path = (
+    os.path.join("src", "raw-data", "offline-championships")
+    if os.getenv("CI")
+    else os.path.join("..", "src", "raw-data", "offline-championships")
+)
 all_data = [(YEAR, POSITION, NAME, POINTS, SCORE_DIFFERENCE)]
 
 # UTILS
@@ -58,7 +62,7 @@ def add_zeros_where_missing(raw_scores: list[list[str]]):
         for j in range(len(raw_scores[0])):
             if raw_scores[i][j].lstrip().rstrip() == "":
                 raw_scores[i][j] = "0"
-    
+
     return raw_scores
 
 
@@ -135,7 +139,7 @@ def clean_up_raw_scores(raw_scores: list[list[str]]) -> list[tuple[str, ...]]:
     return list(zip(points_scored, score_differences))
 
 
-def print_file(data: list[tuple[str, ...]], dir=raw-data_base_path):
+def print_file(data: list[tuple[str, ...]], dir=raw_data_base_path):
     with open(
         os.path.join(dir, "all_data.csv"), "w", newline="", encoding="utf-8"
     ) as csvfile:
@@ -199,7 +203,7 @@ class DeskohraniHTMLParser(HTMLParser):
 
 
 # Do not flood the deskohrani servers during local testing
-inaugural_year = 2003 if os.getenv("CI") else 2023
+inaugural_year = 2003 if os.getenv("CI") or os.getenv("TEST_ALL_YEARS") else 2023
 current_year = datetime.datetime.now().year
 
 # Do allow testing before the current year website is available
@@ -216,7 +220,7 @@ years_range = list(
 # Check if scraped data available
 # They are never pushed to GitHub so the action always scrapes the new values.
 scraped_responses_found = False
-p = os.path.join(raw-data_base_path, "scraped_{}.pickle".format(inaugural_year))
+p = os.path.join(raw_data_base_path, "scraped_{}.pickle".format(inaugural_year))
 
 if os.path.exists(p):
     scraped_responses_found = True
@@ -224,6 +228,9 @@ if os.path.exists(p):
         responses = pickle.load(scrapedFile)
 
 if not scraped_responses_found:
+    print(os.listdir(os.getcwd()))
+    if not os.path.exists(raw_data_base_path):
+        os.mkdir(raw_data_base_path)
     base_url = "https://deskohrani.cz/cgi/mso/index.pl?turnaj=mcr&text=uvod.htm&telo=vysledky.pl&rok={}&jazyk=cs&hra=car"
     url_list = [base_url.format(year) for year in years_range]
     responses = [requests.get(url) for url in url_list]
