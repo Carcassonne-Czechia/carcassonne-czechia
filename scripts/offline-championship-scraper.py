@@ -1,7 +1,7 @@
 """
 Scraping scores of online championship into a consistent format. Light on deskohrani servers.
 
-Data is saved to `src/raw_data/offline-championships`.
+Data is saved to `src/raw-data/offline-championships`.
 """
 
 import requests
@@ -22,7 +22,7 @@ POSITION = "position"
 POINTS = "points"
 SCORE_DIFFERENCE = "scoreDifference"
 
-raw_data_base_path = os.path.join("..", "src", "raw_data", "offline-championships")
+raw-data_base_path = os.path.join("..", "src", "raw-data", "offline-championships")
 all_data = [(YEAR, POSITION, NAME, POINTS, SCORE_DIFFERENCE)]
 
 # UTILS
@@ -135,7 +135,7 @@ def clean_up_raw_scores(raw_scores: list[list[str]]) -> list[tuple[str, ...]]:
     return list(zip(points_scored, score_differences))
 
 
-def print_file(data: list[tuple[str, ...]], dir=raw_data_base_path):
+def print_file(data: list[tuple[str, ...]], dir=raw-data_base_path):
     with open(
         os.path.join(dir, "all_data.csv"), "w", newline="", encoding="utf-8"
     ) as csvfile:
@@ -216,7 +216,7 @@ years_range = list(
 # Check if scraped data available
 # They are never pushed to GitHub so the action always scrapes the new values.
 scraped_responses_found = False
-p = os.path.join(raw_data_base_path, "scraped_{}.pickle".format(inaugural_year))
+p = os.path.join(raw-data_base_path, "scraped_{}.pickle".format(inaugural_year))
 
 if os.path.exists(p):
     scraped_responses_found = True

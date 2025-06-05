@@ -1,5 +1,5 @@
-import nationalChampionshipData from "src/raw_data/offline-championships/all_data.csv";
-import onlineChampionshipData from "src/raw_data/online-championships/all_data.csv";
+import nationalChampionshipData from "src/raw-data/offline-championships/all_data.csv";
+import onlineChampionshipData from "src/raw-data/online-championships/all_data.csv";
 import { unsafeEntries } from "~/utils";
 import type {
     NationalChampionshipResultsRow,

@@ -1,4 +1,4 @@
-import nationalChampionshipData from "src/raw_data/offline-championships/all_data.csv";
+import nationalChampionshipData from "src/raw-data/offline-championships/all_data.csv";
 import {
     nationalChampionshipHeaderRow,
     type NationalChampionshipResultsRow,

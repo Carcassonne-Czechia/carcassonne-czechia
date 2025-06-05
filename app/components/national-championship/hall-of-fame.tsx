@@ -1,5 +1,5 @@
-import nationalChampionshipData from "src/raw_data/offline-championships/all_data.csv";
-import onlineChampionshipData from "src/raw_data/online-championships/all_data.csv";
+import nationalChampionshipData from "src/raw-data/offline-championships/all_data.csv";
+import onlineChampionshipData from "src/raw-data/online-championships/all_data.csv";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlagCheckered, faMedal } from "@fortawesome/free-solid-svg-icons";
 import { DataTable } from "primereact/datatable";

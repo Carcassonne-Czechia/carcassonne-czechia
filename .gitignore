@@ -8,8 +8,7 @@
 
 # Custom
 /archive/
-/src/raw_data/offline-championships/
-
+/src/raw-data/offline-championships/
 
 # Python
 .pickle

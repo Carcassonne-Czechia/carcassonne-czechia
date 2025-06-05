@@ -27,7 +27,7 @@ jobs:
               run: |
                   git config --global user.name "posij118"
                   git config --global user.email "posij118@github.com"
-                  git add src/raw_data/offline-championships/all_data.csv
+                  git add src/raw-data/offline-championships/all_data.csv
                   git commit -m "Update data directory with new CSV files"
                   git push
               env:
