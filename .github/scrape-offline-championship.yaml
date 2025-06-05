@@ -2,7 +2,7 @@ name: Yearly Offline Championship Update
 
 on:
     schedule:
-        - cron: "0 0 1 1 *"
+        - cron: "0 0 31 10 *"
 
 jobs:
     update-data:
@@ -17,17 +17,14 @@ jobs:
               with:
                   python-version: "3.x"
 
-            - name: Install dependencies
-              run: pip install -r requirements.txt
-
             - name: Run Python script
               run: python scripts/generate_csv_list.py
 
             - name: Commit and push changes
               run: |
                   git config --global user.name "posij118"
-                  git config --global user.email "action@github.com"
-                  git add data/
+                  git config --global user.email "posij118@github.com"
+                  git add src/raw_data/offline-championships/all_data.csv
                   git commit -m "Update data directory with new CSV files"
                   git push
               env:
