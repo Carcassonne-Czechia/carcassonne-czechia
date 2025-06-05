@@ -1,8 +1,12 @@
 import { Menubar } from "primereact/menubar";
 import type { MenuItem } from "primereact/menuitem";
-import type { JSX } from "react";
+import { useContext, type JSX } from "react";
 import { NavLink } from "react-router";
+import { DICTIONARY } from "~/i18n/dictionary";
 import { ROUTE_HEADERS } from "~/routes";
+import "flag-icons/css/flag-icons.min.css";
+import { SelectButton } from "primereact/selectbutton";
+import { LangContext, type Lang } from "~/i18n/lang-context";
 
 interface Item {
     to?: string;
@@ -13,6 +17,9 @@ interface Item {
 }
 
 export default function NavBar() {
+    const { lang, setLang } = useContext(LangContext);
+    const langs: Lang[] = ["cs", "en"];
+
     const itemRenderer = (item: Item) => (
         <NavLink
             to={item.to ?? ""}
@@ -25,25 +32,25 @@ export default function NavBar() {
 
     const items: Item[] = [
         {
-            label: "Home",
+            label: DICTIONARY.home[lang],
             to: "/",
             template: itemRenderer,
         },
         {
-            label: "Players",
+            label: DICTIONARY.players[lang],
             to: `/${ROUTE_HEADERS.PLAYERS}`,
             template: itemRenderer,
         },
         {
-            label: "Contests",
+            label: DICTIONARY.tournaments[lang],
             items: [
                 {
-                    label: "National Championship",
+                    label: DICTIONARY.nationalChampionship[lang],
                     to: `/${ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP}`,
                     template: itemRenderer,
                 },
                 {
-                    label: "Online Championship",
+                    label: DICTIONARY.onlineChampionship[lang],
                     to: `/${ROUTE_HEADERS.ONLINE_CHAMPIONSHIP}`,
                     template: itemRenderer,
                 },
@@ -56,9 +63,33 @@ export default function NavBar() {
             <img alt="logo" src="/assets/logo.jpg" height="40"></img>
             <div style={{ display: "flex", alignItems: "center" }}>
                 <div style={{ padding: "0 1rem", fontWeight: "600" }}>
-                    Carcassonne Czechia
+                    {DICTIONARY.hook[lang]}
                 </div>
             </div>
+        </div>
+    );
+
+    const end = (
+        <div style={{ height: "100%" }}>
+            <SelectButton
+                value={lang}
+                options={langs}
+                onChange={(e) => {
+                    if (setLang && (e.value === "cs" || e.value === "en")) {
+                        setLang(e.value);
+                    }
+                }}
+                itemTemplate={(l) => (
+                    <span
+                        className={`fi fi-${l === "cs" ? "cz" : "gb"} fis`}
+                        style={{
+                            height: "100%",
+                            borderRadius: "1px",
+                        }}
+                    ></span>
+                )}
+                style={{ minWidth: "90px", marginLeft: "0.5rem" }}
+            />
         </div>
     );
 
@@ -67,6 +98,7 @@ export default function NavBar() {
             <Menubar
                 model={items as MenuItem[]}
                 start={start}
+                end={end}
                 style={{ fontSize: "16px" }}
             />
         </div>

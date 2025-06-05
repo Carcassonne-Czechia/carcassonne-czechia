@@ -3,13 +3,17 @@ import type { TeamMemberData } from "./compute-player-data";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { medalColors } from "../national-championship/compute-hall-of-fame-data";
 import { teamContests } from "~/players/team-members";
-import React from "react";
+import React, { useContext } from "react";
+import { DICTIONARY } from "~/i18n/dictionary";
+import { LangContext } from "~/i18n/lang-context";
 
 export default function TeamContests({
     teamMemberData,
 }: {
     teamMemberData: TeamMemberData;
 }) {
+    const { lang } = useContext(LangContext);
+
     return (
         <>
             {teamMemberData.team_captain && (
@@ -21,7 +25,9 @@ export default function TeamContests({
                     }}
                 >
                     <FontAwesomeIcon icon={faStar} color={medalColors.Gold} />
-                    <span style={{ marginLeft: "0.5rem" }}>Team captain</span>
+                    <span style={{ marginLeft: "0.5rem" }}>
+                        {DICTIONARY.teamCaptain[lang]}
+                    </span>
                 </span>
             )}
             {teamMemberData.former_captain && (
@@ -35,7 +41,7 @@ export default function TeamContests({
                 >
                     <FontAwesomeIcon icon={faStar} color={medalColors.Silver} />
                     <span style={{ marginLeft: "0.5rem" }}>
-                        Former team captain
+                        {DICTIONARY.formerTeamCaptain[lang]}
                     </span>
                 </span>
             )}

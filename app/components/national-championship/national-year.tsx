@@ -4,13 +4,16 @@ import {
     type NationalChampionshipResultsRow,
     type NationalChampionshipResultsRowWithUsername,
 } from "~/components/national-championship/typings";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import NationalChampionshipAbout from "./national-about";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Dropdown } from "primereact/dropdown";
 import { BGAStats } from "~/players/bga-stats";
 import BGALink from "../bga-link";
+import { DICTIONARY } from "~/i18n/dictionary";
+import NationalChampionshipNavigation from "./navigation";
+import { LangContext } from "~/i18n/lang-context";
 
 export const computeDataWithBGAUsernames = (
     data: NationalChampionshipResultsRow[]
@@ -18,7 +21,7 @@ export const computeDataWithBGAUsernames = (
     return data.map((row) => {
         return {
             BGA_Username:
-                BGAStats.find((stat) => stat.name === row.Name)?.bga_username ??
+                BGAStats.find((stat) => stat.name === row.name)?.bga_username ??
                 "",
             ...row,
         };
@@ -26,8 +29,9 @@ export const computeDataWithBGAUsernames = (
 };
 
 export default function NationalChampionship() {
+    const { lang } = useContext(LangContext);
     const dataYears = [
-        ...new Set(nationalChampionshipData.map((elem) => elem.Year)),
+        ...new Set(nationalChampionshipData.map((elem) => elem.year)),
     ].sort();
     const [year, setYear] = useState<string>(dataYears[dataYears.length - 1]);
 
@@ -37,23 +41,33 @@ export default function NationalChampionship() {
     return (
         <main>
             <NationalChampionshipAbout />
+            <NationalChampionshipNavigation />
             <div>
-                <Dropdown
-                    value={year}
-                    onChange={(e) => setYear(e.value)}
-                    options={[
-                        ...new Set(
-                            nationalChampionshipData.map((row) => row.Year)
-                        ),
-                    ]}
-                    optionLabel="name"
-                    placeholder="Select year"
-                    className="w-full md:w-14rem"
-                />
+                <div>
+                    <label
+                        htmlFor="national-year-picker"
+                        style={{ marginRight: "0.5rem", fontWeight: "600" }}
+                    >
+                        {DICTIONARY.selectYear[lang]}:
+                    </label>
+                    <Dropdown
+                        value={year}
+                        id="national-year-picker"
+                        name="national-year-picker"
+                        onChange={(e) => setYear(e.value)}
+                        options={[
+                            ...new Set(
+                                nationalChampionshipData.map((row) => row.year)
+                            ),
+                        ]}
+                        optionLabel="year"
+                        placeholder={DICTIONARY.selectYear[lang]}
+                    />
+                </div>
                 <DataTable
-                    value={dataWithBGAUsernames
-                        .slice(1)
-                        .filter((row) => row.Year === year)}
+                    value={dataWithBGAUsernames.filter(
+                        (row) => row.year === year
+                    )}
                     tableStyle={{ minWidth: "30rem", marginTop: "1rem" }}
                     stripedRows
                     showGridlines
@@ -61,7 +75,7 @@ export default function NationalChampionship() {
                     {nationalChampionshipHeaderRow.map((field) => (
                         <Column
                             field={field}
-                            header={field}
+                            header={DICTIONARY[field][lang]}
                             key={field}
                             body={
                                 field === "BGA_Username" ? BGALink : undefined

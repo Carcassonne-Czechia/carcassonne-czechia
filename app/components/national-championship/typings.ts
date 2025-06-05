@@ -1,15 +1,15 @@
 /** Note that for CSV files we type as NationalChampionshipResultsRow[] even though the first row is the header row. */
 export type NationalChampionshipResultsRow = {
-    Year: string;
-    Position: string;
-    Name: string;
-    Points: string;
-    "Score difference": string;
+    year: string;
+    position: string;
+    name: string;
+    points: string;
+    scoreDifference: string;
 };
 
 export type OnlineChampionshipResultsRow = {
-    Year: string;
-    Position: string;
+    year: string;
+    position: string;
     BGA_Username: string;
 };
 
@@ -17,9 +17,9 @@ export type NationalChampionshipResultsRowWithUsername =
     NationalChampionshipResultsRow & { BGA_Username: string };
 
 export const nationalChampionshipHeaderRow = [
-    "Position",
-    "Name",
+    "position",
+    "name",
     "BGA_Username",
-    "Points",
-    "Score Difference",
+    "points",
+    "scoreDifference",
 ] as const;

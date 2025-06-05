@@ -136,31 +136,31 @@ export const updateResultsWithNationalChampionshipDataBetweenYears = (
 ) => {
     const filteredData = nationalChampionshipData.filter(
         (row: NationalChampionshipResultsRow) =>
-            Number(row.Year) >= minYear && Number(row.Year) <= maxYear
+            Number(row.year) >= minYear && Number(row.year) <= maxYear
     );
 
     filteredData.forEach(
         (
             row: NationalChampionshipResultsRow & { ["BGA_Username"]?: string }
         ) => {
-            if (playerNameIndices[row.Name] !== undefined) {
+            if (playerNameIndices[row.name] !== undefined) {
                 tournamentStats[
-                    playerNameIndices[row.Name]
+                    playerNameIndices[row.name]
                 ].nationalChampionshipRawData.push({
-                    year: Number(row.Year),
-                    rank: Number(row.Position),
+                    year: Number(row.year),
+                    rank: Number(row.position),
                 });
-                tournamentStats[playerNameIndices[row.Name]]
+                tournamentStats[playerNameIndices[row.name]]
                     .nationalChampionshipParticipation++;
 
-                if (row.Position === "1")
-                    tournamentStats[playerNameIndices[row.Name]]
+                if (row.position === "1")
+                    tournamentStats[playerNameIndices[row.name]]
                         .nationalChampionshipGold++;
-                if (row.Position === "2")
-                    tournamentStats[playerNameIndices[row.Name]]
+                if (row.position === "2")
+                    tournamentStats[playerNameIndices[row.name]]
                         .nationalChampionshipSilver++;
-                if (row.Position === "3")
-                    tournamentStats[playerNameIndices[row.Name]]
+                if (row.position === "3")
+                    tournamentStats[playerNameIndices[row.name]]
                         .nationalChampionshipBronze++;
             }
         }
@@ -176,34 +176,34 @@ export const updateResultsWithOnlineChampionshipDataBetweenYears = (
     maxYear: number
 ) => {
     const filteredData = onlineChampionshipData.filter(
-        (row) => Number(row.Year) >= minYear && Number(row.Year) <= maxYear
+        (row) => Number(row.year) >= minYear && Number(row.year) <= maxYear
     );
 
     filteredData.forEach(
-        (row: OnlineChampionshipResultsRow & { Name?: string }) => {
+        (row: OnlineChampionshipResultsRow & { name?: string }) => {
             BGAStats.forEach((stat) => {
                 if (stat.bga_username === row["BGA_Username"])
-                    row.Name = stat.name;
+                    row.name = stat.name;
             });
             // If name not known, not add to table
-            if (!row.Name) return;
-            if (playerNameIndices[row.Name] !== undefined) {
+            if (!row.name) return;
+            if (playerNameIndices[row.name] !== undefined) {
                 tournamentStats[
-                    playerNameIndices[row.Name]
+                    playerNameIndices[row.name]
                 ].onlineChampionshipRawData.push({
-                    year: Number(row.Year),
-                    rank: Number(row.Position),
+                    year: Number(row.year),
+                    rank: Number(row.position),
                 });
-                tournamentStats[playerNameIndices[row.Name]]
+                tournamentStats[playerNameIndices[row.name]]
                     .onlineChampionshipParticipation++;
-                if (row.Position === "1")
-                    tournamentStats[playerNameIndices[row.Name]]
+                if (row.position === "1")
+                    tournamentStats[playerNameIndices[row.name]]
                         .onlineChampionshipGold++;
-                if (row.Position === "2")
-                    tournamentStats[playerNameIndices[row.Name]]
+                if (row.position === "2")
+                    tournamentStats[playerNameIndices[row.name]]
                         .onlineChampionshipSilver++;
-                if (row.Position === "3")
-                    tournamentStats[playerNameIndices[row.Name]]
+                if (row.position === "3")
+                    tournamentStats[playerNameIndices[row.name]]
                         .onlineChampionshipBronze++;
             }
         }

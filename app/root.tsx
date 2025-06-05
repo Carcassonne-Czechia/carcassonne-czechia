@@ -17,7 +17,8 @@ import { PrimeReactProvider } from "primereact/api";
 
 import NavBar from "./components/nav-bar";
 
-import { StrictMode } from "react";
+import { StrictMode, useState } from "react";
+import { LangContext, type Lang } from "./i18n/lang-context";
 
 export const links: Route.LinksFunction = () => [
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -33,28 +34,33 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+    const [lang, setLang] = useState<Lang>(
+        navigator.language === "cs" || navigator.language === "sk" ? "cs" : "en"
+    );
     return (
-        <PrimeReactProvider>
-            <StrictMode>
-                <html lang="en">
-                    <head>
-                        <meta charSet="utf-8" />
-                        <meta
-                            name="viewport"
-                            content="width=device-width, initial-scale=1"
-                        />
-                        <Meta />
-                        <Links />
-                    </head>
-                    <body>
-                        <NavBar />
-                        <div className="">{children}</div>
-                        <ScrollRestoration />
-                        <Scripts />
-                    </body>
-                </html>
-            </StrictMode>
-        </PrimeReactProvider>
+        <StrictMode>
+            <PrimeReactProvider>
+                <LangContext value={{ lang, setLang }}>
+                    <html lang="en">
+                        <head>
+                            <meta charSet="utf-8" />
+                            <meta
+                                name="viewport"
+                                content="width=device-width, initial-scale=1"
+                            />
+                            <Meta />
+                            <Links />
+                        </head>
+                        <body>
+                            <NavBar />
+                            <div className="">{children}</div>
+                            <ScrollRestoration />
+                            <Scripts />
+                        </body>
+                    </html>
+                </LangContext>
+            </PrimeReactProvider>
+        </StrictMode>
     );
 }
 

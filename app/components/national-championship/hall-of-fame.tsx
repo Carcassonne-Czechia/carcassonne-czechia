@@ -15,7 +15,7 @@ import {
     individualTournamentNames,
 } from "~/players/tournament-results";
 import BGALink from "../bga-link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import {
     computePlayerNames,
@@ -25,6 +25,9 @@ import {
     sortTournamentStats,
 } from "./compute-hall-of-fame-data";
 import { Checkbox } from "primereact/checkbox";
+import NationalChampionshipNavigation from "./navigation";
+import { DICTIONARY } from "~/i18n/dictionary";
+import { LangContext } from "~/i18n/lang-context";
 
 const cartesianProduct = <T, S>(arr1: T[], arr2: S[]): [T, S][] => {
     const result: [T, S][] = [];
@@ -39,9 +42,11 @@ const cartesianProduct = <T, S>(arr1: T[], arr2: S[]): [T, S][] => {
 };
 
 export default function HallOfFame() {
+    const { lang } = useContext(LangContext);
+
     const dataYears = [
-        ...new Set(nationalChampionshipData.map((elem) => elem.Year))
-            .union(new Set(onlineChampionshipData.map((elem) => elem.Year)))
+        ...new Set(nationalChampionshipData.map((elem) => elem.year))
+            .union(new Set(onlineChampionshipData.map((elem) => elem.year)))
             .union(
                 new Set(
                     rareTournamentNames
@@ -101,13 +106,21 @@ export default function HallOfFame() {
     const headerGroup = (
         <ColumnGroup>
             <Row>
-                <Column header="Name" rowSpan={2} field="Name" />
-                <Column header="BGA" rowSpan={2} field="BGA_Username" />
+                <Column
+                    header={DICTIONARY.name[lang]}
+                    rowSpan={2}
+                    field="name"
+                />
+                <Column
+                    header={DICTIONARY.BGA_Username[lang]}
+                    rowSpan={2}
+                    field="BGA_Username"
+                />
                 {individualTournamentNames
                     .filter((_, i) => tournamentsVisible[i])
                     .map((tournamentName) => (
                         <Column
-                            header={tournamentName}
+                            header={DICTIONARY[tournamentName][lang]}
                             field={tournamentName}
                             colSpan={4}
                             sortable
@@ -147,7 +160,8 @@ export default function HallOfFame() {
 
     return (
         <main>
-            <h1>Hall of Fame</h1>
+            <h1>{DICTIONARY.hallOfFame[lang]}</h1>
+            <NationalChampionshipNavigation />
             <div
                 style={{
                     display: "flex",
@@ -168,7 +182,7 @@ export default function HallOfFame() {
                             fontWeight: 600,
                         }}
                     >
-                        <span>Min year:</span>
+                        <span>{DICTIONARY.minYear[lang]}:</span>
                     </span>
                     <Dropdown
                         value={minYear}
@@ -185,7 +199,7 @@ export default function HallOfFame() {
                             fontWeight: 600,
                         }}
                     >
-                        <span>Max year:</span>
+                        <span>{DICTIONARY.maxYear[lang]}:</span>
                     </span>
                     <Dropdown
                         value={maxYear}
@@ -211,7 +225,7 @@ export default function HallOfFame() {
                         }}
                     >
                         <span style={{ marginRight: "1rem" }}>
-                            Include competitions:
+                            {DICTIONARY.includedTournaments[lang]}:
                         </span>
                     </span>
                     <div
@@ -289,10 +303,12 @@ export default function HallOfFame() {
                 scrollHeight="400px"
                 sortOrder={order}
                 sortField={field}
+                // Trick to make it impossible to sort in an ascending order
                 onSort={(e) => {
                     setOrder(e.sortOrder === 1 ? -1 : 1);
                     setField(e.sortField);
                 }}
+                // Force rerender on change
                 key={JSON.stringify([initialSortedTournamentStats])}
             >
                 <Column field="Name" />

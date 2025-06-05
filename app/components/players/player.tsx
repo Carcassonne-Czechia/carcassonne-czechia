@@ -8,6 +8,15 @@ import TeamContests from "./team-contest-display";
 import { individualTournamentNames } from "~/players/tournament-results";
 import { computeIndividualTournamentDataForPlayersBetweenYears } from "../national-championship/compute-hall-of-fame-data";
 import SignificantIndividualResults from "./significant-individual-results";
+import Markdown from "react-markdown";
+
+function getMarkdownUrl(BGA_Username: string, lang: string) {
+    // note that this does not include files in subdirectories
+    return new URL(
+        `/app/players/bios/${BGA_Username}-${lang}.md`,
+        import.meta.url
+    ).href;
+}
 
 export default function Player({
     params,
@@ -26,7 +35,6 @@ export default function Player({
               Number.POSITIVE_INFINITY
           )[0]
         : undefined;
-    console.log(individualTournamentData);
 
     return (
         <main style={{ paddingTop: "2rem" }}>
@@ -41,6 +49,7 @@ export default function Player({
                     style={{
                         display: "flex",
                         alignItems: "center",
+                        width: "min(250px, max(30%, 184px))",
                     }}
                 >
                     <PlayerAvatar BGA_Username={BGA_Username} />
@@ -62,6 +71,17 @@ export default function Player({
                     >
                         {BGA_Username}
                     </h2>
+                    <span
+                        style={{
+                            fontSize: "20px",
+                            textAlign: "center",
+                            marginBottom: "20px",
+                            fontWeight: 600,
+                            width: "100%",
+                        }}
+                    >
+                        {name}
+                    </span>
                     <TeamContests teamMemberData={teamMemberData} />
                     {individualTournamentData &&
                         individualTournamentNames.map((name) => (
@@ -70,8 +90,10 @@ export default function Player({
                                 results={
                                     individualTournamentData[`${name}RawData`]
                                 }
+                                key={name}
                             />
                         ))}
+                    <Markdown>{getMarkdownUrl(BGA_Username, "en")}</Markdown>
                 </div>
             </div>
         </main>

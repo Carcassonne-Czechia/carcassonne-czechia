@@ -1,29 +1,37 @@
-import { Button } from "primereact/button";
-import { NavLink } from "react-router";
-import { ROUTE_HEADERS } from "~/routes";
+import { useContext } from "react";
+import { LangContext } from "~/i18n/lang-context";
 
 export default function NationalChampionshipAbout() {
-    return (
-        <>
-            <h1>National Championship</h1>
-            <p className="pb-3">
+    const { lang } = useContext(LangContext);
+
+    return lang === "cs" ? (
+        <div>
+            <h1>Mistrovství ČR</h1>
+            <p>
                 Mistrovství ČR v Carcassonne se koná každoročně od roku 2003 v
                 říjnu jako součást festivalu Deskohraní. V roce 2020 se MČR
                 nehrálo kvůli pandemii koronaviru.
             </p>
-            <p className="pb-3">
+            <p>
                 Formát MČR určují organizátoři z organizace{" "}
                 <a href="https://www.duha.cz/">Duha-Děsír</a>, kteří ho upravují
                 podle počtu účastníků nebo kapacity prostor.
             </p>
-            <nav className="flex justify-center pb-3">
-                <NavLink to={""} className="pr-3 ">
-                    <Button>History</Button>
-                </NavLink>
-                <NavLink to={ROUTE_HEADERS.HALL_OF_FAME} className="pl-3">
-                    <Button>Hall Of Fame</Button>
-                </NavLink>
-            </nav>
-        </>
+        </div>
+    ) : (
+        <div>
+            <h1>National Championship</h1>
+            <p>
+                The Czech National Championship in Carcassonne has been held
+                annually since 2003 in October as part of the Deskohraní
+                festival. In 2020, the championship was not played due to the
+                pandemic.
+            </p>
+            <p>
+                The championship format is determined by the organizers from{" "}
+                <a href="https://www.duha.cz/">Duha-Děsír</a>, who adjust it
+                based on the number of participants or venue capacity.
+            </p>
+        </div>
     );
 }

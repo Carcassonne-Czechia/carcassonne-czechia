@@ -18,4 +18,6 @@ Hanabi
 Be creative and write your own questions.
 
 Use a markdown cheatsheet or AI to help with writing.
+
+Please add that you wrote your bio in /app/existing-content.ts, seriously haven't found any better solution.
 -->

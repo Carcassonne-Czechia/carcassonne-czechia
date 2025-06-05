@@ -7,8 +7,13 @@ import { DataView } from "primereact/dataview";
 import { Link } from "react-router";
 import PlayerAvatar from "./player_avatar";
 import TeamContests from "./team-contest-display";
+import { DICTIONARY } from "~/i18n/dictionary";
+import { useContext } from "react";
+import { LangContext } from "~/i18n/lang-context";
 
 export default function Players() {
+    const { lang } = useContext(LangContext);
+
     const currentTeamMemberData = currentTeamMemberBGAUsernames.map(
         (BGA_Username) => computeTeamMemberDataFromBGAUsername(BGA_Username)
     );
@@ -45,6 +50,16 @@ export default function Players() {
                     >
                         {item.BGA_Username}
                     </Link>
+                    <span
+                        style={{
+                            fontSize: "20px",
+                            textAlign: "center",
+                            marginBottom: "20px",
+                            fontWeight: 600,
+                        }}
+                    >
+                        {item.name}
+                    </span>
                     <TeamContests teamMemberData={item} />
                 </div>
             </div>
@@ -73,7 +88,7 @@ export default function Players() {
 
     return (
         <main>
-            <h1>Team members</h1>
+            <h1>{DICTIONARY.members[lang]}</h1>
             <div className="card">
                 <DataView
                     value={currentTeamMemberData}

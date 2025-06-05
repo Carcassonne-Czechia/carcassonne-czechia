@@ -1,10 +1,16 @@
-import type { JSX } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, type JSX } from "react";
 import {
     convertRankToNumber,
     type IndividualTournamentName,
     type IndividualTournamentResult,
     type Rank,
 } from "~/players/tournament-results";
+import { getOrdinalNumber } from "~/utils";
+import { medalColors } from "../national-championship/compute-hall-of-fame-data";
+import { faMedal } from "@fortawesome/free-solid-svg-icons";
+import { DICTIONARY } from "~/i18n/dictionary";
+import { LangContext } from "~/i18n/lang-context";
 
 export default function SignificantIndividualResults({
     tournamentName,
@@ -15,6 +21,8 @@ export default function SignificantIndividualResults({
     results: IndividualTournamentResult[];
     maxPrinted?: number;
 }) {
+    const { lang } = useContext(LangContext);
+
     const sortedResults = results.sort(
         (a, b) => convertRankToNumber(a.rank) - convertRankToNumber(b.rank)
     );
@@ -40,11 +48,32 @@ export default function SignificantIndividualResults({
 
     for (const result of groupedResults) {
         resultString.push(
-            <li>
+            <li key={result.rank}>
                 <span style={{ fontWeight: 600 }}>
-                    {result.rank.toString()}
+                    {lang === "en"
+                        ? getOrdinalNumber(result.rank)
+                        : result.rank.toString() + "."}
                 </span>
-                <span> ({result.years.join(", ")})</span>
+                {Object.entries(medalColors).map(([_, colorHex], i) => {
+                    return result.rank === i + 1 ? (
+                        <FontAwesomeIcon
+                            icon={faMedal}
+                            style={{
+                                color: colorHex,
+
+                                marginLeft: "2px",
+                            }}
+                            key={i}
+                        />
+                    ) : (
+                        <React.Fragment key={i}></React.Fragment>
+                    );
+                })}
+
+                <span style={{ marginLeft: "" }}>
+                    {" "}
+                    ({result.years.join(", ")})
+                </span>
             </li>
         );
         printed += result.years.length;
@@ -55,7 +84,9 @@ export default function SignificantIndividualResults({
         <></>
     ) : (
         <div key={tournamentName}>
-            <span style={{ fontWeight: 600 }}>{tournamentName}</span>
+            <span style={{ fontWeight: 600 }}>
+                {DICTIONARY[tournamentName][lang]}:
+            </span>
             <ul>{resultString}</ul>
         </div>
     );
