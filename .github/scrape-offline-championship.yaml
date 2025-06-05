@@ -18,7 +18,7 @@ jobs:
                   python-version: "3.x"
 
             - name: Run Python script
-              run: python scripts/generate_csv_list.py
+              run: python scripts/offline-championship-scraper.py
 
             - name: Commit and push changes
               run: |
