@@ -1,4 +1,4 @@
-import NationalChampionship from "~/components/national-championship/national-year";
+import NationalChampionship from "~/components/national-championship/national-championship";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {

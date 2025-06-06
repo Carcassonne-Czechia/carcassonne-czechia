@@ -12,7 +12,6 @@ import { Dropdown } from "primereact/dropdown";
 import { BGAStats } from "~/players/bga-stats";
 import BGALink from "../bga-link";
 import { DICTIONARY } from "~/i18n/dictionary";
-import NationalChampionshipNavigation from "./navigation";
 import { LangContext } from "~/i18n/lang-context";
 
 export const computeDataWithBGAUsernames = (
@@ -41,7 +40,6 @@ export default function NationalChampionship() {
     return (
         <main>
             <NationalChampionshipAbout />
-            <NationalChampionshipNavigation />
             <div>
                 <div>
                     <label

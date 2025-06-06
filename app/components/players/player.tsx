@@ -6,7 +6,7 @@ import { computeTeamMemberDataFromBGAUsername } from "./compute-player-data";
 import PlayerAvatar from "./player-avatar";
 import TeamContests from "./team-contest-display";
 import { individualTournamentNames } from "~/players/tournament-results";
-import { computeIndividualTournamentDataForPlayersBetweenYears } from "../national-championship/compute-hall-of-fame-data";
+import { computeIndividualTournamentDataForPlayersBetweenYears } from "../hall-of-fame/compute-hall-of-fame-data";
 import SignificantIndividualResults from "./significant-individual-results";
 import Markdown from "react-markdown";
 

@@ -1,9 +1,4 @@
-import {
-    type RouteConfig,
-    index,
-    prefix,
-    route,
-} from "@react-router/dev/routes";
+import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export const ROUTE_HEADERS = {
     NATIONAL_CHAMPIONSHIP: "national-championship",
@@ -14,13 +9,18 @@ export const ROUTE_HEADERS = {
 
 export default [
     index("routes/home.tsx"),
-    route("players", "components/players/players.tsx"),
-    route("players/:player", "components/players/player.tsx"),
-    ...prefix(ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP, [
-        route("", "components/national-championship/national-year.tsx"),
-        route(
-            ROUTE_HEADERS.HALL_OF_FAME,
-            "components/national-championship/hall-of-fame.tsx"
-        ),
-    ]),
+    route(`${ROUTE_HEADERS.PLAYERS}`, "components/players/players.tsx"),
+    route(`${ROUTE_HEADERS.PLAYERS}/:player`, "components/players/player.tsx"),
+    route(
+        ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP,
+        "components/national-championship/national-championship.tsx"
+    ),
+    route(
+        ROUTE_HEADERS.ONLINE_CHAMPIONSHIP,
+        "components/online-championship/online-championship.tsx"
+    ),
+    route(
+        ROUTE_HEADERS.HALL_OF_FAME,
+        "components/hall-of-fame/hall-of-fame.tsx"
+    ),
 ] satisfies RouteConfig;

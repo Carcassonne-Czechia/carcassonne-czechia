@@ -7,7 +7,7 @@ import {
     type Rank,
 } from "~/players/tournament-results";
 import { getOrdinalNumber } from "~/utils";
-import { medalColors } from "../national-championship/compute-hall-of-fame-data";
+import { medalColors } from "../hall-of-fame/compute-hall-of-fame-data";
 import { faMedal } from "@fortawesome/free-solid-svg-icons";
 import { DICTIONARY } from "~/i18n/dictionary";
 import { LangContext } from "~/i18n/lang-context";

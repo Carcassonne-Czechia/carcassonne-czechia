@@ -23,9 +23,8 @@ import {
     filterTournamentStatsRows,
     medalColors,
     sortTournamentStats,
-} from "./compute-hall-of-fame-data";
+} from "../hall-of-fame/compute-hall-of-fame-data";
 import { Checkbox } from "primereact/checkbox";
-import NationalChampionshipNavigation from "./navigation";
 import { DICTIONARY } from "~/i18n/dictionary";
 import { LangContext } from "~/i18n/lang-context";
 
@@ -161,7 +160,6 @@ export default function HallOfFame() {
     return (
         <main>
             <h1>{DICTIONARY.hallOfFame[lang]}</h1>
-            <NationalChampionshipNavigation />
             <div
                 style={{
                     display: "flex",

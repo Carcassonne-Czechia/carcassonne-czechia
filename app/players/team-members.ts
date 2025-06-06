@@ -23,10 +23,18 @@ export const formerTeamMemberBGAUsernames = [
     "kaspemart",
     "MATY51",
 ] as const;
+
+export const otherBGAUsernames = ["Ales84"] as const;
+
 export type CurrentTeamMemberBGAUsername =
     (typeof currentTeamMemberBGAUsernames)[number];
 export type FormerTeamMemberBGAUsername =
     (typeof formerTeamMemberBGAUsernames)[number];
+export type OtherBGAUsername = (typeof otherBGAUsernames)[number];
+export type BGAUsername =
+    | CurrentTeamMemberBGAUsername
+    | FormerTeamMemberBGAUsername
+    | OtherBGAUsername;
 
 export const teamCaptain: CurrentTeamMemberBGAUsername = "posij118" as const;
 export const formerTeamCaptains: (
@@ -42,7 +50,7 @@ export const teamCompetitionMembers: Record<
     TeamContest,
     {
         year: number;
-        members: (CurrentTeamMemberBGAUsername | FormerTeamMemberBGAUsername)[];
+        members: BGAUsername[];
     }[]
 > = {
     WTCOC: [

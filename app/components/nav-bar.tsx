@@ -54,6 +54,11 @@ export default function NavBar() {
                     to: `${ROUTE_HEADERS.ONLINE_CHAMPIONSHIP}`,
                     template: itemRenderer,
                 },
+                {
+                    label: DICTIONARY.hallOfFame[lang],
+                    to: `${ROUTE_HEADERS.HALL_OF_FAME}`,
+                    template: itemRenderer,
+                },
             ],
         },
     ];

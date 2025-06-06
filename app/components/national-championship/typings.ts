@@ -1,4 +1,3 @@
-/** Note that for CSV files we type as NationalChampionshipResultsRow[] even though the first row is the header row. */
 export type NationalChampionshipResultsRow = {
     year: string;
     position: string;
@@ -22,4 +21,10 @@ export const nationalChampionshipHeaderRow = [
     "BGA_Username",
     "points",
     "scoreDifference",
+] as const;
+
+export const onlineChampionshipHeaderRow = [
+    "position",
+    "name",
+    "BGA_Username",
 ] as const;

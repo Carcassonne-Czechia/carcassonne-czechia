@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { TeamMemberData } from "./compute-player-data";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { medalColors } from "../national-championship/compute-hall-of-fame-data";
+import { medalColors } from "../hall-of-fame/compute-hall-of-fame-data";
 import { teamContests } from "~/players/team-members";
 import React, { useContext } from "react";
 import { DICTIONARY } from "~/i18n/dictionary";

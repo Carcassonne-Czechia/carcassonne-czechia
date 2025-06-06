@@ -1,11 +1,8 @@
-import type {
-    CurrentTeamMemberBGAUsername,
-    FormerTeamMemberBGAUsername,
-} from "./team-members";
+import type { BGAUsername } from "./team-members";
 
 export interface BGAStat {
     name?: string;
-    bgaUsername: CurrentTeamMemberBGAUsername | FormerTeamMemberBGAUsername;
+    bgaUsername: BGAUsername;
     id: number;
     maxElo?: number;
 }
@@ -86,5 +83,9 @@ export const BGAStats: BGAStat[] = [
         bgaUsername: "wikri",
         maxElo: 400,
         id: 84673481,
+    },
+    {
+        bgaUsername: "Ales84",
+        id: 87427346,
     },
 ] as const;
