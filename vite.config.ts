@@ -17,4 +17,7 @@ export default defineConfig({
     ssr: {
         noExternal: ["primereact"],
     },
+    build: {
+        outDir: "dist",
+    },
 });
