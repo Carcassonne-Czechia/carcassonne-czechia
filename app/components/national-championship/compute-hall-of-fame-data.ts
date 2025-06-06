@@ -48,8 +48,7 @@ export const computeIndividualTournamentDataForPlayersBetweenYears = (
     maxYear: number
 ) => {
     const BGAUsernames = playerNames.map(
-        (name) =>
-            BGAStats.find((stat) => stat.name === name)?.bga_username ?? ""
+        (name) => BGAStats.find((stat) => stat.name === name)?.bgaUsername ?? ""
     );
 
     const playerNameIndices = Object.fromEntries(
@@ -182,7 +181,7 @@ export const updateResultsWithOnlineChampionshipDataBetweenYears = (
     filteredData.forEach(
         (row: OnlineChampionshipResultsRow & { name?: string }) => {
             BGAStats.forEach((stat) => {
-                if (stat.bga_username === row["BGA_Username"])
+                if (stat.bgaUsername === row["BGA_Username"])
                     row.name = stat.name;
             });
             // If name not known, not add to table

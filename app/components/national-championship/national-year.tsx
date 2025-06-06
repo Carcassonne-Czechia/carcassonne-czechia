@@ -21,7 +21,7 @@ export const computeDataWithBGAUsernames = (
     return data.map((row) => {
         return {
             BGA_Username:
-                BGAStats.find((stat) => stat.name === row.name)?.bga_username ??
+                BGAStats.find((stat) => stat.name === row.name)?.bgaUsername ??
                 "",
             ...row,
         };
