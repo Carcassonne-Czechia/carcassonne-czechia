@@ -51,16 +51,20 @@ export default function Players() {
                     >
                         {item.BGA_Username}
                     </Link>
-                    <span
-                        style={{
-                            fontSize: "20px",
-                            textAlign: "center",
-                            marginBottom: "20px",
-                            fontWeight: 600,
-                        }}
-                    >
-                        {item.name}
-                    </span>
+                    {item.name ? (
+                        <span
+                            style={{
+                                fontSize: "20px",
+                                textAlign: "center",
+                                marginBottom: "20px",
+                                fontWeight: 600,
+                            }}
+                        >
+                            {item.name}
+                        </span>
+                    ) : (
+                        <></>
+                    )}
                     <TeamContests teamMemberData={item} />
                 </div>
             </div>
