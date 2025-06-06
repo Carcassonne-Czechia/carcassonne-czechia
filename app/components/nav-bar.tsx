@@ -1,6 +1,6 @@
 import { Menubar } from "primereact/menubar";
 import type { MenuItem } from "primereact/menuitem";
-import { useContext, type JSX } from "react";
+import { useContext, useEffect, useState, type JSX } from "react";
 import { NavLink } from "react-router";
 import { DICTIONARY } from "~/i18n/dictionary";
 import { ROUTE_HEADERS } from "~/routes";
@@ -17,6 +17,23 @@ interface Item {
 }
 
 export default function NavBar() {
+    // Stop NavBar elements from flickering before full hydration
+    const [elem, setElem] = useState<JSX.Element>(<></>);
+    useEffect(
+        () =>
+            setElem(
+                <div className="card">
+                    <Menubar
+                        model={items as MenuItem[]}
+                        start={start}
+                        end={end}
+                        style={{ fontSize: "16px" }}
+                    />
+                </div>
+            ),
+        []
+    );
+
     const { lang, setLang } = useContext(LangContext);
     const langs: Lang[] = ["cs", "en"];
 
@@ -98,14 +115,5 @@ export default function NavBar() {
         </div>
     );
 
-    return (
-        <div className="card">
-            <Menubar
-                model={items as MenuItem[]}
-                start={start}
-                end={end}
-                style={{ fontSize: "16px" }}
-            />
-        </div>
-    );
+    return elem;
 }

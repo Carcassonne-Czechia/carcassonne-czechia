@@ -37,6 +37,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     const [lang, setLang] = useState<Lang>(
         navigator.language === "cs" || navigator.language === "sk" ? "cs" : "en"
     );
+
     return (
         <StrictMode>
             <PrimeReactProvider>
@@ -67,6 +68,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
     return <Outlet />;
+}
+
+export function HydrateFallback() {
+    return <></>;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
