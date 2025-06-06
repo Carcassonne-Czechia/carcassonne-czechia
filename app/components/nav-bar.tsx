@@ -3,7 +3,7 @@ import type { MenuItem } from "primereact/menuitem";
 import { useContext, type JSX } from "react";
 import { NavLink } from "react-router";
 import { DICTIONARY } from "~/i18n/dictionary";
-import { ROUTE_HEADERS } from "~/routes";
+import { BASE_URL, ROUTE_HEADERS } from "~/routes";
 import "flag-icons/css/flag-icons.min.css";
 import { SelectButton } from "primereact/selectbutton";
 import { LangContext, type Lang } from "~/i18n/lang-context";
@@ -22,7 +22,7 @@ export default function NavBar() {
 
     const itemRenderer = (item: Item) => (
         <NavLink
-            to={item.to ?? ""}
+            to={`${BASE_URL}/${item.to}`}
             className="flex align-items-center p-menuitem-link"
         >
             {item.icon && <span className={item.icon} />}
@@ -33,12 +33,12 @@ export default function NavBar() {
     const items: Item[] = [
         {
             label: DICTIONARY.home[lang],
-            to: "/",
+            to: "",
             template: itemRenderer,
         },
         {
             label: DICTIONARY.players[lang],
-            to: `/${ROUTE_HEADERS.PLAYERS}`,
+            to: `${ROUTE_HEADERS.PLAYERS}`,
             template: itemRenderer,
         },
         {
@@ -46,12 +46,12 @@ export default function NavBar() {
             items: [
                 {
                     label: DICTIONARY.nationalChampionship[lang],
-                    to: `/${ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP}`,
+                    to: `${ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP}`,
                     template: itemRenderer,
                 },
                 {
                     label: DICTIONARY.onlineChampionship[lang],
-                    to: `/${ROUTE_HEADERS.ONLINE_CHAMPIONSHIP}`,
+                    to: `${ROUTE_HEADERS.ONLINE_CHAMPIONSHIP}`,
                     template: itemRenderer,
                 },
             ],
@@ -60,7 +60,11 @@ export default function NavBar() {
 
     const start = (
         <div style={{ display: "flex", flexDirection: "row" }}>
-            <img alt="logo" src="/assets/logo.jpg" height="40"></img>
+            <img
+                alt="logo"
+                src={`/${BASE_URL}/assets/logo.jpg`}
+                height="40"
+            ></img>
             <div style={{ display: "flex", alignItems: "center" }}>
                 <div style={{ padding: "0 1rem", fontWeight: "600" }}>
                     {DICTIONARY.hook[lang]}

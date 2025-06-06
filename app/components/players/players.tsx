@@ -10,6 +10,7 @@ import TeamContests from "./team-contest-display";
 import { DICTIONARY } from "~/i18n/dictionary";
 import { useContext } from "react";
 import { LangContext } from "~/i18n/lang-context";
+import { BASE_URL } from "~/routes";
 
 export default function Players() {
     const { lang } = useContext(LangContext);
@@ -46,7 +47,7 @@ export default function Players() {
                             fontSize: "20px",
                             textAlign: "center",
                         }}
-                        to={`/players/${item.BGA_Username}`}
+                        to={`/${BASE_URL}/players/${item.BGA_Username}`}
                     >
                         {item.BGA_Username}
                     </Link>
