@@ -3,7 +3,7 @@ import {
     type FormerTeamMemberBGAUsername,
 } from "~/players/team-members";
 import { computeTeamMemberDataFromBGAUsername } from "./compute-player-data";
-import PlayerAvatar from "./player_avatar";
+import PlayerAvatar from "./player-avatar";
 import TeamContests from "./team-contest-display";
 import { individualTournamentNames } from "~/players/tournament-results";
 import { computeIndividualTournamentDataForPlayersBetweenYears } from "../national-championship/compute-hall-of-fame-data";

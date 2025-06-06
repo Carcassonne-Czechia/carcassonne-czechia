@@ -5,7 +5,7 @@ import {
 } from "./compute-player-data";
 import { DataView } from "primereact/dataview";
 import { Link } from "react-router";
-import PlayerAvatar from "./player_avatar";
+import PlayerAvatar from "./player-avatar";
 import TeamContests from "./team-contest-display";
 import { DICTIONARY } from "~/i18n/dictionary";
 import { useContext } from "react";
