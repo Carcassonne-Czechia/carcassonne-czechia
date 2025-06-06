@@ -14,4 +14,7 @@ export default defineConfig({
         dsv(),
         devtoolsJson(),
     ],
+    ssr: {
+        noExternal: ["primereact"],
+    },
 });
