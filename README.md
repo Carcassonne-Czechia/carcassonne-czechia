@@ -73,3 +73,11 @@ Měly by splňovat:
 - Název souboru `${BGA_Username}.jpg`, například tedy `posij118.jpg`.
 - Velikost zhruba kolem 200 x 200 (to jenom z důvodu, aby se načetly rychle v případě pomalého připojení).
 - Pokud byste z nějakého důvodu chtěli vektorový obrázek, pak můžete upravit komponentu `<PlayerAvatar />`.
+
+### Jména a přezdívky na BGA
+
+Nacházejí se v souboru [`bga-stats.ts`](https://github.com/posij118/carcassonne-czechia/blob/main/app/players/bga-stats.ts).
+
+- Ke každé bga přezdívce je potřeba přidat BGA id. To jde zjistit kliknutím na profil (ale ne svůj!) na BGA, kde je součástí URL. Tímto budou fungovat odkazy na BGA.
+- Jméno je nepovinné, ale doporučuji ho sdílet.
+- Ještě je možnost přidat maximální dosažené ELO na BGA, ale zatím ho stránka nepoužívá.
