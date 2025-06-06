@@ -163,4 +163,4 @@ export const teamCompetitionMembers: Record<
             ],
         },
     ],
-};
+} as const;
