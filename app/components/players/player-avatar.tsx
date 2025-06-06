@@ -3,7 +3,6 @@ import type {
     FormerTeamMemberBGAUsername,
 } from "~/players/team-members";
 import { HAS_AVATAR } from "../../existing-content";
-import { BASE_URL } from "~/routes";
 
 export default function PlayerAvatar({
     BGA_Username,
@@ -16,8 +15,8 @@ export default function PlayerAvatar({
         <img
             src={
                 avatarFound
-                    ? `/${BASE_URL}/assets/player-avatars/${BGA_Username}.jpg`
-                    : `/${BASE_URL}/assets/logo.jpg`
+                    ? `/assets/player-avatars/${BGA_Username}.jpg`
+                    : `/assets/logo.jpg`
             }
             alt={`${BGA_Username} avatar`}
             width="100%"

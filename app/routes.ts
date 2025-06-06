@@ -5,7 +5,6 @@ import {
     route,
 } from "@react-router/dev/routes";
 
-export const BASE_URL = "carcassonne-czechia";
 export const ROUTE_HEADERS = {
     NATIONAL_CHAMPIONSHIP: "national-championship",
     HALL_OF_FAME: "hall-of-fame",
@@ -14,16 +13,14 @@ export const ROUTE_HEADERS = {
 };
 
 export default [
-    ...prefix(BASE_URL, [
-        index("routes/home.tsx"),
-        route("players", "components/players/players.tsx"),
-        route("players/:player", "components/players/player.tsx"),
-        ...prefix(ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP, [
-            route("", "components/national-championship/national-year.tsx"),
-            route(
-                ROUTE_HEADERS.HALL_OF_FAME,
-                "components/national-championship/hall-of-fame.tsx"
-            ),
-        ]),
+    index("routes/home.tsx"),
+    route("players", "components/players/players.tsx"),
+    route("players/:player", "components/players/player.tsx"),
+    ...prefix(ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP, [
+        route("", "components/national-championship/national-year.tsx"),
+        route(
+            ROUTE_HEADERS.HALL_OF_FAME,
+            "components/national-championship/hall-of-fame.tsx"
+        ),
     ]),
 ] satisfies RouteConfig;
