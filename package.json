@@ -1,6 +1,7 @@
 {
     "name": "carcassonne-czechia",
     "private": true,
+    "homepage": "https://posij118.github.io/carcassonne-czechia/",
     "type": "module",
     "scripts": {
         "build": "react-router build",
