@@ -6,6 +6,7 @@ import dsv from "@rollup/plugin-dsv";
 import devtoolsJson from "vite-plugin-devtools-json";
 
 export default defineConfig({
+    base: "/carcassonne-czechia",
     plugins: [
         tailwindcss(),
         reactRouter(),
