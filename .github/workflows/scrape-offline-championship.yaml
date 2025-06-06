@@ -3,6 +3,7 @@ name: Yearly Offline Championship Update
 on:
     schedule:
         - cron: "0 0 31 10 *"
+    workflow_dispatch:
 
 jobs:
     update-data:
