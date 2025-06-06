@@ -18,6 +18,7 @@ export default function PlayerAvatar({
                     ? `/assets/player-avatars/${BGA_Username}.jpg`
                     : "/assets/logo.jpg"
             }
+            alt={`${BGA_Username} avatar`}
             width="100%"
         />
     );
