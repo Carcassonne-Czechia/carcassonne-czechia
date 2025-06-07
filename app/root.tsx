@@ -55,7 +55,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                         </head>
                         <body>
                             <NavBar />
-                            <div className="">{children}</div>
+                            <div className="main-content">{children}</div>
                             <ScrollRestoration />
                             <Scripts />
                         </body>

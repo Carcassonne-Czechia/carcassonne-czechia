@@ -109,11 +109,13 @@ export default function HallOfFame() {
                     header={DICTIONARY.name[lang]}
                     rowSpan={2}
                     field="name"
+                    frozen
                 />
                 <Column
                     header={DICTIONARY.BGA_Username[lang]}
                     rowSpan={2}
                     field="BGA_Username"
+                    frozen
                 />
                 {individualTournamentNames
                     .filter((_, i) => tournamentsVisible[i])
@@ -309,8 +311,8 @@ export default function HallOfFame() {
                 // Force rerender on change
                 key={JSON.stringify([initialSortedTournamentStats])}
             >
-                <Column field="Name" />
-                <Column field="BGA_Username" body={BGALink} />
+                <Column field="Name" frozen />
+                <Column field="BGA_Username" body={BGALink} frozen />
                 {tournamentColumnNames
                     .filter((_, i) => tournamentsVisible[Math.floor(i / 4)])
                     .map(([tournamentName, placement]) => {
