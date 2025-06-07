@@ -1,0 +1,38 @@
+name: Bios Bundling
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - /src/bios
+    workflow_dispatch:
+
+jobs:
+    update-data:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.x"
+
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+
+            - name: Run Python script
+              run: python scripts/bios-bundler.py
+
+            - name: Commit and push changes
+              run: |
+                  git config --global user.name "posij118"
+                  git config --global user.email "posij118@github.com"
+                  git add public/all-bios.json
+                  git commit -m "Bundle all bios"
+                  git push
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
