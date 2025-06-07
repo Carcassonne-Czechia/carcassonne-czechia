@@ -97,6 +97,10 @@ const _DICTIONARY = {
         cs: "Bio",
         en: "Bio",
     },
+    links: {
+        cs: "Odkazy",
+        en: "Links",
+    },
 } as const;
 
 export type DictionaryStub = keyof typeof _DICTIONARY;

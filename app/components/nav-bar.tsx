@@ -65,6 +65,11 @@ export default function NavBar() {
                 },
             ],
         },
+        {
+            label: DICTIONARY.links[lang],
+            to: `${ROUTE_HEADERS.LINKS}`,
+            template: itemRenderer,
+        },
     ];
 
     const start = (

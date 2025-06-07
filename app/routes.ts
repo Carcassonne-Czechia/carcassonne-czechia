@@ -5,6 +5,7 @@ export const ROUTE_HEADERS = {
     HALL_OF_FAME: "hall-of-fame",
     PLAYERS: "players",
     ONLINE_CHAMPIONSHIP: "online-championship",
+    LINKS: "links",
 };
 
 export default [
@@ -23,4 +24,5 @@ export default [
         ROUTE_HEADERS.HALL_OF_FAME,
         "components/hall-of-fame/hall-of-fame.tsx"
     ),
+    route(ROUTE_HEADERS.LINKS, "components/links/links.tsx"),
 ] satisfies RouteConfig;
