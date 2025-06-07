@@ -74,6 +74,8 @@ Měly by splňovat:
 - Velikost zhruba kolem 200 x 200 (to jenom z důvodu, aby se načetly rychle v případě pomalého připojení).
 - Pokud byste z nějakého důvodu chtěli vektorový obrázek, pak můžete upravit komponentu `<PlayerAvatar />`.
 
+Nakonec je potřeba přidat svoje jméno na BGA do pole `HAS_AVATAR` v souboru [existing-content](https://github.com/posij118/carcassonne-czechia/blob/main/app/existing-content.ts). Je mi to líto, ale lepší řešení jsem nenašel.
+
 ### Jména a přezdívky na BGA
 
 Nacházejí se v souboru [`bga-stats.ts`](https://github.com/posij118/carcassonne-czechia/blob/main/app/players/bga-stats.ts).
@@ -81,3 +83,12 @@ Nacházejí se v souboru [`bga-stats.ts`](https://github.com/posij118/carcassonn
 - Ke každé bga přezdívce je potřeba přidat BGA id. To jde zjistit kliknutím na profil (ale ne svůj!) na BGA, kde je součástí URL. Tímto budou fungovat odkazy na BGA.
 - Jméno je nepovinné, ale doporučuji ho sdílet.
 - Ještě je možnost přidat maximální dosažené ELO na BGA, ale zatím ho stránka nepoužívá.
+
+### Bio (info o sobě)
+
+Přidává se do složky [`bios`](https://github.com/posij118/carcassonne-czechia/tree/main/src/bios) ve formátu Markdown.
+
+- Je možné psát v angličtině nebo češtině, ideální však je si to třeba nechat přeložit od AI a zkontrolovat.
+- Nepatří sem úspěchy v Carcassonne, ty se vypisují automaticky, ani jméno a přezdívka na BGA.
+- Mělo by se po chvíli automaticky objevit na stránce (ale pár minut to může trvat).
+- Kreativitě se meze nekladou.
