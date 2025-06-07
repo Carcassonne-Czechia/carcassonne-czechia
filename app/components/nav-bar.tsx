@@ -18,21 +18,8 @@ interface Item {
 
 export default function NavBar() {
     // Stop NavBar elements from flickering before full hydration
-    const [elem, setElem] = useState<JSX.Element>(<></>);
-    useEffect(
-        () =>
-            setElem(
-                <div className="card">
-                    <Menubar
-                        model={items as MenuItem[]}
-                        start={start}
-                        end={end}
-                        style={{ fontSize: "16px" }}
-                    />
-                </div>
-            ),
-        []
-    );
+    const [hydrated, setHydrated] = useState(false);
+    useEffect(() => setHydrated(true), []);
 
     const { lang, setLang } = useContext(LangContext);
     const langs: Lang[] = ["cs", "en"];
@@ -110,10 +97,21 @@ export default function NavBar() {
                         }}
                     ></span>
                 )}
-                style={{ minWidth: "90px", marginLeft: "0.5rem" }}
+                style={{ marginLeft: "0.5rem" }}
             />
         </div>
     );
 
-    return elem;
+    return hydrated ? (
+        <div className="card" style={{ marginBottom: "0.5rem" }} key={lang}>
+            <Menubar
+                model={items as MenuItem[]}
+                start={start}
+                end={end}
+                style={{ fontSize: "16px" }}
+            />
+        </div>
+    ) : (
+        <></>
+    );
 }
