@@ -89,6 +89,14 @@ const _DICTIONARY = {
         cs: "Zahrnuté turnaje",
         en: "Included tournaments",
     },
+    achievements: {
+        cs: "Úspěchy",
+        en: "Achievements",
+    },
+    bio: {
+        cs: "Bio",
+        en: "Bio",
+    },
 } as const;
 
 export type DictionaryStub = keyof typeof _DICTIONARY;
