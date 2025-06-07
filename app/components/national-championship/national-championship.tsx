@@ -69,6 +69,7 @@ export default function NationalChampionship() {
                     tableStyle={{ minWidth: "30rem", marginTop: "1rem" }}
                     stripedRows
                     showGridlines
+                    scrollable
                 >
                     {nationalChampionshipHeaderRow.map((field) => (
                         <Column
