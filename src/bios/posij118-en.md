@@ -4,7 +4,7 @@ Student (_Theoretical computer science_)
 
 ## Hobbies
 
-Frisbee, Running, Intellectual discussions, Math and Programming
+Frisbee, Running, Intellectual discussions, Math and (Competitive) programming
 
 ## Other board games
 
