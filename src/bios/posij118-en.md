@@ -13,9 +13,3 @@ Hanabi
 ## Birth Year
 
 1999
-
-<!---
-Be creative and write your own questions.
-
-Use a markdown cheatsheet or AI to help with writing.
--->
