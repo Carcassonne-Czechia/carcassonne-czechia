@@ -70,6 +70,7 @@ export default function NationalChampionship() {
                     stripedRows
                     showGridlines
                     scrollable
+                    scrollHeight="500px"
                 >
                     {nationalChampionshipHeaderRow.map((field) => (
                         <Column
