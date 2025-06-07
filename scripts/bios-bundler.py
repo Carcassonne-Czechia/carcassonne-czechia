@@ -21,11 +21,11 @@ for f in os.listdir(src_base_path):
     bga_username = "-".join(parts[:-1])
     lang = parts[-1]
 
-    with open(os.path.join(src_base_path, f), "r") as file:
+    with open(os.path.join(src_base_path, f), "r", encoding="utf-8") as file:
         raw_markdown = file.read()
         obj.setdefault(bga_username, {}).setdefault(lang, raw_markdown)
 
-obj_str = json.dumps(obj)
+obj_str = json.dumps(obj, ensure_ascii=False)
 if os.path.exists(all_bios_path): os.remove(all_bios_path)
-with open(all_bios_path, "x") as file:
+with open(all_bios_path, "x", encoding="utf-8") as file:
     file.write(obj_str)
