@@ -40,8 +40,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
     return (
         <StrictMode>
-            <PrimeReactProvider>
-                <LangContext value={{ lang, setLang }}>
+            <LangContext value={{ lang, setLang }}>
+                <PrimeReactProvider>
                     <html lang="en">
                         <head>
                             <meta charSet="utf-8" />
@@ -60,8 +60,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                             <Scripts />
                         </body>
                     </html>
-                </LangContext>
-            </PrimeReactProvider>
+                </PrimeReactProvider>
+            </LangContext>
         </StrictMode>
     );
 }
