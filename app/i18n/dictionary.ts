@@ -21,11 +21,11 @@ const _DICTIONARY = {
         cs: "Carcassonne Champions League",
         en: "Carcassonne Champions League",
     },
-    teamCaptain: {
+    teamCaptainBGAUsername: {
         cs: "Kapitán týmu",
         en: "Team captain",
     },
-    formerTeamCaptain: {
+    formerTeamCaptainBGAUsername: {
         cs: "Dřívější kapitán týmu",
         en: "Former team captain",
     },

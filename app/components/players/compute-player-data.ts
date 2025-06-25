@@ -1,6 +1,6 @@
 import {
-    formerTeamCaptains,
-    teamCaptain,
+    formerTeamCaptainBGAUsernames,
+    teamCaptainBGAUsername,
     teamCompetitionMembers,
     teamContests,
     type CurrentTeamMemberBGAUsername,
@@ -26,8 +26,8 @@ export const computeTeamMemberDataFromBGAUsername = (
         Partial<Record<TeamContestParticipations, number[]>> = {
         name: getNameFromBGAUsername(BGA_Username),
         BGA_Username,
-        team_captain: teamCaptain === BGA_Username,
-        former_captain: formerTeamCaptains.includes(BGA_Username),
+        team_captain: teamCaptainBGAUsername === BGA_Username,
+        former_captain: formerTeamCaptainBGAUsernames.includes(BGA_Username),
     };
 
     teamContests.forEach((teamContest) => {

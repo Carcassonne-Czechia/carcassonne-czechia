@@ -46,7 +46,7 @@ Zde je přehled toho, co je potřeba aktualizovat:
 
 ### Změny ve členech nebo kapitánovi týmu
 
-Zde stačí upravit proměnné `currentTeamMemberBGAUsernames` a `formerTeamMemberBGAUsernames` v souboru [team-members.ts](https://github.com/posij118/carcassonne-czechia/blob/main/app/players/team-members.ts). Pro změny v kapitánovi tu jsou proměnné `teamCaptain` a `formerTeamCaptain`.
+Zde stačí upravit proměnné `currentTeamMemberBGAUsernames` a `formerTeamMemberBGAUsernames` v souboru [team-members.ts](https://github.com/posij118/carcassonne-czechia/blob/main/app/players/team-members.ts). Pro změny v kapitánovi tu jsou proměnné `teamCaptainBGAUsername` a `formerTeamCaptainBGAUsername`.
 
 ### Týmy pro týmové soutěže
 

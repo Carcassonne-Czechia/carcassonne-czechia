@@ -26,7 +26,7 @@ export default function TeamContests({
                 >
                     <FontAwesomeIcon icon={faStar} color={medalColors.Gold} />
                     <span style={{ marginLeft: "0.5rem" }}>
-                        {DICTIONARY.teamCaptain[lang]}
+                        {DICTIONARY.teamCaptainBGAUsername[lang]}
                     </span>
                 </span>
             )}
@@ -41,7 +41,7 @@ export default function TeamContests({
                 >
                     <FontAwesomeIcon icon={faStar} color={medalColors.Silver} />
                     <span style={{ marginLeft: "0.5rem" }}>
-                        {DICTIONARY.formerTeamCaptain[lang]}
+                        {DICTIONARY.formerTeamCaptainBGAUsername[lang]}
                     </span>
                 </span>
             )}

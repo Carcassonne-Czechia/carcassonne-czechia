@@ -36,8 +36,9 @@ export type BGAUsername =
     | FormerTeamMemberBGAUsername
     | OtherBGAUsername;
 
-export const teamCaptain: CurrentTeamMemberBGAUsername = "posij118" as const;
-export const formerTeamCaptains: (
+export const teamCaptainBGAUsername: CurrentTeamMemberBGAUsername =
+    "posij118" as const;
+export const formerTeamCaptainBGAUsernames: (
     | CurrentTeamMemberBGAUsername
     | FormerTeamMemberBGAUsername
 )[] = ["martypartyouje", "Hurtle_cz"] as const;
