@@ -9,19 +9,17 @@ import NationalChampionshipAbout from "./national-about";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Dropdown } from "primereact/dropdown";
-import { BGAStats } from "~/players/bga-stats";
 import BGALink from "../bga-link";
 import { DICTIONARY } from "~/i18n/dictionary";
 import { LangContext } from "~/i18n/lang-context";
+import { getBGAUsernameFromName } from "~/utils";
 
 export const computeDataWithBGAUsernames = (
     data: NationalChampionshipResultsRow[]
 ) => {
     return data.map((row) => {
         return {
-            BGA_Username:
-                BGAStats.find((stat) => stat.name === row.name)?.bgaUsername ??
-                "",
+            BGA_Username: getBGAUsernameFromName(row.name) ?? "",
             ...row,
         };
     });

@@ -1,4 +1,3 @@
-import { BGAStats } from "~/players/bga-stats";
 import {
     formerTeamCaptains,
     teamCaptain,
@@ -8,6 +7,7 @@ import {
     type FormerTeamMemberBGAUsername,
     type TeamContestParticipations,
 } from "~/players/team-members";
+import { getNameFromBGAUsername } from "~/utils";
 
 type BasicTeamMemberData = {
     name: string | undefined;
@@ -24,7 +24,7 @@ export const computeTeamMemberDataFromBGAUsername = (
 ) => {
     const memberData: BasicTeamMemberData &
         Partial<Record<TeamContestParticipations, number[]>> = {
-        name: BGAStats.find((stat) => stat.bgaUsername === BGA_Username)?.name,
+        name: getNameFromBGAUsername(BGA_Username),
         BGA_Username,
         team_captain: teamCaptain === BGA_Username,
         former_captain: formerTeamCaptains.includes(BGA_Username),

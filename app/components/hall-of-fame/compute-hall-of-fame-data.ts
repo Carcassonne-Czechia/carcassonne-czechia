@@ -1,6 +1,6 @@
 import nationalChampionshipData from "src/raw-data/offline-championships/all_data.csv";
 import onlineChampionshipData from "src/raw-data/online-championships/all_data.csv";
-import { unsafeEntries } from "~/utils";
+import { getBGAUsernameFromName, unsafeEntries } from "~/utils";
 import type {
     NationalChampionshipResultsRow,
     OnlineChampionshipResultsRow,
@@ -48,7 +48,7 @@ export const computeIndividualTournamentDataForPlayersBetweenYears = (
     maxYear: number
 ) => {
     const BGAUsernames = playerNames.map(
-        (name) => BGAStats.find((stat) => stat.name === name)?.bgaUsername ?? ""
+        (name) => getBGAUsernameFromName(name) ?? ""
     );
 
     const playerNameIndices = Object.fromEntries(

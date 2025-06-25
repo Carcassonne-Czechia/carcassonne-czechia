@@ -2,13 +2,13 @@ import onlineChampionshipData from "src/raw-data/online-championships/all_data.c
 import { useContext, useState } from "react";
 import { LangContext } from "~/i18n/lang-context";
 import OnlineChampionshipAbout from "./online-about";
-import { BGAStats } from "~/players/bga-stats";
 import { onlineChampionshipHeaderRow } from "../national-championship/typings";
 import { DataTable } from "primereact/datatable";
 import { DICTIONARY } from "~/i18n/dictionary";
 import { Dropdown } from "primereact/dropdown";
 import { Column } from "primereact/column";
 import BGALink from "../bga-link";
+import { getNameFromBGAUsername } from "~/utils";
 
 export default function OnlineChampionship() {
     const { lang } = useContext(LangContext);
@@ -20,8 +20,7 @@ export default function OnlineChampionship() {
     const dataWithNames = onlineChampionshipData.map((row) => {
         return {
             ...row,
-            name: BGAStats.find((stat) => stat.bgaUsername === row.BGA_Username)
-                ?.name,
+            name: getNameFromBGAUsername(row.BGA_Username) ?? "",
         };
     });
 

@@ -1,3 +1,5 @@
+import { BGAStats } from "./players/bga-stats";
+
 type Entries<T> = {
     [K in keyof T]: [K, T[K]];
 }[keyof T][];
@@ -28,3 +30,9 @@ export function getOrdinalNumber(i: number | string) {
     }
     return i + "th";
 }
+
+export const getNameFromBGAUsername = (bgaUsername: string) =>
+    BGAStats.find((player) => player.bgaUsername === bgaUsername)?.name;
+
+export const getBGAUsernameFromName = (name: string) =>
+    BGAStats.find((player) => player.name === name)?.bgaUsername;
