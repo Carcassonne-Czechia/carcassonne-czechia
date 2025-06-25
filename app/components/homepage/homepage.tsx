@@ -19,9 +19,13 @@ export function HomePage() {
             <p>
                 The Czech national team in Carcassonne was founded during the
                 pandemic in 2020 by an old guard around Hurtle, Moya, and his
-                friends from the National Championship. The team brings together
-                players from the Czech Republic who participate in tournaments
-                and competitions in this popular board game.
+                friends from the{" "}
+                <Link to={ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP}>
+                    National Championship
+                </Link>
+                . The team brings together players from the Czech Republic who
+                participate in tournaments and competitions in this popular
+                board game.
             </p>
             <p>
                 Not long after the establishment of the national team, Marty
