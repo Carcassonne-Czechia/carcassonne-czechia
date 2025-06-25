@@ -39,8 +39,8 @@ export function HomePage() {
             </p>
             <p>
                 Většina turnajů se hraje online na platformě{" "}
-                <a href="https://boardgamearena.com">BoardGameArena</a>. V Praze
-                se každoročně v říjnu koná{" "}
+                <a href="https://boardgamearena.com">BoardGameArena</a> (BGA). V
+                Praze se každoročně v říjnu koná{" "}
                 <Link to={ROUTE_HEADERS.NATIONAL_CHAMPIONSHIP}>
                     Mistrovství České republiky
                 </Link>
@@ -49,7 +49,7 @@ export function HomePage() {
                 na{" "}
                 <a href="https://carcassonne-meisterschaft.de/">
                     mistrovství světa
-                </a>
+                </a>{" "}
                 konaného napřesrok ve městě Herne v Německu.
             </p>
             <p>
@@ -71,8 +71,8 @@ export function HomePage() {
                     marginTop: "2rem",
                 }}
             >
-                Pokud máte zájem se přidat do týmu, pak můžete napsat na
-                BoardGameAreně současnému kapitánovi týmu{" "}
+                Pokud máte zájem se přidat do týmu, pak můžete napsat na BGA
+                současnému kapitánovi týmu{" "}
                 {<BGALink BGA_Username={teamCaptainBGAUsername} />}, přidáme vás
                 na náš Discord a můžete hrát s námi.
             </p>
