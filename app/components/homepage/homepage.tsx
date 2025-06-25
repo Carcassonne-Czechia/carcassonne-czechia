@@ -16,11 +16,24 @@ export function HomePage() {
                 already check out the current roster, stats, and former and
                 planned tournaments organized by the Czech community.
             </p>
+            <p>
+                The Czech national team in Carcassonne was founded during the
+                pandemic in 2020 by an old guard around Hurtle, Moya, and his
+                friends from the National Championship. The team brings together
+                players from the Czech Republic who participate in tournaments
+                and competitions in this popular board game.
+            </p>
+            <p>
+                Not long after the establishment of the national team, Marty
+                took over as team captain, successfully leading us through the
+                World and European Team Championships. In 2025, Marty handed
+                over the baton to Posij, who became the new team captain.
+            </p>
         </main>
     ) : (
         <main style={{ marginTop: "1rem" }}>
             <h3>
-                Vítejte na stránkách českého národního týmu ve hře Carcassonne
+                Vítejte na stránkách českého národního týmu ve hře Carcassonne.
             </h3>
             <p>
                 Tým byl založen za pandemie v roce 2020 starou partou kolem
