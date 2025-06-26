@@ -15,7 +15,7 @@ jobs:
         steps:
             - name: Show working directory and files
               run: |
-                pwd
+                cd /
                 ls -l
           
             - name: Checkout repository
