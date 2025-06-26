@@ -41,7 +41,10 @@ jobs:
                 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
             - name: Commit and push changes
+              env:
+                GH_TOKEN: ${{ steps.app-token.outputs.token }}
               run: |
-                  git add public/all-bios.json
-                  git commit -m "Bundle all bios"
-                  git push
+                git add public/all-bios.json
+                git commit -m "Bundle all bios" || echo "No changes to commit"
+                git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
+                git push origin HEAD:${{ github.ref_name }}
