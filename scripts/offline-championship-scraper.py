@@ -77,7 +77,6 @@ def add_zeros_where_missing(raw_scores: list[list[str]]):
 
 def clean_up_raw_scores(raw_scores: list[list[str]]) -> list[tuple[str, ...]]:
     raw_scores = replace_decimal_separators(raw_scores)
-    print(raw_scores)
     raw_scores = add_zeros_where_missing(raw_scores)
     points_scored_avg_max = 20
     points_scored_avg_min = 0.5

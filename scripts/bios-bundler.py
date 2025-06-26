@@ -16,7 +16,6 @@ all_bios_path = (
 obj: dict[str, dict[str, str]] = {}
 
 for f in os.listdir(src_base_path):
-    print(f)
     base, _ = f.split(".")
     parts = base.split("-")
     bga_username = "-".join(parts[:-1])
@@ -26,6 +25,7 @@ for f in os.listdir(src_base_path):
         raw_markdown = file.read()
         obj.setdefault(bga_username, {}).setdefault(lang, raw_markdown)
 
+print(obj)
 obj_str = json.dumps(obj, ensure_ascii=False)
 if os.path.exists(all_bios_path): os.remove(all_bios_path)
 with open(all_bios_path, "x", encoding="utf-8") as file:
