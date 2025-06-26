@@ -1,8 +1,6 @@
 import os
 import json
 
-print(os.getenv("CI"))
-
 src_base_path = (
     os.path.join("src", "bios")
     if os.getenv("CI")
@@ -29,5 +27,5 @@ for f in os.listdir(src_base_path):
 
 obj_str = json.dumps(obj, ensure_ascii=False)
 if os.path.exists(all_bios_path): os.remove(all_bios_path)
-with open(all_bios_path, "x", encoding="utf-8") as file:
+with open(all_bios_path, "w", encoding="utf-8") as file:
     file.write(obj_str)
