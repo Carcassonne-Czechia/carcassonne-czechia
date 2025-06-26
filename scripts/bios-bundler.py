@@ -25,7 +25,6 @@ for f in os.listdir(src_base_path):
         raw_markdown = file.read()
         obj.setdefault(bga_username, {}).setdefault(lang, raw_markdown)
 
-print(obj)
 obj_str = json.dumps(obj, ensure_ascii=False)
 if os.path.exists(all_bios_path): os.remove(all_bios_path)
 with open(all_bios_path, "x", encoding="utf-8") as file:
