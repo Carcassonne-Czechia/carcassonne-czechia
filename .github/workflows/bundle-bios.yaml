@@ -43,6 +43,10 @@ jobs:
                 git config user.name "github-actions[bot]"
                 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+            - name: Print created file
+              run: |
+                  cat public/all-bios.json
+
             - name: Commit and push changes
               run: |
                   git add public/all-bios.json

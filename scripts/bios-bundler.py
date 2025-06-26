@@ -26,6 +26,6 @@ for f in os.listdir(src_base_path):
         obj.setdefault(bga_username, {}).setdefault(lang, raw_markdown)
 
 obj_str = json.dumps(obj, ensure_ascii=False)
-if os.path.exists(all_bios_path): os.remove(all_bios_path)
+print(obj_str)
 with open(all_bios_path, "w", encoding="utf-8") as file:
     file.write(obj_str)
