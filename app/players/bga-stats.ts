@@ -70,8 +70,9 @@ export const BGAStats: BGAStat[] = [
         maxElo: 600,
     },
     {
+        name: "Tomáš Novotný",
         bgaUsername: "smoula",
-        maxElo: 500,
+        maxElo: 570,
         id: 84189399,
     },
     {
