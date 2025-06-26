@@ -16,6 +16,7 @@ all_bios_path = (
 obj: dict[str, dict[str, str]] = {}
 
 for f in os.listdir(src_base_path):
+    print(f)
     base, _ = f.split(".")
     parts = base.split("-")
     bga_username = "-".join(parts[:-1])
