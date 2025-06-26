@@ -1,6 +1,8 @@
 import os
 import json
 
+print(os.getenv("CI"))
+
 src_base_path = (
     os.path.join("src", "bios")
     if os.getenv("CI")
