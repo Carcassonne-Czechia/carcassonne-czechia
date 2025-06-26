@@ -27,6 +27,10 @@ jobs:
             - name: Run Python script
               run: python scripts/bios-bundler.py
 
+            - uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.TEST_TOKEN }}
             - name: Commit and push changes
               run: |
                   git config --global user.name "posij118"
@@ -34,5 +38,3 @@ jobs:
                   git add public/all-bios.json
                   git commit -m "Bundle all bios"
                   git push
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
