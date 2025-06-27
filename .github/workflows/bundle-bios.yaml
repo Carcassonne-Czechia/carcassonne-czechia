@@ -13,6 +13,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - name: Set up GitHub App token
             - uses: actions/create-github-app-token@v1
               id: app-token
               with:
@@ -37,13 +38,13 @@ jobs:
 
             - name: Set User
               run: |
-                git config user.name "github-actions[bot]"
-                git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
             - name: Commit and push changes
               env:
-                GH_TOKEN: ${{ steps.app-token.outputs.token }}
+                  GH_TOKEN: ${{ steps.app-token.outputs.token }}
               run: |
-                git add public/all-bios.json
-                git commit -m "Bundle all bios" || echo "No changes to commit"
-                git push
+                  git add public/all-bios.json
+                  git commit -m "Bundle all bios" || echo "No changes to commit"
+                  git push
