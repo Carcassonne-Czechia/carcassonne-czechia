@@ -46,5 +46,4 @@ jobs:
               run: |
                 git add public/all-bios.json
                 git commit -m "Bundle all bios" || echo "No changes to commit"
-                git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
-                git push origin HEAD:${{ github.ref_name }}
+                git push
