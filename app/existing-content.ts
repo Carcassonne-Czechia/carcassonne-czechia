@@ -6,4 +6,17 @@ import type {
 export const HAS_AVATAR: (
     | CurrentTeamMemberBGAUsername
     | FormerTeamMemberBGAUsername
-)[] = ["smoula"] as const;
+)[] = [
+    "smoula",
+    "bormar",
+    "chonps",
+    "farincz",
+    "Hurtle_cz",
+    "majkls",
+    "Moya88",
+    "posij118",
+    "Simaster 1991",
+    "wikri",
+    "vomo_43",
+    "Zabza",
+] as const;
