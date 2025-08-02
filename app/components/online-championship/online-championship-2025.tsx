@@ -203,7 +203,7 @@ export default function OnlineChampionship2025() {
                     <b>Formát turnaje:</b>
                     <ul>
                         <li>
-                            Každý pár hráčů odehraje spolu jednu sérii Best of
+                            Každý pár hráčů odehraje spolu jeden zápas Best of
                             Three (BO3).
                         </li>
                         <li>
@@ -281,8 +281,9 @@ export default function OnlineChampionship2025() {
                 </p>
                 <p>
                     <b>Odměny:</b> Vítězové získají možnost reprezentovat Česko
-                    v příští sezóně Carcassonne Champions League (CCL), podle
-                    koeficientu aktualizace po letošním ETCOC.
+                    v příští sezóně Carcassonne Champions League (CCL), počet
+                    míst bude záviset na aktualizaci koeficientu po letošním
+                    ETCOC.
                 </p>
             </div>
         </div>
