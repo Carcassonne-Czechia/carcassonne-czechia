@@ -101,6 +101,14 @@ const _DICTIONARY = {
         cs: "Odkazy",
         en: "Links",
     },
+    historicalResults: {
+        cs: "Historické výsledky",
+        en: "Historical results",
+    },
+    news: {
+        cs: "Novinky",
+        en: "News",
+    },
 } as const;
 
 export type DictionaryStub = keyof typeof _DICTIONARY;

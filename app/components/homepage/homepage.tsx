@@ -4,6 +4,7 @@ import { teamCaptainBGAUsername } from "~/players/team-members";
 import BGALink from "../bga-link";
 import { Link } from "react-router";
 import { ROUTE_HEADERS } from "~/routes";
+import News from "../news/news-comp";
 
 export function HomePage() {
     const { lang } = useContext(LangContext);
@@ -33,6 +34,8 @@ export function HomePage() {
                 World and European Team Championships. In 2025, Marty handed
                 over the baton to Posij, who became the new team captain.
             </p>
+            <h2 style={{ textAlign: "center" }}>News</h2>
+            <News />
         </main>
     ) : (
         <main style={{ marginTop: "1rem" }}>
@@ -93,6 +96,8 @@ export function HomePage() {
                 {<BGALink BGA_Username={teamCaptainBGAUsername} />}, přidáme vás
                 na náš Discord a můžete hrát s námi.
             </p>
+            <h2 style={{ textAlign: "center" }}>Novinky</h2>
+            <News />
         </main>
     );
 }
