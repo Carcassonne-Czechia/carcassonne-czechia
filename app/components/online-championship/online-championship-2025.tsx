@@ -142,6 +142,24 @@ export default function OnlineChampionship2025() {
                             any assistance by other humans or AIs during the
                             game.
                         </li>
+                        <li>
+                            If the players realize that a game is being played
+                            with wrong settings, the course of action depends on
+                            the number of remaining tiles in the deck:
+                            <ul>
+                                <li>
+                                    If there are at least 60 tiles left, the
+                                    game must be restarted by setting up a new
+                                    tournament.
+                                </li>
+                                <li>
+                                    Otherwise, the game must be played until the
+                                    end and if there are any games left that
+                                    would be played with wrong settings, a new
+                                    tournament must be created.
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </p>
                 <p>
@@ -276,6 +294,23 @@ export default function OnlineChampionship2025() {
                             Hráči nesmí používat žádná počítadla kartiček,
                             skripty nebo jakoukoli pomoc od jiných lidí nebo AI
                             během hry.
+                        </li>
+                        <li>
+                            Pokud hráči zjistí, že se hra hraje s nesprávným
+                            nastavením, postup závisí na počtu zbývajících
+                            kartiček v balíčku:
+                            <ul>
+                                <li>
+                                    Pokud zbývá alespoň 60 kartiček, musí se hra
+                                    restartovat vytvořením nového turnaje.
+                                </li>
+                                <li>
+                                    V opačném případě se hra musí dohrát do
+                                    konce a pokud zbývají nějaké hry, které by
+                                    se hrály s nesprávným nastavením, musí se
+                                    vytvořit nový turnaj.
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </p>
