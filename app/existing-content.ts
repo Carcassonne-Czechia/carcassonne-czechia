@@ -19,4 +19,6 @@ export const HAS_AVATAR: (
     "wikri",
     "vomo_43",
     "Zabza",
+    "soustruznice",
+    "J0nny",
 ] as const;

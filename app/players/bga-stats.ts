@@ -89,4 +89,14 @@ export const BGAStats: BGAStat[] = [
         bgaUsername: "Ales84",
         id: 87427346,
     },
+    {
+        bgaUsername: "soustruznice",
+        id: 88295846,
+        maxElo: 400,
+    },
+    {
+        bgaUsername: "J0nny",
+        id: 84017874,
+        maxElo: 500,
+    },
 ] as const;
