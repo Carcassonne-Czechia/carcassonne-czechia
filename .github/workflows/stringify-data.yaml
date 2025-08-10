@@ -45,5 +45,5 @@ jobs:
               run: |
                   git add -f src/raw-data/bga-stats.json
                   git add -f src/raw-data/rare-tournament-results.json
-                  git commit -m "Bundle all bios" || echo "No changes to commit"
+                  git commit -m "Stringify Data" || echo "No changes to commit"
                   git push
