@@ -1,0 +1,49 @@
+name: Data Stringify
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - app/players/bga-stats.ts
+            - app/players/tournament-results.ts
+    workflow_dispatch:
+
+jobs:
+    update-data:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Set up GitHub App token
+              uses: actions/create-github-app-token@v1
+              id: app-token
+              with:
+                  app-id: ${{ vars.APP_ID }}
+                  private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  token: ${{ steps.app-token.outputs.token }}
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                node-version: 23
+
+            - name: Run Node script
+              run: node --experimental-strip-types scripts/stringifier.ts
+
+            - name: Set User
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+            - name: Commit and push changes
+              env:
+                  GH_TOKEN: ${{ steps.app-token.outputs.token }}
+              run: |
+                  git add src/raw-data/bga-stats.json
+                  git add src/raw-data/rare-tournament-results.json
+                  git commit -m "Bundle all bios" || echo "No changes to commit"
+                  git push
