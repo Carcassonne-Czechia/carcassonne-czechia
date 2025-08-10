@@ -45,123 +45,124 @@ export default function OnlineChampionship2025() {
                 </p>
                 <p>
                     <b>Important dates:</b>
-                    <ul>
-                        <li>
-                            <b>Registration:</b> August 2 up to August 24 23:59
-                        </li>
-                        <li>
-                            <b>Tournament draw:</b> August 25
-                        </li>
-                        <li>
-                            <b>Tournament start:</b> September 1
-                        </li>
-                        <li>
-                            <b>Tournament end:</b>
-                        </li>{" "}
-                        Between October and Mid-November (according to the
-                        number of players).
-                    </ul>
                 </p>
+                <ul>
+                    <li>
+                        <b>Registration:</b> August 2 up to August 24 23:59
+                    </li>
+                    <li>
+                        <b>Tournament draw:</b> August 25
+                    </li>
+                    <li>
+                        <b>Tournament start:</b> September 1
+                    </li>
+                    <li>
+                        <b>Tournament end:</b>
+                    </li>{" "}
+                    Between October and Mid-November (according to the number of
+                    players).
+                </ul>
+
                 <p>
                     <b>Tournament format:</b>
-                    <ul>
-                        <li>
-                            Each pair of players will play one Best of Three
-                            (BO3) match together.
-                        </li>
-                        <li>
-                            During the draw, all matches will be scheduled for
-                            their respective weeks. Each player will be
-                            scheduled to play at most one match per week.
-                        </li>
-                        <li>
-                            The players must agree on the exact time their match
-                            will be played. When agreed, one of the players must
-                            fill out a form indicating that time. Players will
-                            in turn receive a tournament invitiation.
-                        </li>
-                        <li>
-                            All games are played on BGA using the base game
-                            Tournament format with <b>15 minutes</b> clock time
-                            for each player.
-                        </li>
-                        <li>
-                            In case of a game ending in a tie, the win goes to
-                            the player who has not started (as usual on BGA).
-                        </li>
-                        <li>
-                            Final results will be determined by, subsequently,
-                            the number of won matches, the difference of games
-                            won and lost, and the number of games won. In case
-                            of a tie, these criteria will be applied once more,
-                            but this time using only the matches between the
-                            tied players.
-                        </li>
-                        <li>
-                            In the unlikely event of more than 12 entrants, the
-                            format will be changed to an 8-round swiss system.
-                        </li>
-                    </ul>
                 </p>
+                <ul>
+                    <li>
+                        Each pair of players will play one Best of Three (BO3)
+                        match together.
+                    </li>
+                    <li>
+                        During the draw, all matches will be scheduled for their
+                        respective weeks. Each player will be scheduled to play
+                        at most one match per week.
+                    </li>
+                    <li>
+                        The players must agree on the exact time their match
+                        will be played. When agreed, one of the players must
+                        fill out a form indicating that time. Players will in
+                        turn receive a tournament invitiation.
+                    </li>
+                    <li>
+                        All games are played on BGA using the base game
+                        Tournament format with <b>15 minutes</b> clock time for
+                        each player.
+                    </li>
+                    <li>
+                        In case of a game ending in a tie, the win goes to the
+                        player who has not started (as usual on BGA).
+                    </li>
+                    <li>
+                        Final results will be determined by, subsequently, the
+                        number of won matches, the difference of games won and
+                        lost, and the number of games won. In case of a tie,
+                        these criteria will be applied once more, but this time
+                        using only the matches between the tied players.
+                    </li>
+                    <li>
+                        In the unlikely event of more than 12 entrants, the
+                        format will be changed to an 8-round swiss system.
+                    </li>
+                </ul>
+
                 <p>
                     <b>Tournament rules:</b>
-                    <ul>
-                        <li>
-                            Players are expected to play and attempt to win all
-                            the matches they are supposed to play in.
-                        </li>
-                        <li>
-                            Players are expected to complete their matches in a
-                            timely manner, allowing sufficient options for match
-                            scheduling. Ideally, matches should be scheduled
-                            around the beginning of the week. If a player knows
-                            they are going to be busy, it is desirable to
-                            schedule matches even earlier to avoid backlogs.
-                        </li>
-                        <li>
-                            If a player does not come to a match, we will ask
-                            the players to reschedule at earliest convenience.
-                        </li>
-                        <li>
-                            If it appears there are substantial issues with the
-                            timely completion of matches, the team captain might
-                            introduce a warning system akin to the one CCL 2025
-                            used.
-                        </li>
-                        <li>
-                            If a player is out of time in a game (signaled by
-                            the red clock after the game ends), they lose the
-                            game, but not the match.
-                        </li>
-                        <li>
-                            Players must inform their opponents in case they
-                            discard a tile.
-                        </li>
-                        <li>
-                            Players may not use any tile-counters, scripts, or
-                            any assistance by other humans or AIs during the
-                            game.
-                        </li>
-                        <li>
-                            If the players realize that a game is being played
-                            with wrong settings, the course of action depends on
-                            the number of remaining tiles in the deck:
-                            <ul>
-                                <li>
-                                    If there are at least 60 tiles left, the
-                                    game must be restarted by setting up a new
-                                    tournament.
-                                </li>
-                                <li>
-                                    Otherwise, the game must be played until the
-                                    end and if there are any games left that
-                                    would be played with wrong settings, a new
-                                    tournament must be created.
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
                 </p>
+                <ul>
+                    <li>
+                        Players are expected to play and attempt to win all the
+                        matches they are supposed to play in.
+                    </li>
+                    <li>
+                        Players are expected to complete their matches in a
+                        timely manner, allowing sufficient options for match
+                        scheduling. Ideally, matches should be scheduled around
+                        the beginning of the week. If a player knows they are
+                        going to be busy, it is desirable to schedule matches
+                        even earlier to avoid backlogs.
+                    </li>
+                    <li>
+                        If a player does not come to a match, we will ask the
+                        players to reschedule at earliest convenience.
+                    </li>
+                    <li>
+                        If it appears there are substantial issues with the
+                        timely completion of matches, the team captain might
+                        introduce a warning system akin to the one CCL 2025
+                        used.
+                    </li>
+                    <li>
+                        If a player is out of time in a game (signaled by the
+                        red clock after the game ends), they lose the game, but
+                        not the match.
+                    </li>
+                    <li>
+                        Players must inform their opponents in case they discard
+                        a tile.
+                    </li>
+                    <li>
+                        Players may not use any tile-counters, scripts, or any
+                        assistance by other humans or AIs during the game.
+                    </li>
+                    <li>
+                        If the players realize that a game is being played with
+                        wrong settings, the course of action depends on the
+                        number of remaining tiles in the deck:
+                        <ul>
+                            <li>
+                                If there are at least 60 tiles left, the game
+                                must be restarted by setting up a new
+                                tournament.
+                            </li>
+                            <li>
+                                Otherwise, the game must be played until the end
+                                and if there are any games left that would be
+                                played with wrong settings, a new tournament
+                                must be created.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
                 <p>
                     <b>Prizes:</b> The winners will receive the opportunity to
                     represent Czechia in the next Carcassonne Champions League
@@ -201,119 +202,119 @@ export default function OnlineChampionship2025() {
                 </p>
                 <p>
                     <b>Důležité termíny:</b>
-                    <ul>
-                        <li>
-                            <b>Přihlašování:</b> 2. srpna až 24. srpna 23:59
-                        </li>
-                        <li>
-                            <b>Rozlosování turnaje:</b> 25. srpna
-                        </li>
-                        <li>
-                            <b>Začátek turnaje:</b> 1. září
-                        </li>
-                        <li>
-                            <b>Konec turnaje:</b> Mezi říjnem a polovinou
-                            listopadu (podle počtu hráčů).
-                        </li>
-                    </ul>
                 </p>
+                <ul>
+                    <li>
+                        <b>Přihlašování:</b> 2. srpna až 24. srpna 23:59
+                    </li>
+                    <li>
+                        <b>Rozlosování turnaje:</b> 25. srpna
+                    </li>
+                    <li>
+                        <b>Začátek turnaje:</b> 1. září
+                    </li>
+                    <li>
+                        <b>Konec turnaje:</b> Mezi říjnem a polovinou listopadu
+                        (podle počtu hráčů).
+                    </li>
+                </ul>
+
                 <p>
                     <b>Formát turnaje:</b>
-                    <ul>
-                        <li>
-                            Každý pár hráčů odehraje spolu jeden zápas Best of
-                            Three (BO3).
-                        </li>
-                        <li>
-                            Při rozlosování se naplánují všechny zápasy na
-                            příslušné týdny. Každý hráč bude mít naplánován
-                            maximálně jeden zápas týdně.
-                        </li>
-                        <li>
-                            Hráči se musí dohodnout na přesném čase, kdy se
-                            jejich zápas bude hrát. Po dohodě jeden z hráčů
-                            vyplní formulář, ve kterém uvede čas. Hráči pak
-                            obdrží pozvánku do turnaje.
-                        </li>
-                        <li>
-                            Všechny hry se hrají na BGA s použitím základní hry
-                            v turnajovém formátu s <b>15 minutami</b> času pro
-                            každého hráče.
-                        </li>
-                        <li>
-                            V případě, že hra skončí remízou, vyhraje hráč,
-                            který nezačal (jak je obvyklé na BGA).
-                        </li>
-                        <li>
-                            Konečné výsledky se určí podle počtu vyhraných
-                            zápasů, rozdílu vyhraných a prohraných her a počtu
-                            vyhraných her. V případě remízy se tato kritéria
-                            použijí znovu, ale tentokrát pouze na zápasy mezi
-                            hráči, mezi nimiž je třeba určit pořadí.
-                        </li>
-                        <li>
-                            V případě, že se přihlásí více než 12 hráčů, bude
-                            formát změněn na 8-kolový švýcarský systém.
-                        </li>
-                    </ul>
                 </p>
+                <ul>
+                    <li>
+                        Každý pár hráčů odehraje spolu jeden zápas Best of Three
+                        (BO3).
+                    </li>
+                    <li>
+                        Při rozlosování se naplánují všechny zápasy na příslušné
+                        týdny. Každý hráč bude mít naplánován maximálně jeden
+                        zápas týdně.
+                    </li>
+                    <li>
+                        Hráči se musí dohodnout na přesném čase, kdy se jejich
+                        zápas bude hrát. Po dohodě jeden z hráčů vyplní
+                        formulář, ve kterém uvede čas. Hráči pak obdrží pozvánku
+                        do turnaje.
+                    </li>
+                    <li>
+                        Všechny hry se hrají na BGA s použitím základní hry v
+                        turnajovém formátu s <b>15 minutami</b> času pro každého
+                        hráče.
+                    </li>
+                    <li>
+                        V případě, že hra skončí remízou, vyhraje hráč, který
+                        nezačal (jak je obvyklé na BGA).
+                    </li>
+                    <li>
+                        Konečné výsledky se určí podle počtu vyhraných zápasů,
+                        rozdílu vyhraných a prohraných her a počtu vyhraných
+                        her. V případě remízy se tato kritéria použijí znovu,
+                        ale tentokrát pouze na zápasy mezi hráči, mezi nimiž je
+                        třeba určit pořadí.
+                    </li>
+                    <li>
+                        V případě, že se přihlásí více než 12 hráčů, bude formát
+                        změněn na 8-kolový švýcarský systém.
+                    </li>
+                </ul>
+
                 <p>
                     <b>Pravidla turnaje:</b>
-                    <ul>
-                        <li>
-                            Očekává se, že hráči odehrají s cílem vyhrát všechny
-                            zápasy, kterých se účastní.
-                        </li>
-                        <li>
-                            Hráči by měli dokončit své zápasy včas, aby bylo
-                            možné naplánovat další zápasy. Ideálně by se zápasy
-                            měly naplánovat kolem začátku týdne. Pokud hráč ví,
-                            že bude zaneprázdněn, je žádoucí naplánovat zápasy
-                            ještě dříve, aby se předešlo zpožděním.
-                        </li>
-                        <li>
-                            Pokud hráč nepřijde na zápas, požádáme hráče o
-                            přeplánování na co nejdříve.
-                        </li>
-                        <li>
-                            Pokud se ukáže, že existují podstatné problémy s
-                            včasným dokončením zápasů, může kapitán týmu zavést
-                            varovný systém podobný tomu, který byl použit v CCL
-                            2025.
-                        </li>
-                        <li>
-                            Pokud hráči vyprší čas ve hře (signalizováno
-                            červenými hodinami po skončení hry), prohraje hru,
-                            ale ne zápas.
-                        </li>
-                        <li>
-                            Hráči musí informovat soupeře v případě, že odhodí
-                            kartičku.
-                        </li>
-                        <li>
-                            Hráči nesmí používat žádná počítadla kartiček,
-                            skripty nebo jakoukoli pomoc od jiných lidí nebo AI
-                            během hry.
-                        </li>
-                        <li>
-                            Pokud hráči zjistí, že se hra hraje s nesprávným
-                            nastavením, postup závisí na počtu zbývajících
-                            kartiček v balíčku:
-                            <ul>
-                                <li>
-                                    Pokud zbývá alespoň 60 kartiček, musí se hra
-                                    restartovat vytvořením nového turnaje.
-                                </li>
-                                <li>
-                                    V opačném případě se hra musí dohrát do
-                                    konce a pokud zbývají nějaké hry, které by
-                                    se hrály s nesprávným nastavením, musí se
-                                    vytvořit nový turnaj.
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
                 </p>
+                <ul>
+                    <li>
+                        Očekává se, že hráči odehrají s cílem vyhrát všechny
+                        zápasy, kterých se účastní.
+                    </li>
+                    <li>
+                        Hráči by měli dokončit své zápasy včas, aby bylo možné
+                        naplánovat další zápasy. Ideálně by se zápasy měly
+                        naplánovat kolem začátku týdne. Pokud hráč ví, že bude
+                        zaneprázdněn, je žádoucí naplánovat zápasy ještě dříve,
+                        aby se předešlo zpožděním.
+                    </li>
+                    <li>
+                        Pokud hráč nepřijde na zápas, požádáme hráče o
+                        přeplánování na co nejdříve.
+                    </li>
+                    <li>
+                        Pokud se ukáže, že existují podstatné problémy s včasným
+                        dokončením zápasů, může kapitán týmu zavést varovný
+                        systém podobný tomu, který byl použit v CCL 2025.
+                    </li>
+                    <li>
+                        Pokud hráči vyprší čas ve hře (signalizováno červenými
+                        hodinami po skončení hry), prohraje hru, ale ne zápas.
+                    </li>
+                    <li>
+                        Hráči musí informovat soupeře v případě, že odhodí
+                        kartičku.
+                    </li>
+                    <li>
+                        Hráči nesmí používat žádná počítadla kartiček, skripty
+                        nebo jakoukoli pomoc od jiných lidí nebo AI během hry.
+                    </li>
+                    <li>
+                        Pokud hráči zjistí, že se hra hraje s nesprávným
+                        nastavením, postup závisí na počtu zbývajících kartiček
+                        v balíčku:
+                        <ul>
+                            <li>
+                                Pokud zbývá alespoň 60 kartiček, musí se hra
+                                restartovat vytvořením nového turnaje.
+                            </li>
+                            <li>
+                                V opačném případě se hra musí dohrát do konce a
+                                pokud zbývají nějaké hry, které by se hrály s
+                                nesprávným nastavením, musí se vytvořit nový
+                                turnaj.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
                 <p>
                     <b>Odměny:</b> Vítězové získají možnost reprezentovat Česko
                     v příští sezóně Carcassonne Champions League (CCL), počet
