@@ -275,16 +275,34 @@ export default function HallOfFame() {
                                             inputId={`visible-toggler${name}`}
                                             checked={tournamentsVisible[i]}
                                             onChange={(e) =>
-                                                setTournamentsVisible([
-                                                    ...tournamentsVisible.slice(
-                                                        0,
-                                                        i
-                                                    ),
-                                                    e.checked ?? false,
-                                                    ...tournamentsVisible.slice(
-                                                        i + 1
-                                                    ),
-                                                ])
+                                                setTournamentsVisible(
+                                                    (_prev) => {
+                                                        const newTournamentsVisible =
+                                                            [
+                                                                ...tournamentsVisible.slice(
+                                                                    0,
+                                                                    i
+                                                                ),
+                                                                e.checked ??
+                                                                    false,
+                                                                ...tournamentsVisible.slice(
+                                                                    i + 1
+                                                                ),
+                                                            ];
+
+                                                        if (
+                                                            newTournamentsVisible.some(
+                                                                (x) => x
+                                                            )
+                                                        )
+                                                            return newTournamentsVisible;
+                                                        else
+                                                            return tournamentsVisible.map(
+                                                                (_, j) =>
+                                                                    j === i
+                                                            );
+                                                    }
+                                                )
                                             }
                                         />
                                     </span>
