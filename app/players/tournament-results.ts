@@ -1,6 +1,12 @@
 // Use for tournaments where only one team member participates
 
-const _rareTournamentNames = ["worldChampionship", "CCL"] as const;
+const _rareTournamentNames = [
+    "CCL",
+    "KoCCup",
+    "KoCChampionship",
+    "KoCToC",
+    "MSO",
+] as const;
 const _championshipNames = [
     "nationalChampionship",
     "onlineChampionship",
@@ -14,7 +20,10 @@ export const championshipNames: ChampionshipName[] = [
     ..._championshipNames,
 ] as const;
 
-export type IndividualTournamentName = RareTournamentName | ChampionshipName;
+export type IndividualTournamentName =
+    | RareTournamentName
+    | ChampionshipName
+    | "worldChampionship";
 export type Rank = "Q" | "R32" | "R16" | "QF" | "SF" | number;
 
 export const rareTournamentResults: Record<
@@ -23,8 +32,17 @@ export const rareTournamentResults: Record<
         year: number;
         names: string[];
         ranks: Rank[];
+        coeffPoints: number[];
     }[]
-> = {
+> &
+    Record<
+        "worldChampionship",
+        {
+            year: number;
+            names: string[];
+            ranks: Rank[];
+        }[]
+    > = {
     worldChampionship: [
         {
             year: 2006,
@@ -123,11 +141,39 @@ export const rareTournamentResults: Record<
             year: 2024,
             names: ["Pavel Hudec"],
             ranks: ["R16"],
+            coeffPoints: [7],
         },
         {
             year: 2025,
             names: ["Pavel Hudec", "Pavel Raus"],
             ranks: ["QF", "Q"],
+            coeffPoints: [13, 3.5],
+        },
+    ],
+
+    KoCCup: [
+        {
+            year: 2024,
+            names: ["Pavel Hudec"],
+            coeffPoints: [5],
+            ranks: ["QF"],
+        },
+    ],
+    KoCChampionship: [],
+    KoCToC: [
+        {
+            year: 2024,
+            names: ["Pavel Hudec"],
+            coeffPoints: [8],
+            ranks: [4],
+        },
+    ],
+    MSO: [
+        {
+            year: 2025,
+            names: ["Pavel Hudec"],
+            ranks: [3],
+            coeffPoints: [9.5],
         },
     ],
 } as const;
@@ -149,8 +195,10 @@ export const convertRankToNumber = (rank: Rank) => {
 };
 
 export const individualTournamentNames: IndividualTournamentName[] = (
-    championshipNames as IndividualTournamentName[]
-).concat(rareTournamentNames);
+    ["worldChampionship"] as IndividualTournamentName[]
+)
+    .concat(championshipNames as IndividualTournamentName[])
+    .concat(rareTournamentNames);
 
 export const getShortIndividualTournamentName = (
     name: IndividualTournamentName
@@ -159,6 +207,10 @@ export const getShortIndividualTournamentName = (
     if (name === "nationalChampionship") return "NC";
     if (name === "onlineChampionship") return "NOC";
     if (name === "worldChampionship") return "WC";
+    if (name === "KoCChampionship") return "KoCCH";
+    if (name === "KoCCup") return "KoCC";
+    if (name === "KoCToC") return "KoCToC";
+    if (name === "MSO") return "MSO";
 };
 
 const _placements = ["Participation", "Gold", "Silver", "Bronze"] as const;

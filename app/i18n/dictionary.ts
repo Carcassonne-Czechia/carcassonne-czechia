@@ -21,6 +21,22 @@ const _DICTIONARY = {
         cs: "Carcassonne Champions League",
         en: "Carcassonne Champions League",
     },
+    KoCCup: {
+        cs: "King of Carcassonne Cup",
+        en: "King of Carcassonne Cup",
+    },
+    KoCChampionship: {
+        cs: "King of Carcassonne Championship",
+        en: "King of Carcassonne Championship",
+    },
+    KoCToC: {
+        cs: "King of Carcassonne Tournament of Champions",
+        en: "King of Carcassonne Tournament of Champions",
+    },
+    MSO: {
+        cs: "Mind Sports Olympiad",
+        en: "Mind Sports Olympiad",
+    },
     teamCaptainBGAUsername: {
         cs: "Kapitán týmu",
         en: "Team captain",

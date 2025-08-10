@@ -10,6 +10,7 @@
 # Custom
 /archive/
 /src/raw-data/offline-championships/
+**/*.json
 
 # Python
 .pickle
