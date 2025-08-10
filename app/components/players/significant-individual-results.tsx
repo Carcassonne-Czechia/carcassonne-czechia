@@ -52,7 +52,9 @@ export default function SignificantIndividualResults({
                 <span style={{ fontWeight: 600 }}>
                     {lang === "en"
                         ? getOrdinalNumber(result.rank)
-                        : result.rank.toString() + "."}
+                        : typeof result.rank === "string"
+                          ? result.rank
+                          : result.rank.toString() + "."}
                 </span>
                 {Object.entries(medalColors).map(([_, colorHex], i) => {
                     return result.rank === i + 1 ? (
