@@ -45,6 +45,6 @@ jobs:
               env:
                   GH_TOKEN: ${{ steps.app-token.outputs.token }}
               run: |
-                  git add public/all-bios.json
+                  git add -f public/all-bios.json
                   git commit -m "Bundle all bios" || echo "No changes to commit"
                   git push
