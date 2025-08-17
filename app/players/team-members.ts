@@ -11,7 +11,6 @@ export const currentTeamMemberBGAUsernames = [
     "Simaster 1991",
     "majkls",
     "vomo_43",
-    "wikri",
     "soustruznice",
     "J0nny",
 ] as const;
@@ -24,6 +23,7 @@ export const formerTeamMemberBGAUsernames = [
     "DarnCZ",
     "kaspemart",
     "MATY51",
+    "wikri",
 ] as const;
 
 export const otherBGAUsernames = ["Ales84"] as const;
