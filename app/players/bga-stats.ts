@@ -11,44 +11,44 @@ export const BGAStats: BGAStat[] = [
     {
         name: "Pavel Hudec",
         bgaUsername: "posij118",
-        maxElo: 785,
+        maxElo: 825,
         id: 90127806,
     },
     {
         name: "Martin Mojžíš",
         bgaUsername: "Moya88",
-        maxElo: 700,
+        maxElo: 789,
         id: 84643413,
     },
     {
         name: "Martin Čeliňák",
         bgaUsername: "martypartyouje",
-        maxElo: 700,
+        maxElo: 776,
         id: 85379310,
     },
     {
         name: "Pavel Raus",
         bgaUsername: "chonps",
-        maxElo: 600,
+        maxElo: 646,
         id: 86015756,
     },
     {
         name: "Petra Vidnerová",
         bgaUsername: "Zabza",
-        maxElo: 600,
+        maxElo: 641,
         id: 91471532,
     },
     {
         name: "Martin Boreš",
         bgaUsername: "bormar",
-        maxElo: 500,
+        maxElo: 579,
         id: 88672769,
     },
     {
         name: "Jakub Hertl",
         bgaUsername: "Hurtle_cz",
         id: 84616793,
-        maxElo: 600,
+        maxElo: 673,
     },
     {
         name: "Martin Kašperlík",
@@ -62,27 +62,27 @@ export const BGAStats: BGAStat[] = [
     {
         bgaUsername: "majkls",
         id: 88500055,
-        maxElo: 600,
+        maxElo: 646,
     },
     {
         bgaUsername: "Simaster 1991",
         id: 88803329,
-        maxElo: 600,
+        maxElo: 651,
     },
     {
         name: "Tomáš Novotný",
         bgaUsername: "smoula",
-        maxElo: 570,
+        maxElo: 569,
         id: 84189399,
     },
     {
         bgaUsername: "vomo_43",
-        maxElo: 600,
+        maxElo: 618,
         id: 93570408,
     },
     {
         bgaUsername: "wikri",
-        maxElo: 400,
+        maxElo: 472,
         id: 84673481,
     },
     {
@@ -92,11 +92,11 @@ export const BGAStats: BGAStat[] = [
     {
         bgaUsername: "soustruznice",
         id: 88295846,
-        maxElo: 400,
+        maxElo: 483,
     },
     {
         bgaUsername: "J0nny",
         id: 84017874,
-        maxElo: 500,
+        maxElo: 573,
     },
 ] as const;
