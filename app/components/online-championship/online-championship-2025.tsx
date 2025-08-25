@@ -16,17 +16,6 @@ export default function OnlineChampionship2025() {
             </h2>
             <div>
                 <p>
-                    <b>Sign-up form:</b>
-                    <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSc2RXHWp4VQ23IACFY_VE9zTZzjr8ejvxASHFt1UaM-v4cVOA/viewform?usp=dialog"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        {" "}
-                        CLICK
-                    </a>
-                </p>
-                <p>
                     <b>Received sign-ups:</b>
                     <a
                         href="https://docs.google.com/spreadsheets/d/12SIPpqp6bmOsGUI1_aARHHGu1O88yg-Ol10Fz19tsls/edit?usp=sharing"
@@ -181,13 +170,6 @@ export default function OnlineChampionship2025() {
             <h2 style={{ textAlign: "center" }}>Online mistrovství ČR 2025</h2>
 
             <div>
-                <p>
-                    <b>Přihlašovací formulář:</b>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc2RXHWp4VQ23IACFY_VE9zTZzjr8ejvxASHFt1UaM-v4cVOA/viewform?usp=dialog">
-                        {" "}
-                        KLIKNĚTE
-                    </a>
-                </p>
                 <p>
                     <b>Přijaté přihlášky:</b>
                     <a href="https://docs.google.com/spreadsheets/d/12SIPpqp6bmOsGUI1_aARHHGu1O88yg-Ol10Fz19tsls/edit?usp=sharing">
