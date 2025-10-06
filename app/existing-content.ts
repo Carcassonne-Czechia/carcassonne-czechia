@@ -21,4 +21,5 @@ export const HAS_AVATAR: (
     "Zabza",
     "soustruznice",
     "J0nny",
+    "Mejla28",
 ] as const;

@@ -61,11 +61,13 @@ export const BGAStats: BGAStat[] = [
     },
     {
         bgaUsername: "majkls",
+        name: "Michal Bařinka",
         id: 88500055,
         maxElo: 646,
     },
     {
         bgaUsername: "Simaster 1991",
+        name: "Šimon Veselý",
         id: 88803329,
         maxElo: 651,
     },
@@ -79,6 +81,7 @@ export const BGAStats: BGAStat[] = [
         bgaUsername: "vomo_43",
         maxElo: 618,
         id: 93570408,
+        name: "Martin Vomočil",
     },
     {
         bgaUsername: "wikri",
@@ -96,7 +99,14 @@ export const BGAStats: BGAStat[] = [
     },
     {
         bgaUsername: "J0nny",
+        name: "Jan Heřman",
         id: 84017874,
         maxElo: 573,
+    },
+    {
+        bgaUsername: "Mejla28",
+        name: "David Milota",
+        id: 92088844,
+        maxElo: 401,
     },
 ] as const;
