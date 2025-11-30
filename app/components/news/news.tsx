@@ -1,6 +1,7 @@
 import type { JSX } from "react";
 import type { Lang } from "~/i18n/lang-context";
 import { ROUTE_HEADERS } from "~/routes";
+import BGALink from "../bga-link";
 
 export type NewsItem = {
     title: { [l in Lang]: string };
@@ -20,8 +21,31 @@ export const NEWS: Array<NewsItem> = [
         },
         date: new Date("2025-11-30"),
         content: {
-            cs: "Podzim bohatý na turnaje byl završen uspořádáním druhého ročníku online mistrovství České republiky. Zúčastnilo se ho celkem dvanáct hráčů, kteří sehráli napínavý turnaj systémem každý s každým. Vítězem se stal bez ztráty bodu martypartyouje, který si tak zajistil účast v nadcházejícím ročníku Carcassonne Champions League. Gratulujeme jemu, zbylým medailistům i všem účastníkům a těšíme se na další ročník!",
-            en: "The autumn, rich in tournaments, was capped off by the organization of the second edition of the online championship of the Czech Republic. A total of twelve players participated, engaging in an exciting round-robin tournament. The winner, martypartyouje, secured his place in the upcoming Carcassonne Champions League without losing a single point. Congratulations to him, the other medalists, and all participants! We look forward to the next edition!",
+            cs: (
+                <p>
+                    Podzim bohatý na turnaje byl završen uspořádáním druhého
+                    ročníku online mistrovství České republiky. Zúčastnilo se ho
+                    celkem dvanáct hráčů, kteří sehráli napínavý turnaj systémem
+                    každý s každým. Vítězem se stal bez ztráty bodu{" "}
+                    <BGALink BGA_Username="martypartyouje" />, který si tak
+                    zajistil účast v nadcházejícím ročníku Carcassonne Champions
+                    League. Gratulujeme jemu, zbylým medailistům i všem
+                    účastníkům a těšíme se na další ročník!
+                </p>
+            ),
+            en: (
+                <p>
+                    The autumn, rich in tournaments, was capped off by the
+                    organization of the second edition of the online
+                    championship of the Czech Republic. A total of twelve
+                    players participated, engaging in an exciting round-robin
+                    tournament. The winner,{" "}
+                    <BGALink BGA_Username="martypartyouje" />, secured his place
+                    in the upcoming Carcassonne Champions League without losing
+                    a single point. Congratulations to him, the other medalists,
+                    and all participants! We look forward to the next edition!
+                </p>
+            ),
         },
     },
 
@@ -46,11 +70,11 @@ export const NEWS: Array<NewsItem> = [
                         give props to the rest of the teams we played against.
                     </p>
                     <p>
-                        We would like to share a memorable moment of J0nny
-                        drawing a connection tile at the last turn in his
-                        decider game against Croatia that turned the game around
-                        making him win by two points and our team win the match
-                        3:2.
+                        We would like to share a memorable moment of{" "}
+                        <BGALink BGA_Username="J0nny" /> drawing a connection
+                        tile at the last turn in his decider game against
+                        Croatia that turned the game around making him win by
+                        two points and our team win the match 3:2.
                     </p>
                     <p>
                         In the quarterfinals, we faced a strong Belgian team and
@@ -59,6 +83,15 @@ export const NEWS: Array<NewsItem> = [
                         future competitions. Even though we were again a couple
                         of decisions away from a breakthrough, we are motivated
                         to keep improving and aiming for a medal in the future.
+                    </p>
+                    <p>
+                        In addition to that, <BGALink BGA_Username="chonps" />{" "}
+                        managed to claim a very respectable 10th place in the
+                        in-person World Championships. This was the first time
+                        the field has grown to over 50 players, making this
+                        achievement even more impressive. Congratulations to
+                        chonps for representing our community on the world
+                        stage!
                     </p>
                 </>
             ),
@@ -75,10 +108,11 @@ export const NEWS: Array<NewsItem> = [
                         jsme hráli.
                     </p>
                     <p>
-                        Rádi bychom nasdíleli nezapomenutelný moment, kdy J0nny
-                        posledním tahem svého rozhodujícího zápasu proti
-                        Chorvatsku spojil louky, což otočilo hru a umožnilo mu
-                        vyhrát o dva body a našemu týmu vyhrát zápas 3:2.
+                        Rádi bychom nasdíleli nezapomenutelný moment, kdy{" "}
+                        <BGALink BGA_Username="J0nny" /> posledním tahem svého
+                        rozhodujícího zápasu proti Chorvatsku spojil louky, což
+                        otočilo hru a umožnilo mu vyhrát o dva body a našemu
+                        týmu vyhrát zápas 3:2.
                     </p>
                     <p>
                         Ve čtvrtfinále jsme čelili silnému belgickému týmu a
@@ -87,6 +121,14 @@ export const NEWS: Array<NewsItem> = [
                         budoucí turnaje. I když jsme byli opět o pár rozhodnutí
                         od průlomu, jsme motivováni k dalšímu zlepšování a
                         nadále cílíme na medaili.
+                    </p>
+                    <p>
+                        Kromě toho <BGALink BGA_Username="chonps" /> dosáhl
+                        velmi ceněného 10. místa na osobním Mistrovství světa.
+                        Bylo to poprvé, co se pole rozrostlo na více než 50
+                        hráčů, což činí tento úspěch ještě působivějším.
+                        Gratulujeme chonpsovi za reprezentaci naší komunity na
+                        světové scéně!
                     </p>
                 </>
             ),
@@ -102,8 +144,25 @@ export const NEWS: Array<NewsItem> = [
         },
         date: new Date("2025-11-01"),
         content: {
-            cs: "Dne 12. října 2025 se konalo mistrovství České republiky v Carcassonne. Naše reprezentace na něm obsadila skvělých prvních pět míst. Gratulujeme a přejeme šťastnou cestu do Německa vítězovi Moyovi a děkujeme všem účastníkům za skvělou atmosféru!",
-            en: "On October 12, 2025, the National Championship of Czechia in Carcassonne took place. Our representatives secured the top five positions. Congratulations to the winner Moya, who will represent us in Germany, and thanks to all participants for the great atmosphere!",
+            cs: (
+                <p>
+                    Dne 12. října 2025 se konalo mistrovství České republiky v
+                    Carcassonne. Naše reprezentace na něm obsadila skvělých
+                    prvních pět míst. Gratulujeme a přejeme šťastnou cestu do
+                    Německa vítězovi <BGALink BGA_Username="Moya88" /> a
+                    děkujeme všem účastníkům za skvělou atmosféru!
+                </p>
+            ),
+            en: (
+                <p>
+                    On October 12, 2025, the National Championship of Czechia in
+                    Carcassonne took place. Our representatives secured the top
+                    five positions. Congratulations to the winner{" "}
+                    <BGALink BGA_Username="Moya88" />, who will represent us in
+                    Germany, and thanks to all participants for the great
+                    atmosphere!
+                </p>
+            ),
         },
     },
 ];
