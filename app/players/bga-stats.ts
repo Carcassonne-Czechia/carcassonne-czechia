@@ -5,6 +5,7 @@ export interface BGAStat {
     bgaUsername: BGAUsername;
     id: number;
     maxElo?: number;
+    maxEloLastYear?: number;
 }
 
 export const BGAStats: BGAStat[] = [
@@ -94,6 +95,7 @@ export const BGAStats: BGAStat[] = [
     },
     {
         bgaUsername: "soustruznice",
+        name: "Marcela Texlová",
         id: 88295846,
         maxElo: 483,
     },
@@ -108,5 +110,9 @@ export const BGAStats: BGAStat[] = [
         name: "David Milota",
         id: 92088844,
         maxElo: 401,
+    },
+    {
+        bgaUsername: "Ouki",
+        id: 84633122,
     },
 ] as const;

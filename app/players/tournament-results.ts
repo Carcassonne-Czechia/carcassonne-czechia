@@ -134,6 +134,11 @@ export const rareTournamentResults: Record<
             names: ["Martin Čeliňák"],
             ranks: [23],
         },
+        {
+            year: 2025,
+            names: ["Pavel Raus"],
+            ranks: [10],
+        },
     ],
 
     CCL: [

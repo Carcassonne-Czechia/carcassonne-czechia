@@ -9,7 +9,6 @@ import { Dropdown } from "primereact/dropdown";
 import { Column } from "primereact/column";
 import BGALink from "../bga-link";
 import { getNameFromBGAUsername } from "~/utils";
-import OnlineChampionship2025 from "./online-championship-2025";
 
 export default function OnlineChampionship() {
     const { lang } = useContext(LangContext);
@@ -28,7 +27,6 @@ export default function OnlineChampionship() {
     return (
         <main>
             <OnlineChampionshipAbout />
-            <OnlineChampionship2025 />
             <h2 style={{ textAlign: "center" }}>
                 {DICTIONARY.historicalResults[lang]}
             </h2>

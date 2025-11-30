@@ -27,7 +27,7 @@ export const formerTeamMemberBGAUsernames = [
     "wikri",
 ] as const;
 
-export const otherBGAUsernames = ["Ales84"] as const;
+export const otherBGAUsernames = ["Ales84", "Ouki"] as const;
 
 export type CurrentTeamMemberBGAUsername =
     (typeof currentTeamMemberBGAUsernames)[number];
@@ -131,6 +131,22 @@ export const teamCompetitionMembers: Record<
         },
     ],
     ETCOC: [
+        {
+            year: 2025,
+            members: [
+                "chonps",
+                "J0nny",
+                "martypartyouje",
+                "Mejla28",
+                "Moya88",
+                "posij118",
+                "Simaster 1991",
+                "smoula",
+                "soustruznice",
+                "vomo_43",
+                "Zabza",
+            ],
+        },
         {
             year: 2023,
             members: [

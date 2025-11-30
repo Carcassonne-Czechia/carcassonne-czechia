@@ -30,7 +30,7 @@ export default function News() {
                         style={{
                             paddingRight: "1rem",
                             height: "100%",
-                            flexBasis: "80px",
+                            flexBasis: "8rem",
                             flexGrow: 0,
                             flexShrink: 0,
                         }}
@@ -42,11 +42,20 @@ export default function News() {
                         />
                     </Link>
                 ) : (
-                    <div style={{ paddingRight: "1rem", height: "100%" }}>
+                    <div
+                        style={{
+                            paddingRight: "1rem",
+                            height: "100%",
+                            display: "flex",
+                            flexBasis: "8rem",
+                            flexGrow: 0,
+                            flexShrink: 0,
+                        }}
+                    >
                         <img
                             src={item.imageSource || "/assets/news/default.jpg"}
                             alt={item.title[lang]}
-                            style={{ height: "100%" }}
+                            style={{ width: "100%" }}
                         />
                     </div>
                 )}
@@ -66,7 +75,13 @@ export default function News() {
                     >
                         {item.title[lang]}
                     </div>
-                    <div style={{ fontSize: "12px" }}>{item.content[lang]}</div>
+                    <div style={{ fontSize: "12px" }}>
+                        {typeof item.content[lang] === "string" ? (
+                            <p>{item.content[lang]}</p>
+                        ) : (
+                            item.content[lang]
+                        )}
+                    </div>
                 </div>
             </div>
         );
