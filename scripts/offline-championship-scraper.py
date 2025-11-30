@@ -145,6 +145,7 @@ def print_file(data: list[tuple[str, ...]], dir=raw_data_base_path):
         writer = csv.writer(csvfile)
         writer.writerows(data)
 
+namesakes = [{"year": 2013, "incorrect": "Jan Heřman", "correct": "Jan Heřman II"}]
 
 # We use 1-based row and column indexing, first place at 3rd row due to rowspan 2
 class DeskohraniHTMLParser(HTMLParser):
@@ -191,6 +192,12 @@ class DeskohraniHTMLParser(HTMLParser):
 
         elif self.row_number >= 3:
             if self.col_number == self.name_col:
+                # Fix namesakes
+                for namesake in namesakes:
+                    if self.year == namesake["year"] and data.rstrip() == namesake[
+                        "incorrect"
+                    ]:
+                        data = namesake["correct"]
                 self.names.append(data.rstrip())
             if self.col_number == self.criteria_col:
                 self.raw_scores.append([])
