@@ -1,11 +1,12 @@
 import type { BGAUsername } from "./team-members";
 
+// Periods: 1 year, 3 years
 export interface BGAStat {
     name?: string;
     bgaUsername: BGAUsername;
     id: number;
     maxElo?: number;
-    maxEloLastYear?: number;
+    maxEloLastPeriods?: number[];
 }
 
 export const BGAStats: BGAStat[] = [
@@ -14,42 +15,49 @@ export const BGAStats: BGAStat[] = [
         bgaUsername: "posij118",
         maxElo: 825,
         id: 90127806,
+        maxEloLastPeriods: [825, 825],
     },
     {
         name: "Martin Mojžíš",
         bgaUsername: "Moya88",
         maxElo: 789,
         id: 84643413,
+        maxEloLastPeriods: [726, 789],
     },
     {
         name: "Martin Čeliňák",
         bgaUsername: "martypartyouje",
         maxElo: 776,
         id: 85379310,
+        maxEloLastPeriods: [748, 776],
     },
     {
         name: "Pavel Raus",
         bgaUsername: "chonps",
         maxElo: 646,
         id: 86015756,
+        maxEloLastPeriods: [611, 646],
     },
     {
         name: "Petra Vidnerová",
         bgaUsername: "Zabza",
         maxElo: 641,
         id: 91471532,
+        maxEloLastPeriods: [567, 617],
     },
     {
         name: "Martin Boreš",
         bgaUsername: "bormar",
-        maxElo: 579,
+        maxElo: 581,
         id: 88672769,
+        maxEloLastPeriods: [581, 581],
     },
     {
         name: "Jakub Hertl",
         bgaUsername: "Hurtle_cz",
         id: 84616793,
         maxElo: 673,
+        maxEloLastPeriods: [581, 599],
     },
     {
         name: "Martin Kašperlík",
@@ -64,25 +72,29 @@ export const BGAStats: BGAStat[] = [
         bgaUsername: "majkls",
         name: "Michal Bařinka",
         id: 88500055,
-        maxElo: 646,
+        maxElo: 698,
+        maxEloLastPeriods: [698, 698],
     },
     {
         bgaUsername: "Simaster 1991",
         name: "Šimon Veselý",
         id: 88803329,
         maxElo: 651,
+        maxEloLastPeriods: [604, 641],
     },
     {
         name: "Tomáš Novotný",
         bgaUsername: "smoula",
         maxElo: 569,
         id: 84189399,
+        maxEloLastPeriods: [569, 569],
     },
     {
         bgaUsername: "vomo_43",
         maxElo: 618,
         id: 93570408,
         name: "Martin Vomočil",
+        maxEloLastPeriods: [576, 618],
     },
     {
         bgaUsername: "wikri",
@@ -98,18 +110,21 @@ export const BGAStats: BGAStat[] = [
         name: "Marcela Texlová",
         id: 88295846,
         maxElo: 483,
+        maxEloLastPeriods: [475, 483],
     },
     {
         bgaUsername: "J0nny",
         name: "Jan Heřman",
         id: 84017874,
         maxElo: 573,
+        maxEloLastPeriods: [573, 573],
     },
     {
         bgaUsername: "Mejla28",
         name: "David Milota",
         id: 92088844,
-        maxElo: 401,
+        maxElo: 484,
+        maxEloLastPeriods: [484, 484],
     },
     {
         bgaUsername: "Ouki",
