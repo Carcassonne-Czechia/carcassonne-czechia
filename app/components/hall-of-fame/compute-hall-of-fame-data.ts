@@ -28,6 +28,16 @@ export const computePlayerNames = () => {
         nationalChampionshipData.map((row) => row.name)
     );
 
+    const onlineChampionshipPlayerNames = new Set<string>(
+        onlineChampionshipData.map((row) => {
+            const stat = BGAStats.find(
+                (stat) => stat.bgaUsername === row["BGA_Username"]
+            );
+            if (stat) return stat.name ?? "";
+            return "";
+        })
+    );
+
     const tournamentPlayerNames = new Set<string>();
     Object.values(rareTournamentResults).forEach((resultsArray) =>
         resultsArray.forEach((result) =>
@@ -36,7 +46,10 @@ export const computePlayerNames = () => {
     );
 
     const playerNames = [
-        ...nationalChampionshipPlayerNames.union(tournamentPlayerNames),
+        ...nationalChampionshipPlayerNames
+            .union(tournamentPlayerNames)
+            .union(onlineChampionshipPlayerNames)
+            .difference(new Set([""])),
     ];
 
     return playerNames;
