@@ -25,7 +25,7 @@ export const medalColors = {
 
 export const computePlayerNames = () => {
     const nationalChampionshipPlayerNames = new Set<string>(
-        nationalChampionshipData.map((row) => row.Name)
+        nationalChampionshipData.map((row) => row.name)
     );
 
     const tournamentPlayerNames = new Set<string>();
