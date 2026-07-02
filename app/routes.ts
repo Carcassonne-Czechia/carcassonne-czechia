@@ -21,6 +21,10 @@ export default [
         "components/online-championship/online-championship.tsx"
     ),
     route(
+        `${ROUTE_HEADERS.ONLINE_CHAMPIONSHIP}/draw`,
+        "components/online-championship/draw-page.tsx"
+    ),
+    route(
         ROUTE_HEADERS.HALL_OF_FAME,
         "components/hall-of-fame/hall-of-fame.tsx"
     ),

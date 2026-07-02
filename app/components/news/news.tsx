@@ -2,6 +2,7 @@ import type { JSX } from "react";
 import type { Lang } from "~/i18n/lang-context";
 import { ROUTE_HEADERS } from "~/routes";
 import BGALink from "../bga-link";
+import { Link } from "react-router";
 
 export type NewsItem = {
     title: { [l in Lang]: string };
@@ -16,39 +17,37 @@ export const NEWS: Array<NewsItem> = [
         linkTo: ROUTE_HEADERS.ONLINE_CHAMPIONSHIP,
         imageSource: "/assets/news/2025-online-championship.jpg",
         title: {
-            cs: "Online mistrovství České republiky 2025",
-            en: "Online championship of the Czech Republic 2025",
+            cs: "Online mistrovství České republiky 2026",
+            en: "Online championship of the Czech Republic 2026",
         },
-        date: new Date("2025-11-30"),
+        date: new Date("2026-07-02"),
         content: {
             cs: (
                 <p>
-                    Podzim bohatý na turnaje byl završen uspořádáním druhého
-                    ročníku online mistrovství České republiky. Zúčastnilo se ho
-                    celkem dvanáct hráčů, kteří sehráli napínavý turnaj systémem
-                    každý s každým. Vítězem se stal bez ztráty bodu{" "}
-                    <BGALink BGA_Username="martypartyouje" />, který si tak
-                    zajistil účast v nadcházejícím ročníku Carcassonne Champions
-                    League. Gratulujeme jemu, zbylým medailistům i všem
-                    účastníkům a těšíme se na další ročník!
+                    Připravujeme pro vás další ročník online mistrovství České
+                    republiky v Carcassonne. Začínáme už 31. srpna 2026 a těšíme
+                    se na vaši účast! Vítězové se opět kvalifikují do
+                    Carcassonne Champions League. Podrobnosti naleznete na{" "}
+                    <Link to="/online-championship">
+                        stránce online mistrovství
+                    </Link>
+                    .
                 </p>
             ),
             en: (
                 <p>
-                    The autumn, rich in tournaments, was capped off by the
-                    organization of the second edition of the online
-                    championship of the Czech Republic. A total of twelve
-                    players participated, engaging in an exciting round-robin
-                    tournament. The winner,{" "}
-                    <BGALink BGA_Username="martypartyouje" />, secured his place
-                    in the upcoming Carcassonne Champions League without losing
-                    a single point. Congratulations to him, the other medalists,
-                    and all participants! We look forward to the next edition!
+                    We are preparing the next edition of the online championship
+                    of the Czech Republic in Carcassonne. It starts on August
+                    31, 2026 and the winners will again qualify for the
+                    Carcassonne Champions League. Details can be found on the{" "}
+                    <Link to="/online-championship">
+                        online championship page
+                    </Link>
+                    .
                 </p>
             ),
         },
     },
-
     {
         title: {
             en: "Engaging fall for our community",

@@ -2,6 +2,7 @@ import onlineChampionshipData from "src/raw-data/online-championships/all_data.c
 import { useContext, useState } from "react";
 import { LangContext } from "~/i18n/lang-context";
 import OnlineChampionshipAbout from "./online-about";
+import OnlineChampionship2026 from "./years/2026";
 import { onlineChampionshipHeaderRow } from "../national-championship/typings";
 import { DataTable } from "primereact/datatable";
 import { DICTIONARY } from "~/i18n/dictionary";
@@ -27,6 +28,7 @@ export default function OnlineChampionship() {
     return (
         <main>
             <OnlineChampionshipAbout />
+            <OnlineChampionship2026 />
             <h2 style={{ textAlign: "center" }}>
                 {DICTIONARY.historicalResults[lang]}
             </h2>
