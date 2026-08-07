@@ -88,7 +88,14 @@ export default function OnlineChampionship2026() {
                             </li>
                         </ul>
                     </li>
-                    <li>All matches are played as Best of Three (BO3).</li>
+                    <li>
+                        All matches are played as Best of Three (BO3).{" "}
+                        <b>
+                            Matches are played using BGA's automated tournament
+                            system with base game only and 15 minute clock
+                            settings.
+                        </b>
+                    </li>
                     <li>
                         Each player is scheduled to play at most one match per
                         week.
@@ -457,7 +464,12 @@ export default function OnlineChampionship2026() {
                         </ul>
                     </li>
                     <li>
-                        Všechny zápasy se hrají formátem Best of Three (BO3).
+                        Všechny zápasy se hrají formátem Best of Three (BO3).{" "}
+                        <b>
+                            Zápasy se hrají prostřednictvím automatizovaného
+                            turnajového systému BGA s použitím pouze základní
+                            hry a nastavením hodin na 15 minut na hru.
+                        </b>
                     </li>
                     <li>
                         Každý hráč má naplánován maximálně jeden zápas týdně.
