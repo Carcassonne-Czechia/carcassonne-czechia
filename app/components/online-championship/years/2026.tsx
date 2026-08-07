@@ -92,8 +92,8 @@ export default function OnlineChampionship2026() {
                         All matches are played as Best of Three (BO3).{" "}
                         <b>
                             Matches are played using BGA's automated tournament
-                            system with base game only and 15 minute clock
-                            settings.
+                            system with base game only and 15 minute per-player
+                            clock settings.
                         </b>
                     </li>
                     <li>
@@ -468,7 +468,7 @@ export default function OnlineChampionship2026() {
                         <b>
                             Zápasy se hrají prostřednictvím automatizovaného
                             turnajového systému BGA s použitím pouze základní
-                            hry a nastavením hodin na 15 minut na hru.
+                            hry a nastavením hodin na 15 minut na hráče.
                         </b>
                     </li>
                     <li>
