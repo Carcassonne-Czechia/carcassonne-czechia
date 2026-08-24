@@ -88,10 +88,10 @@ async function runDraw() {
   console.log(\`  Timestamp: \${new Date(blockTs * 1000).toUTCString()} (\${blockTs})\`);
   console.log(\`  Verify   : https://mempool.space/block/\${hash}\\n\`);
 
-  // 2. Derive PRNG seed from the first 4 bytes (8 hex chars) of the block hash
-  const seed = parseInt(hash.slice(0, 8), 16);
+  // 2. Derive PRNG seed from the last 4 bytes (8 hex chars) of the block hash
+  const seed = parseInt(hash.slice(-8), 16);
   console.log(
-    \`PRNG seed: first 4 bytes of hash = 0x\${hash.slice(0, 8)} = \${seed}\\n\`
+    \`PRNG seed: last 4 bytes of hash = 0x\${hash.slice(-8)} = \${seed}\\n\`
   );
 
   // 3. Shuffle players
