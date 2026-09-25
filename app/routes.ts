@@ -6,6 +6,8 @@ export const ROUTE_HEADERS = {
     PLAYERS: "players",
     ONLINE_CHAMPIONSHIP: "online-championship",
     LINKS: "links",
+    LOGIN: "login",
+    ADMIN: "admin",
 };
 
 export default [
@@ -29,4 +31,6 @@ export default [
         "components/hall-of-fame/hall-of-fame.tsx"
     ),
     route(ROUTE_HEADERS.LINKS, "components/links/links.tsx"),
+    route(ROUTE_HEADERS.LOGIN, "routes/login.tsx"),
+    route(ROUTE_HEADERS.ADMIN, "routes/admin.tsx"),
 ] satisfies RouteConfig;

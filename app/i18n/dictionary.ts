@@ -125,6 +125,26 @@ const _DICTIONARY = {
         cs: "Novinky",
         en: "News",
     },
+    logIn: {
+        cs: "Přihlásit se",
+        en: "Log in",
+    },
+    logOut: {
+        cs: "Odhlásit se",
+        en: "Log out",
+    },
+    admin: {
+        cs: "Administrace",
+        en: "Admin",
+    },
+    adminPanel: {
+        cs: "Administrace",
+        en: "Admin panel",
+    },
+    accessDenied: {
+        cs: "K této stránce nemáte přístup.",
+        en: "You do not have access to this page.",
+    },
 } as const;
 
 export type DictionaryStub = keyof typeof _DICTIONARY;

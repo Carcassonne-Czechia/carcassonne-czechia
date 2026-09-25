@@ -7,6 +7,8 @@ import { ROUTE_HEADERS } from "~/routes";
 import "flag-icons/css/flag-icons.min.css";
 import { SelectButton } from "primereact/selectbutton";
 import { LangContext, type Lang } from "~/i18n/lang-context";
+import { Button } from "primereact/button";
+import { useAuth } from "~/lib/auth-context";
 
 interface Item {
     to?: string;
@@ -22,6 +24,7 @@ export default function NavBar() {
     useEffect(() => setHydrated(true), []);
 
     const { lang, setLang } = useContext(LangContext);
+    const { user, isAdmin, isLoading: authLoading, signOut } = useAuth();
     const langs: Lang[] = ["cs", "en"];
 
     const itemRenderer = (item: Item) => (
@@ -84,7 +87,44 @@ export default function NavBar() {
     );
 
     const end = (
-        <div style={{ height: "100%" }}>
+        <div
+            style={{
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.25rem",
+            }}
+        >
+            {!authLoading &&
+                (user ? (
+                    <>
+                        {isAdmin && (
+                            <NavLink
+                                to="/admin"
+                                className="p-button p-component p-button-text"
+                                aria-label={DICTIONARY.admin[lang]}
+                            >
+                                <span className="pi pi-shield" />
+                                <span>{DICTIONARY.admin[lang]}</span>
+                            </NavLink>
+                        )}
+                        <Button
+                            type="button"
+                            label={DICTIONARY.logOut[lang]}
+                            icon="pi pi-sign-out"
+                            text
+                            onClick={() => void signOut()}
+                        />
+                    </>
+                ) : (
+                    <NavLink
+                        to="/login"
+                        className="p-button p-component p-button-text"
+                    >
+                        <span className="pi pi-sign-in" />
+                        <span>{DICTIONARY.logIn[lang]}</span>
+                    </NavLink>
+                ))}
             <SelectButton
                 value={lang}
                 options={langs}

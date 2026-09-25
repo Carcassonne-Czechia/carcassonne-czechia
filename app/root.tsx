@@ -16,6 +16,7 @@ import "primeicons/primeicons.css";
 import { PrimeReactProvider } from "primereact/api";
 
 import NavBar from "./components/nav-bar";
+import { AuthProvider } from "./lib/auth-context";
 
 import { StrictMode, useState } from "react";
 import { LangContext, type Lang } from "./i18n/lang-context";
@@ -40,28 +41,30 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
     return (
         <StrictMode>
-            <LangContext value={{ lang, setLang }}>
-                <PrimeReactProvider>
-                    <html lang="en">
-                        <head>
-                            <meta charSet="utf-8" />
-                            <meta
-                                name="viewport"
-                                content="width=device-width, initial-scale=1"
-                            />
-                            <title>Carcassonne Czechia</title>
-                            <Meta />
-                            <Links />
-                        </head>
-                        <body>
-                            <NavBar />
-                            <div className="main-content">{children}</div>
-                            <ScrollRestoration />
-                            <Scripts />
-                        </body>
-                    </html>
-                </PrimeReactProvider>
-            </LangContext>
+            <AuthProvider>
+                <LangContext value={{ lang, setLang }}>
+                    <PrimeReactProvider>
+                        <html lang="en">
+                            <head>
+                                <meta charSet="utf-8" />
+                                <meta
+                                    name="viewport"
+                                    content="width=device-width, initial-scale=1"
+                                />
+                                <title>Carcassonne Czechia</title>
+                                <Meta />
+                                <Links />
+                            </head>
+                            <body>
+                                <NavBar />
+                                <div className="main-content">{children}</div>
+                                <ScrollRestoration />
+                                <Scripts />
+                            </body>
+                        </html>
+                    </PrimeReactProvider>
+                </LangContext>
+            </AuthProvider>
         </StrictMode>
     );
 }
