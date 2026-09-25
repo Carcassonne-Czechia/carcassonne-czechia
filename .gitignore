@@ -12,6 +12,7 @@
 /src/raw-data/offline-championships/
 **/*.json
 champions.csv
+/scratch/
 
 # Python
 .pickle
