@@ -8,6 +8,7 @@ export type NewsRecord = {
     content_cs: string | null;
     content_en: string | null;
     image: string | null;
+    author: string | null;
 };
 
 export type NewsFormValues = {

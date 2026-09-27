@@ -129,8 +129,9 @@ export default function Players() {
                     <Link
                         style={{
                             fontWeight: 600,
-                            marginBottom: "20px",
-                            fontSize: "20px",
+                            marginTop: "10px",
+                            marginBottom: "10px",
+                            fontSize: "16px",
                             textAlign: "center",
                         }}
                         to={`/players/${item.BGA_Username}`}
@@ -140,9 +141,9 @@ export default function Players() {
                     {item.name ? (
                         <span
                             style={{
-                                fontSize: "20px",
+                                fontSize: "16px",
                                 textAlign: "center",
-                                marginBottom: "20px",
+                                marginBottom: "10px",
                                 fontWeight: 600,
                             }}
                         >

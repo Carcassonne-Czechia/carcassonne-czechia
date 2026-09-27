@@ -20,7 +20,7 @@ export default function TeamContests({
                 <span
                     style={{
                         fontWeight: 700,
-                        fontSize: "20px",
+                        fontSize: "16px",
                         marginBottom: "12px",
                     }}
                 >
@@ -34,7 +34,7 @@ export default function TeamContests({
                 <span
                     style={{
                         fontWeight: 700,
-                        fontSize: "20px",
+                        fontSize: "16px",
                         marginBottom: "10px",
                         lineHeight: "25px",
                     }}

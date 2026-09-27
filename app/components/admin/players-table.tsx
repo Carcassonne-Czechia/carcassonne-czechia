@@ -3,6 +3,7 @@ import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState, type ChangeEvent } from "react";
 import BGALink from "~/components/bga-link";
+import { getPlayerAvatarUrl } from "~/components/players/player-avatar-url";
 import { getSupabaseClient } from "~/lib/supabase-client";
 
 type Player = {
@@ -514,8 +515,10 @@ export default function PlayersTable() {
                                             <img
                                                 src={
                                                     avatarPreviews[player.id] ||
-                                                    player.profile_picture_path ||
-                                                    "/assets/logo.jpg"
+                                                    getPlayerAvatarUrl(
+                                                        player.bga_username,
+                                                        player.profile_picture_path
+                                                    )
                                                 }
                                                 alt=""
                                                 className="admin-player-avatar-preview"

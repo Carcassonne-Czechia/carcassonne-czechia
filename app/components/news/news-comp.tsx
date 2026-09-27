@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { LangContext } from "../../i18n/lang-context";
 import Markdown from "react-markdown";
+import { DICTIONARY } from "~/i18n/dictionary";
 import { getSupabaseClient } from "~/lib/supabase-client";
 import type { NewsRecord } from "./news-types";
 
@@ -31,9 +32,9 @@ export default function News() {
 
         const loadNews = async () => {
             const { data, error: loadError } = await getSupabaseClient()
-                .from("news")
+                .from("news_public")
                 .select(
-                    "id, author_id, created_at, hide_at, title_cs, title_en, content_cs, content_en, image"
+                    "id, author_id, created_at, hide_at, title_cs, title_en, content_cs, content_en, image, author"
                 )
                 .order("created_at", { ascending: false });
 
@@ -85,6 +86,9 @@ export default function News() {
                         />
                         <span className="news-admin-meta">
                             <strong>{localized.title}</strong>
+                            <span>
+                                {DICTIONARY.author[lang]}: {item.author}
+                            </span>
                         </span>
                         <span
                             className={`news-summary-chevron pi ${

@@ -3,17 +3,14 @@ import type {
     FormerTeamMemberBGAUsername,
 } from "~/players/team-members";
 import { useEffect, useState } from "react";
-import { HAS_AVATAR } from "../../existing-content";
 import { getSupabaseClient } from "~/lib/supabase-client";
+import { getPlayerAvatarUrl } from "./player-avatar-url";
 
 export default function PlayerAvatar({
     BGA_Username,
 }: {
     BGA_Username: CurrentTeamMemberBGAUsername | FormerTeamMemberBGAUsername;
 }) {
-    const avatarFound = HAS_AVATAR.includes(BGA_Username);
-    const avatarFileName =
-        BGA_Username === "_Lyanna_" ? "Lyanna" : BGA_Username;
     const [profilePicturePath, setProfilePicturePath] = useState<string | null>(
         null
     );
@@ -41,14 +38,10 @@ export default function PlayerAvatar({
 
     return (
         <img
-            src={
-                profilePicturePath ||
-                (avatarFound
-                    ? `/assets/player-avatars/${avatarFileName}.jpg`
-                    : `/assets/logo.jpg`)
-            }
+            src={getPlayerAvatarUrl(BGA_Username, profilePicturePath)}
             alt={`${BGA_Username} avatar`}
             width="100%"
+            style={{ objectFit: "contain", height: "184px" }}
         />
     );
 }

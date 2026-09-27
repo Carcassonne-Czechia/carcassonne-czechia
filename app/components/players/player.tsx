@@ -22,6 +22,7 @@ import { getSupabaseClient } from "~/lib/supabase-client";
 
 type PlayerLoaderData = {
     bios: Partial<Record<BGAUsername, Record<Lang, string>>>;
+    bio: string | null;
     teamMemberData: TeamMemberData | null;
     tournamentResults: Record<
         IndividualTournamentName,
@@ -33,6 +34,7 @@ type PlayerLoaderData = {
 type PlayerRow = {
     id: number;
     name: string | null;
+    bio: string | null;
     bga_username: string;
     team_captain: boolean;
     former_captain: boolean;
@@ -82,6 +84,7 @@ export async function clientLoader({
     if (!bgaUsername) {
         return {
             bios,
+            bio: null,
             teamMemberData: null,
             tournamentResults,
             error: "Player not found.",
@@ -91,13 +94,14 @@ export async function clientLoader({
     const supabase = getSupabaseClient();
     const { data: playerData, error: playerError } = await supabase
         .from("players")
-        .select("id,name,bga_username,team_captain,former_captain")
+        .select("id,name,bio,bga_username,team_captain,former_captain")
         .eq("bga_username", bgaUsername)
         .maybeSingle();
 
     if (playerError || !playerData) {
         return {
             bios,
+            bio: null,
             teamMemberData: null,
             tournamentResults,
             error: playerError?.message ?? "Player not found.",
@@ -141,6 +145,7 @@ export async function clientLoader({
     if (queryError) {
         return {
             bios,
+            bio: null,
             teamMemberData: null,
             tournamentResults,
             error: queryError.message,
@@ -193,7 +198,13 @@ export async function clientLoader({
         });
     }
 
-    return { bios, teamMemberData, tournamentResults, error: null };
+    return {
+        bios,
+        bio: player.bio,
+        teamMemberData,
+        tournamentResults,
+        error: null,
+    };
 }
 
 type Page = "achievements" | "bio";
@@ -264,7 +275,7 @@ export default function Player({
                         </h2>
                         <span
                             style={{
-                                fontSize: "20px",
+                                fontSize: "16px",
                                 marginBottom: "20px",
                                 fontWeight: 600,
                                 width: "100%",
@@ -313,7 +324,8 @@ export default function Player({
                             className="long-text"
                         >
                             <Markdown>
-                                {loaderData.bios?.[BGA_Username]?.[lang]}
+                                {loaderData.bio ??
+                                    loaderData.bios?.[BGA_Username]?.[lang]}
                             </Markdown>
                         </div>
                     )}
