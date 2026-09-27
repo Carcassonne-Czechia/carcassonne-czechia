@@ -65,7 +65,7 @@ create table public.tournament_results (
 	unique (tournament_name, year, player_id),
 	constraint tournament_results_year_check check (year between 1900 and 2100),
 	constraint tournament_results_rank_check check (
-		rank ~ '^[0-9]+$' or rank in ('Q', 'R32', 'R16', 'QF', 'SF', 'F', 'W')
+		rank ~ '^[0-9]+$' or rank in ('Q', 'R32', 'R24', 'R16', 'QF', 'SF')
 	),
 	constraint tournament_results_coeff_points_check check (coeff_points is null or coeff_points >= 0)
 );
