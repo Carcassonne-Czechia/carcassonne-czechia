@@ -17,3 +17,5 @@ champions.csv
 # Python
 .pickle
 .venv/
+
+.env.local

@@ -106,11 +106,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
             setSession(nextSession);
             setIsLoading(true);
-            void loadPermissions(nextSession?.user ?? null).finally(() => {
-                if (active) {
-                    setIsLoading(false);
-                }
-            });
+            setTimeout(() => {
+                void loadPermissions(nextSession?.user ?? null).finally(() => {
+                    if (active) {
+                        setIsLoading(false);
+                    }
+                });
+            }, 0);
         });
 
         return () => {

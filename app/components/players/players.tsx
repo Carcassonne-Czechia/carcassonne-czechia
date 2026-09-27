@@ -12,6 +12,7 @@ import type { CurrentTeamMemberBGAUsername } from "~/players/team-members";
 type PlayerRow = {
     name: string | null;
     bga_username: string;
+    profile_picture_path: string | null;
     team_captain: boolean;
     former_captain: boolean;
     team_participations: {
@@ -47,7 +48,7 @@ export default function Players() {
             const { data, error: playersError } = await getSupabaseClient()
                 .from("players")
                 .select(
-                    "name,bga_username,team_captain,former_captain,team_participations(team_contest_name,year)"
+                    "name,bga_username,profile_picture_path,team_captain,former_captain,team_participations(team_contest_name,year)"
                 )
                 .eq("national_team_membership_current", true)
                 .not("bga_username", "is", null)
@@ -66,6 +67,7 @@ export default function Players() {
                 name: player.name ?? undefined,
                 BGA_Username:
                     player.bga_username as CurrentTeamMemberBGAUsername,
+                profile_picture_path: player.profile_picture_path,
                 team_captain: player.team_captain,
                 former_captain: player.former_captain,
                 WTCOCParticipations: player.team_participations
@@ -119,7 +121,10 @@ export default function Players() {
                 }}
                 key={item.BGA_Username}
             >
-                <PlayerAvatar BGA_Username={item.BGA_Username} />
+                <PlayerAvatar
+                    BGA_Username={item.BGA_Username}
+                    profilePicturePath={item.profile_picture_path}
+                />
                 <div
                     style={{
                         display: "flex",

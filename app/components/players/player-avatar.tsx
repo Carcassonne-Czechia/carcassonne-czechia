@@ -8,15 +8,23 @@ import { getPlayerAvatarUrl } from "./player-avatar-url";
 
 export default function PlayerAvatar({
     BGA_Username,
+    profilePicturePath: suppliedProfilePicturePath,
 }: {
     BGA_Username: CurrentTeamMemberBGAUsername | FormerTeamMemberBGAUsername;
+    profilePicturePath?: string | null;
 }) {
-    const [profilePicturePath, setProfilePicturePath] = useState<string | null>(
-        null
-    );
+    const [loadedProfilePicturePath, setLoadedProfilePicturePath] = useState<
+        string | null
+    >(null);
 
     useEffect(() => {
         let active = true;
+
+        if (suppliedProfilePicturePath !== undefined) {
+            return () => {
+                active = false;
+            };
+        }
 
         const loadProfilePicture = async () => {
             const supabase = getSupabaseClient();
@@ -26,7 +34,9 @@ export default function PlayerAvatar({
                 .eq("bga_username", BGA_Username)
                 .maybeSingle();
             if (active) {
-                setProfilePicturePath(player?.profile_picture_path ?? null);
+                setLoadedProfilePicturePath(
+                    player?.profile_picture_path ?? null
+                );
             }
         };
 
@@ -34,11 +44,16 @@ export default function PlayerAvatar({
         return () => {
             active = false;
         };
-    }, [BGA_Username]);
+    }, [BGA_Username, suppliedProfilePicturePath]);
 
     return (
         <img
-            src={getPlayerAvatarUrl(BGA_Username, profilePicturePath)}
+            src={getPlayerAvatarUrl(
+                BGA_Username,
+                suppliedProfilePicturePath !== undefined
+                    ? suppliedProfilePicturePath
+                    : loadedProfilePicturePath
+            )}
             alt={`${BGA_Username} avatar`}
             width="100%"
             style={{ objectFit: "contain", height: "184px" }}

@@ -5,6 +5,12 @@ import {
     sha256Hex,
 } from "../_shared.ts";
 
+const genericRegistrationError = "Unable to complete registration.";
+
+function registrationError(): Response {
+    return jsonResponse({ error: genericRegistrationError }, 400);
+}
+
 Deno.serve(async (request) => {
     if (request.method === "OPTIONS") {
         return new Response("ok", { headers: corsHeaders });
@@ -32,47 +38,50 @@ Deno.serve(async (request) => {
         !email.includes("@") ||
         password.length < 6
     ) {
-        return jsonResponse(
-            { error: "A valid token, email, and password are required." },
-            400
-        );
+        return registrationError();
     }
 
-    const serviceClient = createServiceClient();
-    const { data: created, error: createError } =
-        await serviceClient.auth.admin.createUser({
-            email: email.trim(),
-            password,
-            email_confirm: true,
-        });
+    try {
+        const serviceClient = createServiceClient();
+        const tokenHash = await sha256Hex(token);
+        const { data: tokenIsValid, error: validationError } =
+            await serviceClient.rpc("validate_registration_token", {
+                p_token_hash: tokenHash,
+            });
 
-    if (createError || !created.user) {
-        return jsonResponse(
-            { error: createError?.message ?? "Unable to create the account." },
-            400
-        );
-    }
-
-    const tokenHash = await sha256Hex(token);
-    const { data: completed, error: completionError } = await serviceClient.rpc(
-        "complete_registration",
-        {
-            p_token_hash: tokenHash,
-            p_user_id: created.user.id,
+        if (validationError || tokenIsValid !== true) {
+            return registrationError();
         }
-    );
 
-    if (completionError || !completed?.[0]) {
-        await serviceClient.auth.admin.deleteUser(created.user.id);
-        return jsonResponse(
-            {
-                error:
-                    completionError?.message ??
-                    "The registration token is invalid or expired.",
-            },
-            400
-        );
+        const { data: created, error: createError } =
+            await serviceClient.auth.admin.createUser({
+                email: email.trim(),
+                password,
+                email_confirm: true,
+            });
+
+        if (createError || !created.user) {
+            return registrationError();
+        }
+
+        const { data: completed, error: completionError } =
+            await serviceClient.rpc("complete_registration", {
+                p_token_hash: tokenHash,
+                p_user_id: created.user.id,
+            });
+
+        if (completionError || !completed?.[0]) {
+            const { error: cleanupError } =
+                await serviceClient.auth.admin.deleteUser(created.user.id);
+            if (cleanupError) {
+                console.error("Registration cleanup failed.", cleanupError);
+            }
+            return registrationError();
+        }
+
+        return jsonResponse({ ok: true });
+    } catch (error) {
+        console.error("Registration request failed.", error);
+        return registrationError();
     }
-
-    return jsonResponse({ ok: true });
 });
