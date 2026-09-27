@@ -7,7 +7,11 @@ export const ROUTE_HEADERS = {
     ONLINE_CHAMPIONSHIP: "online-championship",
     LINKS: "links",
     LOGIN: "login",
+    REGISTER: "register/:token",
     ADMIN: "admin",
+    EDITOR: "editor",
+    PROFILE: "profile",
+    NEWS: "news",
 };
 
 export default [
@@ -32,5 +36,10 @@ export default [
     ),
     route(ROUTE_HEADERS.LINKS, "components/links/links.tsx"),
     route(ROUTE_HEADERS.LOGIN, "routes/login.tsx"),
+    route(ROUTE_HEADERS.REGISTER, "routes/register.tsx"),
     route(ROUTE_HEADERS.ADMIN, "routes/admin.tsx"),
+    route(ROUTE_HEADERS.EDITOR, "routes/editor.tsx"),
+    route(ROUTE_HEADERS.PROFILE, "routes/profile.tsx"),
+    route(`${ROUTE_HEADERS.NEWS}/new`, "routes/news-new.tsx"),
+    route(`${ROUTE_HEADERS.NEWS}/:id/edit`, "routes/news-edit.tsx"),
 ] satisfies RouteConfig;

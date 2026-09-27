@@ -9,14 +9,26 @@ import { useAuth } from "~/lib/auth-context";
 
 export default function Login() {
     const { lang } = useContext(LangContext);
-    const { user, isLoading, signIn, error: authError } = useAuth();
+    const {
+        user,
+        isAdmin,
+        isEditor,
+        isLoading,
+        signIn,
+        error: authError,
+    } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     if (!isLoading && user) {
-        return <Navigate to="/admin" replace />;
+        return (
+            <Navigate
+                to={isAdmin ? "/admin" : isEditor ? "/editor" : "/profile"}
+                replace
+            />
+        );
     }
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {

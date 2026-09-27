@@ -81,6 +81,22 @@ const _DICTIONARY = {
         cs: "Jméno",
         en: "Name",
     },
+    phoneNumber: {
+        cs: "Telefonní číslo",
+        en: "Phone number",
+    },
+    playerAvatar: {
+        cs: "Avatar hráče",
+        en: "Player avatar",
+    },
+    chooseImage: {
+        cs: "Vyberte obrázek",
+        en: "Choose an image",
+    },
+    profileSaved: {
+        cs: "Profil byl uložen.",
+        en: "Profile saved.",
+    },
     points: {
         cs: "Body",
         en: "Points",
@@ -141,9 +157,85 @@ const _DICTIONARY = {
         cs: "Administrace",
         en: "Admin panel",
     },
+    editor: {
+        cs: "Editor",
+        en: "Editor",
+    },
+    editorPanel: {
+        cs: "Editor",
+        en: "Editor panel",
+    },
+    profile: {
+        cs: "Profil",
+        en: "Profile",
+    },
+    profilePanel: {
+        cs: "Profil",
+        en: "Profile",
+    },
     accessDenied: {
         cs: "K této stránce nemáte přístup.",
         en: "You do not have access to this page.",
+    },
+    overview: {
+        cs: "Přehled",
+        en: "Overview",
+    },
+    users: {
+        cs: "Uživatelé",
+        en: "Users",
+    },
+    allNews: {
+        cs: "Všechny novinky",
+        en: "All news",
+    },
+    ownNews: {
+        cs: "Jen moje novinky",
+        en: "Only my news",
+    },
+    createNews: {
+        cs: "Vytvořit novinku",
+        en: "Create news",
+    },
+    editNews: {
+        cs: "Upravit novinku",
+        en: "Edit news",
+    },
+    title: {
+        cs: "Název",
+        en: "Title",
+    },
+    content: {
+        cs: "Obsah",
+        en: "Content",
+    },
+    picture: {
+        cs: "Obrázek",
+        en: "Picture",
+    },
+    expiresAt: {
+        cs: "Platí do",
+        en: "Expires at",
+    },
+    author: {
+        cs: "Autor",
+        en: "Author",
+    },
+    expiredNews: {
+        cs: "Archivované novinky",
+        en: "Expired news",
+    },
+    save: {
+        cs: "Uložit",
+        en: "Save",
+    },
+    cancel: {
+        cs: "Zrušit",
+        en: "Cancel",
+    },
+    markdownHint: {
+        cs: "Obsah podporuje Markdown.",
+        en: "Content supports Markdown.",
     },
 } as const;
 

@@ -14,6 +14,8 @@ export const currentTeamMemberBGAUsernames = [
     "soustruznice",
     "J0nny",
     "Mejla28",
+    "_Lyanna_",
+    "Stan84",
 ] as const;
 
 export const formerTeamMemberBGAUsernames = [

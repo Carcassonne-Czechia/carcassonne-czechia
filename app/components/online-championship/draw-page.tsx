@@ -130,7 +130,7 @@ export default function DrawPage() {
 
     return lang === "en" ? (
         <main style={{ padding: "0 0.5rem" }}>
-            <h1>Draw Methodology</h1>
+            <h1 className="bg-aquamarine">Draw Methodology</h1>
             <p>
                 The 2026 tournament draw is seeded by the block hash of the{" "}
                 <b>
@@ -176,7 +176,7 @@ export default function DrawPage() {
         </main>
     ) : (
         <main style={{ padding: "0 0.5rem" }}>
-            <h1>Metodika losování</h1>
+            <h1 className="bg-aquamarine">Metodika losování</h1>
             <p>
                 Losování turnaje 2026 je určeno hashem bloku{" "}
                 <b>

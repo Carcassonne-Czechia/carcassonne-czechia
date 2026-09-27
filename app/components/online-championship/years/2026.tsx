@@ -11,8 +11,25 @@ const detailsBodyStyle: React.CSSProperties = {
     padding: "0.25rem 0 0.25rem 1rem",
 };
 
+const registrationLinksVisible = () => {
+    const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Europe/Prague",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    }).formatToParts(new Date());
+    const dateParts = Object.fromEntries(
+        parts
+            .filter(({ type }) => type !== "literal")
+            .map(({ type, value }) => [type, value])
+    );
+    const pragueDate = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+    return pragueDate < "2026-08-25";
+};
+
 export default function OnlineChampionship2026() {
     const { lang } = useContext(LangContext);
+    const showRegistrationLinks = registrationLinksVisible();
 
     return lang === "en" ? (
         <div
@@ -25,90 +42,99 @@ export default function OnlineChampionship2026() {
                 Online national championship 2026
             </h2>
             <div>
-                <p>
-                    <b>Sign-up form:</b>{" "}
-                    <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLScu-94XwwWhNjD--NTf3KiO6fHIUYkRjp9kZbCGz-rj7qe_DQ/viewform?usp=dialog"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        FORM
-                    </a>
-                </p>
-                <p>
-                    <b>Received sign-ups:</b>{" "}
-                    <a
-                        href="https://docs.google.com/spreadsheets/d/1Az6iXX9_sxOLlE6BCRRTEVTVN67KQcmU8RTsK6mUJP0/edit?usp=sharing"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        SPREADSHEET
-                    </a>
-                </p>
+                {showRegistrationLinks && (
+                    <>
+                        <p>
+                            <b>Sign-up form:</b>{" "}
+                            <a
+                                href="https://docs.google.com/forms/d/e/1FAIpQLScu-94XwwWhNjD--NTf3KiO6fHIUYkRjp9kZbCGz-rj7qe_DQ/viewform?usp=dialog"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                FORM
+                            </a>
+                        </p>
+                        <p>
+                            <b>Received sign-ups:</b>{" "}
+                            <a
+                                href="https://docs.google.com/spreadsheets/d/1Az6iXX9_sxOLlE6BCRRTEVTVN67KQcmU8RTsK6mUJP0/edit?usp=sharing"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                SPREADSHEET
+                            </a>
+                        </p>
+                    </>
+                )}
                 <p>
                     <b>Eligibility:</b> Each player may participate in only{" "}
                     <b>ONE</b> online national championship per tournament
                     season. Only someone who either has Czech citizenship or
                     lives temporarily / permanently in Czechia may participate.
                 </p>
-                <p>
-                    <b>Important dates:</b>
-                </p>
-                <ul>
-                    <li>
-                        <b>Registration:</b> July 2 – August 24 23:59
-                    </li>
-                    <li>
-                        <b>Tournament draw:</b> August 25
-                    </li>
-                    <li>
-                        <b>Tournament start:</b> August 31
-                    </li>
-                    <li>
-                        <b>Tournament end:</b> Between October and mid-November
-                        (depending on the number of players).
-                    </li>
-                </ul>
-                <p>
-                    <b>Tournament format:</b>
-                </p>
-                <ul>
-                    <li>
-                        The format depends on the number of sign-ups:
+                <details style={detailsStyle}>
+                    <summary style={summaryStyle}>Important dates</summary>
+                    <div style={detailsBodyStyle}>
                         <ul>
                             <li>
-                                ≤8 players: single group (round-robin), no
-                                play-offs
+                                <b>Registration:</b> July 2 – August 24 23:59
                             </li>
-                            <li>≤12 players: 2 groups + play-offs</li>
-                            <li>≤18 players: 3 groups + play-offs</li>
                             <li>
-                                19+ players: 4 groups + play-offs (very
-                                unlikely)
+                                <b>Tournament draw:</b> August 25
+                            </li>
+                            <li>
+                                <b>Tournament start:</b> August 31
+                            </li>
+                            <li>
+                                <b>Tournament end:</b> Between October and
+                                mid-November (depending on the number of
+                                players).
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        All matches are played as Best of Three (BO3).{" "}
-                        <b>
-                            Matches are played using BGA's automated tournament
-                            system with base game only and 15 minute per-player
-                            clock settings.
-                        </b>
-                    </li>
-                    <li>
-                        Each player is scheduled to play at most one match per
-                        week.
-                    </li>
-                    <li>
-                        The draw is <b>completely random</b> and conducted using
-                        a publicly verifiable random seed derived from the
-                        Bitcoin blockchain.{" "}
-                        <a href="/online-championship/draw">
-                            See draw methodology.
-                        </a>
-                    </li>
-                </ul>
+                    </div>
+                </details>
+                <details style={detailsStyle}>
+                    <summary style={summaryStyle}>Tournament format</summary>
+                    <div style={detailsBodyStyle}>
+                        <ul>
+                            <li>
+                                The format depends on the number of sign-ups:
+                                <ul>
+                                    <li>
+                                        ≤8 players: single group (round-robin),
+                                        no play-offs
+                                    </li>
+                                    <li>≤12 players: 2 groups + play-offs</li>
+                                    <li>≤18 players: 3 groups + play-offs</li>
+                                    <li>
+                                        19+ players: 4 groups + play-offs (very
+                                        unlikely)
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                All matches are played as Best of Three (BO3).{" "}
+                                <b>
+                                    Matches are played using BGA's automated
+                                    tournament system with base game only and 15
+                                    minute per-player clock settings.
+                                </b>
+                            </li>
+                            <li>
+                                Each player is scheduled to play at most one
+                                match per week.
+                            </li>
+                            <li>
+                                The draw is <b>completely random</b> and
+                                conducted using a publicly verifiable random
+                                seed derived from the Bitcoin blockchain.{" "}
+                                <a href="/online-championship/draw">
+                                    See draw methodology.
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
 
                 <details style={detailsStyle}>
                     <summary style={summaryStyle}>
@@ -316,64 +342,71 @@ export default function OnlineChampionship2026() {
                     </div>
                 </details>
 
-                <p>
-                    <b>Tournament rules:</b>
-                </p>
-                <ul>
-                    <li>
-                        Players are expected to play and attempt to win all the
-                        matches they are supposed to play in.
-                    </li>
-                    <li>
-                        Players are expected to complete their matches in a
-                        timely manner, allowing sufficient options for match
-                        scheduling. Ideally, matches should be scheduled around
-                        the beginning of the week. If a player knows they are
-                        going to be busy, it is desirable to schedule matches
-                        even earlier to avoid backlogs.
-                    </li>
-                    <li>
-                        If a player does not come to a match, we will ask the
-                        players to reschedule at earliest convenience.
-                    </li>
-                    <li>
-                        If it appears there are substantial issues with the
-                        timely completion of matches, the team captain might
-                        introduce a warning system similar to the ones used in
-                        past CCL seasons.
-                    </li>
-                    <li>
-                        If a player is out of time in a game (signaled by the
-                        red clock after the game ends), they lose the game, but
-                        not the match.
-                    </li>
-                    <li>
-                        Players must inform their opponents in case they discard
-                        a tile.
-                    </li>
-                    <li>
-                        Players may not use any tile-counters, scripts, or any
-                        assistance by other humans or AIs during the game.
-                    </li>
-                    <li>
-                        If the players realize that a game is being played with
-                        wrong settings, the course of action depends on the
-                        number of remaining tiles in the deck:
+                <details style={detailsStyle}>
+                    <summary style={summaryStyle}>Tournament rules</summary>
+                    <div style={detailsBodyStyle}>
                         <ul>
                             <li>
-                                If there are at least 60 tiles left, the game
-                                must be restarted by setting up a new
-                                tournament.
+                                Players are expected to play and attempt to win
+                                all the matches they are supposed to play in.
                             </li>
                             <li>
-                                Otherwise, the game must be played until the end
-                                and if there are any games left that would be
-                                played with wrong settings, a new tournament
-                                must be created.
+                                Players are expected to complete their matches
+                                in a timely manner, allowing sufficient options
+                                for match scheduling. Ideally, matches should be
+                                scheduled around the beginning of the week. If a
+                                player knows they are going to be busy, it is
+                                desirable to schedule matches even earlier to
+                                avoid backlogs.
+                            </li>
+                            <li>
+                                If a player does not come to a match, we will
+                                ask the players to reschedule at earliest
+                                convenience.
+                            </li>
+                            <li>
+                                If it appears there are substantial issues with
+                                the timely completion of matches, the team
+                                captain might introduce a warning system similar
+                                to the ones used in past CCL seasons.
+                            </li>
+                            <li>
+                                If a player is out of time in a game (signaled
+                                by the red clock after the game ends), they lose
+                                the game, but not the match.
+                            </li>
+                            <li>
+                                Players must inform their opponents in case they
+                                discard a tile.
+                            </li>
+                            <li>
+                                Players may not use any tile-counters, scripts,
+                                or any assistance by other humans or AIs during
+                                the game.
+                            </li>
+                            <li>
+                                If the players realize that a game is being
+                                played with wrong settings, the course of action
+                                depends on the number of remaining tiles in the
+                                deck:
+                                <ul>
+                                    <li>
+                                        If there are at least 60 tiles left, the
+                                        game must be restarted by setting up a
+                                        new tournament.
+                                    </li>
+                                    <li>
+                                        Otherwise, the game must be played until
+                                        the end and if there are any games left
+                                        that would be played with wrong
+                                        settings, a new tournament must be
+                                        created.
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </details>
 
                 <p>
                     <b>Prizes:</b> The winners will receive the opportunity to
@@ -401,88 +434,100 @@ export default function OnlineChampionship2026() {
             <h2 style={{ textAlign: "center" }}>Online mistrovství ČR 2026</h2>
 
             <div>
-                <p>
-                    <b>Přihlašovací formulář:</b>{" "}
-                    <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLScu-94XwwWhNjD--NTf3KiO6fHIUYkRjp9kZbCGz-rj7qe_DQ/viewform?usp=dialog"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        FORMULÁŘ
-                    </a>
-                </p>
-                <p>
-                    <b>Přijaté přihlášky:</b>{" "}
-                    <a
-                        href="https://docs.google.com/spreadsheets/d/1Az6iXX9_sxOLlE6BCRRTEVTVN67KQcmU8RTsK6mUJP0/edit?usp=sharing"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        TABULKA
-                    </a>
-                </p>
+                {showRegistrationLinks && (
+                    <>
+                        <p>
+                            <b>Přihlašovací formulář:</b>{" "}
+                            <a
+                                href="https://docs.google.com/forms/d/e/1FAIpQLScu-94XwwWhNjD--NTf3KiO6fHIUYkRjp9kZbCGz-rj7qe_DQ/viewform?usp=dialog"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                FORMULÁŘ
+                            </a>
+                        </p>
+                        <p>
+                            <b>Přijaté přihlášky:</b>{" "}
+                            <a
+                                href="https://docs.google.com/spreadsheets/d/1Az6iXX9_sxOLlE6BCRRTEVTVN67KQcmU8RTsK6mUJP0/edit?usp=sharing"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                TABULKA
+                            </a>
+                        </p>
+                    </>
+                )}
                 <p>
                     <b>Právo startovat:</b> Každý hráč se smí účastnit pouze{" "}
                     <b>JEDNOHO</b> online mistrovství v dané turnajové sezóně.
                     Dále musí mít české občanství nebo žít v Česku.
                 </p>
-                <p>
-                    <b>Důležité termíny:</b>
-                </p>
-                <ul>
-                    <li>
-                        <b>Přihlašování:</b> 2. července – 24. srpna 23:59
-                    </li>
-                    <li>
-                        <b>Rozlosování turnaje:</b> 25. srpna
-                    </li>
-                    <li>
-                        <b>Začátek turnaje:</b> 31. srpna
-                    </li>
-                    <li>
-                        <b>Konec turnaje:</b> Mezi říjnem a polovinou listopadu
-                        (podle počtu hráčů).
-                    </li>
-                </ul>
-                <p>
-                    <b>Formát turnaje:</b>
-                </p>
-                <ul>
-                    <li>
-                        Formát závisí na počtu přihlášených:
+                <details style={detailsStyle}>
+                    <summary style={summaryStyle}>Důležité termíny</summary>
+                    <div style={detailsBodyStyle}>
                         <ul>
                             <li>
-                                ≤8 hráčů: jedna skupina (každý s každým), bez
-                                play-off
+                                <b>Přihlašování:</b> 2. července – 24. srpna
+                                23:59
                             </li>
-                            <li>≤12 hráčů: 2 skupiny + play-off</li>
-                            <li>≤18 hráčů: 3 skupiny + play-off</li>
                             <li>
-                                19+ hráčů: 4 skupiny + play-off (velmi
-                                nepravděpodobné)
+                                <b>Rozlosování turnaje:</b> 25. srpna
+                            </li>
+                            <li>
+                                <b>Začátek turnaje:</b> 31. srpna
+                            </li>
+                            <li>
+                                <b>Konec turnaje:</b> Mezi říjnem a polovinou
+                                listopadu (podle počtu hráčů).
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        Všechny zápasy se hrají formátem Best of Three (BO3).{" "}
-                        <b>
-                            Zápasy se hrají prostřednictvím automatizovaného
-                            turnajového systému BGA s použitím pouze základní
-                            hry a nastavením hodin na 15 minut na hráče.
-                        </b>
-                    </li>
-                    <li>
-                        Každý hráč má naplánován maximálně jeden zápas týdně.
-                    </li>
-                    <li>
-                        <b>Zcela náhodné losování</b> provedeme pomocí veřejně
-                        ověřitelného seedu odvozeného z Bitcoinového
-                        blockchainu.{" "}
-                        <a href="/online-championship/draw">
-                            Viz metodika losování.
-                        </a>
-                    </li>
-                </ul>
+                    </div>
+                </details>
+                <details style={detailsStyle}>
+                    <summary style={summaryStyle}>Formát turnaje</summary>
+                    <div style={detailsBodyStyle}>
+                        <ul>
+                            <li>
+                                Formát závisí na počtu přihlášených:
+                                <ul>
+                                    <li>
+                                        ≤8 hráčů: jedna skupina (každý s
+                                        každým), bez play-off
+                                    </li>
+                                    <li>≤12 hráčů: 2 skupiny + play-off</li>
+                                    <li>≤18 hráčů: 3 skupiny + play-off</li>
+                                    <li>
+                                        19+ hráčů: 4 skupiny + play-off (velmi
+                                        nepravděpodobné)
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Všechny zápasy se hrají formátem Best of Three
+                                (BO3).{" "}
+                                <b>
+                                    Zápasy se hrají prostřednictvím
+                                    automatizovaného turnajového systému BGA s
+                                    použitím pouze základní hry a nastavením
+                                    hodin na 15 minut na hráče.
+                                </b>
+                            </li>
+                            <li>
+                                Každý hráč má naplánován maximálně jeden zápas
+                                týdně.
+                            </li>
+                            <li>
+                                <b>Zcela náhodné losování</b> provedeme pomocí
+                                veřejně ověřitelného seedu odvozeného z
+                                Bitcoinového blockchainu.{" "}
+                                <a href="/online-championship/draw">
+                                    Viz metodika losování.
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
 
                 <details style={detailsStyle}>
                     <summary style={summaryStyle}>
@@ -696,61 +741,67 @@ export default function OnlineChampionship2026() {
                     </div>
                 </details>
 
-                <p>
-                    <b>Pravidla turnaje:</b>
-                </p>
-                <ul>
-                    <li>
-                        Očekává se, že hráči odehrají s cílem vyhrát všechny
-                        zápasy, kterých se účastní.
-                    </li>
-                    <li>
-                        Hráči by měli dokončit své zápasy včas, aby bylo možné
-                        naplánovat další zápasy. Ideálně by se zápasy měly
-                        naplánovat kolem začátku týdne. Pokud hráč ví, že bude
-                        zaneprázdněn, je žádoucí naplánovat zápasy ještě dříve,
-                        aby se předešlo zpožděním.
-                    </li>
-                    <li>
-                        Pokud hráč nepřijde na zápas, požádáme hráče o
-                        přeplánování na co nejdříve.
-                    </li>
-                    <li>
-                        Pokud se ukáže, že existují podstatné problémy s včasným
-                        dokončením zápasů, může kapitán týmu zavést varovný
-                        systém podobný těm, které byly použity v minulých
-                        sezónách CCL.
-                    </li>
-                    <li>
-                        Pokud hráči vyprší čas ve hře (signalizováno červenými
-                        hodinami po skončení hry), prohraje hru, ale ne zápas.
-                    </li>
-                    <li>
-                        Hráči musí informovat soupeře v případě, že odhodí
-                        kartičku.
-                    </li>
-                    <li>
-                        Hráči nesmí používat žádná počítadla kartiček, skripty
-                        nebo jakoukoli pomoc od jiných lidí nebo AI během hry.
-                    </li>
-                    <li>
-                        Pokud hráči zjistí, že se hra hraje s nesprávným
-                        nastavením, postup závisí na počtu zbývajících kartiček
-                        v balíčku:
+                <details style={detailsStyle}>
+                    <summary style={summaryStyle}>Pravidla turnaje</summary>
+                    <div style={detailsBodyStyle}>
                         <ul>
                             <li>
-                                Pokud zbývá alespoň 60 kartiček, musí se hra
-                                restartovat vytvořením nového turnaje.
+                                Očekává se, že hráči odehrají s cílem vyhrát
+                                všechny zápasy, kterých se účastní.
                             </li>
                             <li>
-                                V opačném případě se hra musí dohrát do konce a
-                                pokud zbývají nějaké hry, které by se hrály s
-                                nesprávným nastavením, musí se vytvořit nový
-                                turnaj.
+                                Hráči by měli dokončit své zápasy včas, aby bylo
+                                možné naplánovat další zápasy. Ideálně by se
+                                zápasy měly naplánovat kolem začátku týdne.
+                                Pokud hráč ví, že bude zaneprázdněn, je žádoucí
+                                naplánovat zápasy ještě dříve, aby se předešlo
+                                zpožděním.
+                            </li>
+                            <li>
+                                Pokud hráč nepřijde na zápas, požádáme hráče o
+                                přeplánování na co nejdříve.
+                            </li>
+                            <li>
+                                Pokud se ukáže, že existují podstatné problémy s
+                                včasným dokončením zápasů, může kapitán týmu
+                                zavést varovný systém podobný těm, které byly
+                                použity v minulých sezónách CCL.
+                            </li>
+                            <li>
+                                Pokud hráči vyprší čas ve hře (signalizováno
+                                červenými hodinami po skončení hry), prohraje
+                                hru, ale ne zápas.
+                            </li>
+                            <li>
+                                Hráči musí informovat soupeře v případě, že
+                                odhodí kartičku.
+                            </li>
+                            <li>
+                                Hráči nesmí používat žádná počítadla kartiček,
+                                skripty nebo jakoukoli pomoc od jiných lidí nebo
+                                AI během hry.
+                            </li>
+                            <li>
+                                Pokud hráči zjistí, že se hra hraje s nesprávným
+                                nastavením, postup závisí na počtu zbývajících
+                                kartiček v balíčku:
+                                <ul>
+                                    <li>
+                                        Pokud zbývá alespoň 60 kartiček, musí se
+                                        hra restartovat vytvořením nového
+                                        turnaje.
+                                    </li>
+                                    <li>
+                                        V opačném případě se hra musí dohrát do
+                                        konce a pokud zbývají nějaké hry, které
+                                        by se hrály s nesprávným nastavením,
+                                        musí se vytvořit nový turnaj.
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </details>
 
                 <p>
                     <b>Odměny:</b> Vítězové získají možnost reprezentovat Česko

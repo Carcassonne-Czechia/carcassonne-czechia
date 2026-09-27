@@ -13,6 +13,7 @@ type AuthContextValue = {
     user: User | null;
     isLoading: boolean;
     isAdmin: boolean;
+    isEditor: boolean;
     error: string | null;
     signIn: (email: string, password: string) => Promise<string | null>;
     signOut: () => Promise<string | null>;
@@ -24,6 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [session, setSession] = useState<Session | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isEditor, setIsEditor] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -46,10 +48,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             };
         }
 
-        const loadAdminPermission = async (currentUser: User | null) => {
+        const loadPermissions = async (currentUser: User | null) => {
             if (!currentUser) {
                 if (active) {
                     setIsAdmin(false);
+                    setIsEditor(false);
                 }
                 return;
             }
@@ -58,11 +61,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 .from("user_permissions")
                 .select("permission_code")
                 .eq("user_id", currentUser.id)
-                .eq("permission_code", "admin")
-                .maybeSingle();
+                .in("permission_code", ["admin", "news.edit"]);
 
             if (active) {
-                setIsAdmin(Boolean(data) && !permissionError);
+                const permissionCodes = new Set(
+                    (data ?? []).map((permission) => permission.permission_code)
+                );
+                setIsAdmin(permissionCodes.has("admin") && !permissionError);
+                setIsEditor(
+                    permissionCodes.has("news.edit") && !permissionError
+                );
                 if (permissionError) {
                     setError(permissionError.message);
                 }
@@ -81,7 +89,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 setError(sessionError.message);
             }
 
-            await loadAdminPermission(data.session?.user ?? null);
+            await loadPermissions(data.session?.user ?? null);
             if (active) {
                 setIsLoading(false);
             }
@@ -98,7 +106,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
             setSession(nextSession);
             setIsLoading(true);
-            void loadAdminPermission(nextSession?.user ?? null).finally(() => {
+            void loadPermissions(nextSession?.user ?? null).finally(() => {
                 if (active) {
                     setIsLoading(false);
                 }
@@ -161,6 +169,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 user: session?.user ?? null,
                 isLoading,
                 isAdmin,
+                isEditor,
                 error,
                 signIn,
                 signOut,

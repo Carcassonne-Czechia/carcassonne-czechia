@@ -24,7 +24,13 @@ export default function NavBar() {
     useEffect(() => setHydrated(true), []);
 
     const { lang, setLang } = useContext(LangContext);
-    const { user, isAdmin, isLoading: authLoading, signOut } = useAuth();
+    const {
+        user,
+        isAdmin,
+        isEditor,
+        isLoading: authLoading,
+        signOut,
+    } = useAuth();
     const langs: Lang[] = ["cs", "en"];
 
     const itemRenderer = (item: Item) => (
@@ -101,17 +107,38 @@ export default function NavBar() {
                         {isAdmin && (
                             <NavLink
                                 to="/admin"
-                                className="p-button p-component p-button-text"
+                                className="auth-action p-button p-component p-button-text"
                                 aria-label={DICTIONARY.admin[lang]}
                             >
                                 <span className="pi pi-shield" />
                                 <span>{DICTIONARY.admin[lang]}</span>
                             </NavLink>
                         )}
+                        {!isAdmin && (
+                            <NavLink
+                                to={isEditor ? "/editor" : "/profile"}
+                                className="auth-action p-button p-component p-button-text"
+                                aria-label={
+                                    DICTIONARY[isEditor ? "editor" : "profile"][
+                                        lang
+                                    ]
+                                }
+                            >
+                                <span className="pi pi-user" />
+                                <span>
+                                    {
+                                        DICTIONARY[
+                                            isEditor ? "editor" : "profile"
+                                        ][lang]
+                                    }
+                                </span>
+                            </NavLink>
+                        )}
                         <Button
                             type="button"
                             label={DICTIONARY.logOut[lang]}
                             icon="pi pi-sign-out"
+                            className="auth-action"
                             text
                             onClick={() => void signOut()}
                         />
@@ -119,7 +146,7 @@ export default function NavBar() {
                 ) : (
                     <NavLink
                         to="/login"
-                        className="p-button p-component p-button-text"
+                        className="auth-action p-button p-component p-button-text"
                     >
                         <span className="pi pi-sign-in" />
                         <span>{DICTIONARY.logIn[lang]}</span>
