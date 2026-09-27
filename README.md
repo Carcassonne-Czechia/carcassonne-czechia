@@ -24,6 +24,38 @@ npm run dev
 
 Your application will be available at `http://localhost:5173`.
 
+### Local Supabase
+
+The repository includes the Supabase CLI as a pinned development dependency. Local Supabase runs in Docker and provides Postgres, Auth, Storage, Studio, and Mailpit without connecting to a hosted project.
+
+Prerequisites:
+
+- Node 22 or newer
+- Docker Desktop with the Docker engine running
+
+Copy the environment template before using the client:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Start the local Supabase stack:
+
+```bash
+npm run supabase:start
+npm run supabase:status
+```
+
+Copy the local publishable key shown by `supabase:status` into `.env` as `VITE_SUPABASE_PUBLISHABLE_KEY`. The local service URLs are:
+
+- Supabase API: `http://127.0.0.1:54321`
+- Studio: `http://127.0.0.1:54323`
+- Mailpit: `http://127.0.0.1:54324`
+
+Run the website separately with `npm run dev`. Stop the local services with `npm run supabase:stop`; after migrations exist, reset the local database with `npm run supabase:reset`.
+
+The browser may use only `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. Never place a Supabase secret or service-role key in `.env`, browser code, or Netlify public environment variables.
+
 ## Building for Production
 
 Create a production build:

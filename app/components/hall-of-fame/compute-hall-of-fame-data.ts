@@ -1,18 +1,10 @@
-import nationalChampionshipData from "src/raw-data/offline-championships/all_data.csv";
-import onlineChampionshipData from "src/raw-data/online-championships/all_data.csv";
-import { getBGAUsernameFromName, unsafeEntries } from "~/utils";
-import type {
-    NationalChampionshipResultsRow,
-    OnlineChampionshipResultsRow,
-} from "~/components/national-championship/typings";
 import {
     placements,
-    rareTournamentResults,
     individualTournamentNames,
     type HallOfFameRow,
     type IndividualTournamentName,
+    type Rank,
 } from "~/players/tournament-results";
-import { BGAStats } from "~/players/bga-stats";
 
 /** 1 if ASC else -1 */
 export type SortDirection = 1 | -1;
@@ -23,26 +15,47 @@ export const medalColors = {
     Bronze: "#824A02",
 } as const;
 
-export const computePlayerNames = () => {
+export type HallOfFameData = {
+    players: {
+        name: string | null;
+        bgaUsername: string | null;
+    }[];
+    nationalChampionship: {
+        year: number;
+        position: number;
+        name: string;
+    }[];
+    onlineChampionship: {
+        year: number;
+        position: number;
+        bgaUsername: string;
+    }[];
+    tournamentResults: {
+        tournamentName: IndividualTournamentName;
+        year: number;
+        name: string;
+        rank: Rank;
+    }[];
+};
+
+export const computePlayerNames = (data: HallOfFameData) => {
     const nationalChampionshipPlayerNames = new Set<string>(
-        nationalChampionshipData.map((row) => row.name)
+        data.nationalChampionship.map((row) => row.name)
     );
 
     const onlineChampionshipPlayerNames = new Set<string>(
-        onlineChampionshipData.map((row) => {
-            const stat = BGAStats.find(
-                (stat) => stat.bgaUsername === row["BGA_Username"]
-            );
-            if (stat) return stat.name ?? "";
-            return "";
-        })
+        data.onlineChampionship
+            .map(
+                (row) =>
+                    data.players.find(
+                        (player) => player.bgaUsername === row.bgaUsername
+                    )?.name ?? ""
+            )
+            .filter((name) => name !== "")
     );
 
-    const tournamentPlayerNames = new Set<string>();
-    Object.values(rareTournamentResults).forEach((resultsArray) =>
-        resultsArray.forEach((result) =>
-            result.names.forEach((name) => tournamentPlayerNames.add(name))
-        )
+    const tournamentPlayerNames = new Set(
+        data.tournamentResults.map((result) => result.name)
     );
 
     const playerNames = [
@@ -58,10 +71,13 @@ export const computePlayerNames = () => {
 export const computeIndividualTournamentDataForPlayersBetweenYears = (
     playerNames: string[],
     minYear: number,
-    maxYear: number
+    maxYear: number,
+    data: HallOfFameData
 ) => {
     const BGAUsernames = playerNames.map(
-        (name) => getBGAUsernameFromName(name) ?? ""
+        (name) =>
+            data.players.find((player) => player.name === name)?.bgaUsername ??
+            ""
     );
 
     const playerNameIndices = Object.fromEntries(
@@ -84,41 +100,38 @@ export const computeIndividualTournamentDataForPlayersBetweenYears = (
         return row as HallOfFameRow;
     });
 
-    // Compute tournament stats for rare tournaments
-    unsafeEntries(rareTournamentResults).forEach(
-        ([tournamentName, resultsArray]) => {
-            resultsArray.forEach((result) =>
-                result.names.forEach((name, j) => {
-                    const rank = result.ranks[j];
-                    if (result.year >= minYear && result.year <= maxYear) {
-                        if (playerNameIndices[name] !== undefined) {
-                            tournamentStats[playerNameIndices[name]][
-                                `${tournamentName}RawData`
-                            ].push({ year: result.year, rank });
+    // Compute tournament stats for results loaded from Supabase.
+    data.tournamentResults.forEach((result) => {
+        const { name, rank, year } = result;
+        const tournamentName: IndividualTournamentName = result.tournamentName;
+        if (
+            year >= minYear &&
+            year <= maxYear &&
+            playerNameIndices[name] !== undefined
+        ) {
+            tournamentStats[playerNameIndices[name]][
+                `${tournamentName}RawData`
+            ].push({ year, rank });
 
-                            if (rank.toString() === "1") {
-                                tournamentStats[playerNameIndices[name]][
-                                    `${tournamentName}Gold`
-                                ]++;
-                            } else if (rank.toString() === "2") {
-                                tournamentStats[playerNameIndices[name]][
-                                    `${tournamentName}Silver`
-                                ]++;
-                            } else if (rank.toString() === "3") {
-                                tournamentStats[playerNameIndices[name]][
-                                    `${tournamentName}Bronze`
-                                ]++;
-                            }
+            if (rank.toString() === "1") {
+                tournamentStats[playerNameIndices[name]][
+                    `${tournamentName}Gold`
+                ]++;
+            } else if (rank.toString() === "2") {
+                tournamentStats[playerNameIndices[name]][
+                    `${tournamentName}Silver`
+                ]++;
+            } else if (rank.toString() === "3") {
+                tournamentStats[playerNameIndices[name]][
+                    `${tournamentName}Bronze`
+                ]++;
+            }
 
-                            tournamentStats[playerNameIndices[name]][
-                                `${tournamentName}Participation`
-                            ]++;
-                        }
-                    }
-                })
-            );
+            tournamentStats[playerNameIndices[name]][
+                `${tournamentName}Participation`
+            ]++;
         }
-    );
+    });
 
     // Compute tournament stats for championships
 
@@ -126,13 +139,15 @@ export const computeIndividualTournamentDataForPlayersBetweenYears = (
         tournamentStats,
         playerNameIndices,
         minYear,
-        maxYear
+        maxYear,
+        data
     );
     updateResultsWithOnlineChampionshipDataBetweenYears(
         tournamentStats,
         playerNameIndices,
         minYear,
-        maxYear
+        maxYear,
+        data
     );
 
     return tournamentStats;
@@ -144,39 +159,35 @@ export const updateResultsWithNationalChampionshipDataBetweenYears = (
         [k: string]: number;
     },
     minYear: number,
-    maxYear: number
+    maxYear: number,
+    data: HallOfFameData
 ) => {
-    const filteredData = nationalChampionshipData.filter(
-        (row: NationalChampionshipResultsRow) =>
-            Number(row.year) >= minYear && Number(row.year) <= maxYear
+    const filteredData = data.nationalChampionship.filter(
+        (row) => row.year >= minYear && row.year <= maxYear
     );
 
-    filteredData.forEach(
-        (
-            row: NationalChampionshipResultsRow & { ["BGA_Username"]?: string }
-        ) => {
-            if (playerNameIndices[row.name] !== undefined) {
-                tournamentStats[
-                    playerNameIndices[row.name]
-                ].nationalChampionshipRawData.push({
-                    year: Number(row.year),
-                    rank: Number(row.position),
-                });
+    filteredData.forEach((row) => {
+        if (playerNameIndices[row.name] !== undefined) {
+            tournamentStats[
+                playerNameIndices[row.name]
+            ].nationalChampionshipRawData.push({
+                year: row.year,
+                rank: row.position,
+            });
+            tournamentStats[playerNameIndices[row.name]]
+                .nationalChampionshipParticipation++;
+
+            if (row.position === 1)
                 tournamentStats[playerNameIndices[row.name]]
-                    .nationalChampionshipParticipation++;
-
-                if (row.position === "1")
-                    tournamentStats[playerNameIndices[row.name]]
-                        .nationalChampionshipGold++;
-                if (row.position === "2")
-                    tournamentStats[playerNameIndices[row.name]]
-                        .nationalChampionshipSilver++;
-                if (row.position === "3")
-                    tournamentStats[playerNameIndices[row.name]]
-                        .nationalChampionshipBronze++;
-            }
+                    .nationalChampionshipGold++;
+            if (row.position === 2)
+                tournamentStats[playerNameIndices[row.name]]
+                    .nationalChampionshipSilver++;
+            if (row.position === 3)
+                tournamentStats[playerNameIndices[row.name]]
+                    .nationalChampionshipBronze++;
         }
-    );
+    });
 };
 
 export const updateResultsWithOnlineChampionshipDataBetweenYears = (
@@ -185,41 +196,41 @@ export const updateResultsWithOnlineChampionshipDataBetweenYears = (
         [k: string]: number;
     },
     minYear: number,
-    maxYear: number
+    maxYear: number,
+    data: HallOfFameData
 ) => {
-    const filteredData = onlineChampionshipData.filter(
-        (row) => Number(row.year) >= minYear && Number(row.year) <= maxYear
+    const namesByUsername = new Map(
+        data.players
+            .filter((player) => player.name && player.bgaUsername)
+            .map((player) => [
+                player.bgaUsername as string,
+                player.name as string,
+            ])
     );
 
-    filteredData.forEach(
-        (row: OnlineChampionshipResultsRow & { name?: string }) => {
-            BGAStats.forEach((stat) => {
-                if (stat.bgaUsername === row["BGA_Username"])
-                    row.name = stat.name;
-            });
-            // If name not known, not add to table
-            if (!row.name) return;
-            if (playerNameIndices[row.name] !== undefined) {
-                tournamentStats[
-                    playerNameIndices[row.name]
-                ].onlineChampionshipRawData.push({
-                    year: Number(row.year),
-                    rank: Number(row.position),
-                });
-                tournamentStats[playerNameIndices[row.name]]
-                    .onlineChampionshipParticipation++;
-                if (row.position === "1")
-                    tournamentStats[playerNameIndices[row.name]]
-                        .onlineChampionshipGold++;
-                if (row.position === "2")
-                    tournamentStats[playerNameIndices[row.name]]
-                        .onlineChampionshipSilver++;
-                if (row.position === "3")
-                    tournamentStats[playerNameIndices[row.name]]
-                        .onlineChampionshipBronze++;
-            }
-        }
+    const filteredData = data.onlineChampionship.filter(
+        (row) => row.year >= minYear && row.year <= maxYear
     );
+
+    filteredData.forEach((row) => {
+        const name = namesByUsername.get(row.bgaUsername);
+        if (!name || playerNameIndices[name] === undefined) return;
+
+        tournamentStats[playerNameIndices[name]].onlineChampionshipRawData.push(
+            {
+                year: row.year,
+                rank: row.position,
+            }
+        );
+        tournamentStats[playerNameIndices[name]]
+            .onlineChampionshipParticipation++;
+        if (row.position === 1)
+            tournamentStats[playerNameIndices[name]].onlineChampionshipGold++;
+        if (row.position === 2)
+            tournamentStats[playerNameIndices[name]].onlineChampionshipSilver++;
+        if (row.position === 3)
+            tournamentStats[playerNameIndices[name]].onlineChampionshipBronze++;
+    });
 };
 
 /** Filter those who have at least one medal or one participation in what is not national championship */

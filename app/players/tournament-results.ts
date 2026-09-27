@@ -24,7 +24,7 @@ export type IndividualTournamentName =
     | RareTournamentName
     | ChampionshipName
     | "worldChampionship";
-export type Rank = "Q" | "R32" | "R16" | "QF" | "SF" | number;
+export type Rank = "Q" | "Group" | "R32" | "R24" | "R16" | "QF" | "SF" | number;
 
 export const rareTournamentResults: Record<
     RareTournamentName,
@@ -32,7 +32,6 @@ export const rareTournamentResults: Record<
         year: number;
         names: string[];
         ranks: Rank[];
-        coeffPoints: number[];
     }[]
 > &
     Record<
@@ -143,16 +142,19 @@ export const rareTournamentResults: Record<
 
     CCL: [
         {
+            year: 2026,
+            names: ["Pavel Hudec", "Michal Bařinka", "Martin Čeliňák"],
+            ranks: ["R16", "R24", "R24"],
+        },
+        {
             year: 2024,
             names: ["Pavel Hudec"],
             ranks: ["R16"],
-            coeffPoints: [7],
         },
         {
             year: 2025,
             names: ["Pavel Hudec", "Pavel Raus"],
             ranks: ["QF", "Q"],
-            coeffPoints: [13, 3.5],
         },
     ],
 
@@ -160,16 +162,25 @@ export const rareTournamentResults: Record<
         {
             year: 2024,
             names: ["Pavel Hudec"],
-            coeffPoints: [5],
             ranks: ["QF"],
         },
     ],
-    KoCChampionship: [],
+    KoCChampionship: [
+        {
+            year: 2026,
+            names: ["Pavel Hudec"],
+            ranks: [7],
+        },
+    ],
     KoCToC: [
+        {
+            year: 2026,
+            names: ["Pavel Hudec"],
+            ranks: [1],
+        },
         {
             year: 2024,
             names: ["Pavel Hudec"],
-            coeffPoints: [8],
             ranks: [4],
         },
     ],
@@ -178,7 +189,6 @@ export const rareTournamentResults: Record<
             year: 2025,
             names: ["Pavel Hudec"],
             ranks: [3],
-            coeffPoints: [9.5],
         },
     ],
 } as const;
@@ -187,15 +197,21 @@ export const convertRankToNumber = (rank: Rank) => {
     if (typeof rank == "number") return rank;
     switch (rank) {
         case "Q":
-            return 40.5;
+            return 80;
+        case "Group":
+            return 42.5;
         case "R32":
             return 24.5;
+        case "R24":
+            return 20.5;
         case "R16":
             return 12.5;
         case "QF":
             return 6.5;
         case "SF":
             return 3.5;
+        default:
+            return Number.POSITIVE_INFINITY;
     }
 };
 

@@ -12,6 +12,7 @@ import { getNameFromBGAUsername } from "~/utils";
 type BasicTeamMemberData = {
     name: string | undefined;
     BGA_Username: CurrentTeamMemberBGAUsername | FormerTeamMemberBGAUsername;
+    profile_picture_path?: string | null;
     team_captain: boolean;
     former_captain: boolean;
 };

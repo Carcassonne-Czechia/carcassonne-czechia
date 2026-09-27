@@ -6,7 +6,7 @@ export default function OnlineChampionshipAbout() {
 
     return lang === "cs" ? (
         <>
-            <h1>Online mistrovství ČR</h1>
+            <h1 className="bg-aquamarine">Online mistrovství ČR</h1>
             <div style={{ padding: "0 0.5rem" }}>
                 <p>
                     Online mistrovství ČR se koná každoročně na podzim a
@@ -17,7 +17,7 @@ export default function OnlineChampionshipAbout() {
         </>
     ) : (
         <>
-            <h1>Online national championship</h1>
+            <h1 className="bg-aquamarine">Online national championship</h1>
             <div style={{ padding: "0 0.5rem" }}>
                 <p>
                     The Czech Online National Championship is organized by our

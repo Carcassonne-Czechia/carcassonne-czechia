@@ -6,7 +6,7 @@ export default function NationalChampionshipAbout() {
 
     return lang === "cs" ? (
         <div>
-            <h1>Mistrovství ČR</h1>
+            <h1 className="bg-aquamarine">Mistrovství ČR</h1>
             <p>
                 Mistrovství ČR v Carcassonne se koná každoročně od roku 2003 v
                 říjnu jako součást festivalu Deskohraní. V roce 2020 se MČR
@@ -20,7 +20,7 @@ export default function NationalChampionshipAbout() {
         </div>
     ) : (
         <div>
-            <h1>National Championship</h1>
+            <h1 className="bg-aquamarine">National Championship</h1>
             <p>
                 The Czech National Championship in Carcassonne has been held
                 annually since 2003 in October as part of the Deskohraní
