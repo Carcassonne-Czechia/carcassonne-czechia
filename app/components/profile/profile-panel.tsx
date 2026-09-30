@@ -6,6 +6,7 @@ import Markdown from "react-markdown";
 import { DICTIONARY } from "~/i18n/dictionary";
 import { LangContext } from "~/i18n/lang-context";
 import { getSupabaseClient } from "~/lib/supabase-client";
+import { getPlayerAvatarUrl } from "~/components/players/player-avatar-url";
 
 type ProfileForm = {
     bgaUsername: string;
@@ -219,8 +220,10 @@ export default function ProfilePanel({ userId }: { userId: string }) {
                     className="profile-avatar-preview"
                     src={
                         imagePreview ||
-                        form.profilePicturePath ||
-                        "/assets/logo.jpg"
+                        getPlayerAvatarUrl(
+                            form.bgaUsername || null,
+                            form.profilePicturePath || null
+                        )
                     }
                     alt={DICTIONARY.playerAvatar[lang]}
                 />
