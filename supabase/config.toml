@@ -186,6 +186,9 @@ password_requirements = ""
 [functions."complete-registration"]
 verify_jwt = false
 
+[functions."admin-registration"]
+verify_jwt = false
+
 # Configure passkey sign-ins.
 # [auth.passkey]
 # enabled = false
