@@ -99,13 +99,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         const {
             data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+        } = supabase.auth.onAuthStateChange((event, nextSession) => {
             if (!active) {
                 return;
             }
 
             setSession(nextSession);
-            setIsLoading(true);
+            if (event !== "TOKEN_REFRESHED") {
+                setIsLoading(true);
+            }
             setTimeout(() => {
                 void loadPermissions(nextSession?.user ?? null).finally(() => {
                     if (active) {
